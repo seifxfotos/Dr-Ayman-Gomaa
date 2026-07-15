@@ -27,7 +27,7 @@
         .hero-content { max-width: 550px; z-index: 2; }
         .hero-box { background-color: var(--teal-box); padding: 30px; border-radius: 10px; font-size: 22px; font-weight: 700; line-height: 1.6; margin-bottom: 20px; }
         .btn { display: inline-block; padding: 10px 25px; background-color: var(--teal-box); color: white; border-radius: 25px; font-weight: 700; border: none; cursor: pointer; font-family: var(--font-main); font-size: 16px;}
-        .btn-blue { background-color: var(--btn-blue); border-radius: 0; padding: 12px 30px; width: 100%; font-size: 18px;}
+        .btn-blue { background-color: var(--btn-blue); border-radius: 0; padding: 12px 30px; width: 100%; font-size: 18px; color: white;}
         .hero-image { position: absolute; left: 5%; bottom: 0; height: 90%; z-index: 1; }
 
         /* الخدمات */
@@ -41,6 +41,8 @@
         /* الحجز */
         .appointment-sec { padding: 80px 5%; background-color: #f8f9fa; }
         input, select, textarea { padding: 12px; border: 1px solid #ccc; border-radius: 4px; font-family: var(--font-main); font-size: 14px; width: 100%; }
+        label { font-weight: 700; margin-bottom: 5px; display: block; }
+        label span { color: red; }
 
         /* الخرايط */
         .maps-section { padding: 60px 5%; }
@@ -104,17 +106,30 @@
             <h2 class="section-title" style="text-align: center;">احجز موعداً</h2>
             <form>
                 <div class="form-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
-                    <div style="display: flex; flex-direction: column;"><label style="font-weight:700; margin-bottom:5px;">الاسم</label><input type="text"></div>
-                    <div style="display: flex; flex-direction: column;"><label style="font-weight:700; margin-bottom:5px;">رقم الهاتف</label><input type="tel"></div>
-                    <div style="display: flex; flex-direction: column; grid-column: span 2;">
-                        <label style="font-weight:700; margin-bottom:5px;">أقرب عيادة ليك</label>
+                    <div><label>الاسم الأول <span>*</span></label><input type="text"></div>
+                    <div><label>اسم العائلة <span>*</span></label><input type="text"></div>
+                    <div><label>رقم الهاتف <span>*</span></label><input type="tel"></div>
+                    <div><label>البريد الإلكتروني <span>*</span></label><input type="email"></div>
+                    <div><label>الدولة <span>*</span></label><input type="text"></div>
+                    <div><label>المدينة <span>*</span></label><input type="text"></div>
+                    <div style="grid-column: span 2;"><label>الجنسية <span>*</span></label><input type="text"></div>
+                    <div style="grid-column: span 2;"><label>كيف تعرفت علينا؟</label>
                         <select>
-                            <option>عيادة بورسعيد</option>
-                            <option>عيادة السويس</option>
-                            <option>عيادة الإسماعيلية</option>
+                            <option>مريض سابق للدكتور</option>
+                            <option>فيسبوك</option>
+                            <option>صديق/قريب</option>
+                            <option>أخرى</option>
                         </select>
                     </div>
-                    <div style="display: flex; flex-direction: column; grid-column: span 2;"><label style="font-weight:700; margin-bottom:5px;">الرسالة</label><textarea></textarea></div>
+                    <div style="grid-column: span 2;"><label>الوظيفة <span>*</span></label><input type="text"></div>
+                    <div><label>العمر <span>*</span></label><input type="number"></div>
+                    <div><label>الجنس <span>*</span></label>
+                        <select>
+                            <option>ذكر</option>
+                            <option>أنثى</option>
+                        </select>
+                    </div>
+                    <div style="grid-column: span 2;"><label>هل تعاني من أي حالة طبية؟ (يرجى ذكر التفاصيل) <span>*</span></label><textarea></textarea></div>
                     <button type="submit" class="btn btn-blue" style="grid-column: span 2;">إرسال</button>
                 </div>
             </form>
