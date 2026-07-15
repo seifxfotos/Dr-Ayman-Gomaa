@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>دكتور أيمن جمعة - استشاري جراحة الأورام</title>
-    <!-- رابط مكتبة الأيقونات المحدث -->
+    <!-- رابط مكتبة الأيقونات -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
     
@@ -25,11 +25,21 @@
 
         /* Hero */
         .hero { background: linear-gradient(135deg, #0a84c6 0%, #034b75 100%); display: flex; align-items: center; justify-content: space-between; padding: 50px 5%; color: white; min-height: 500px; position: relative; overflow: hidden; }
-        .hero-content { max-width: 550px; z-index: 2; margin-right: auto; }
+        .hero-content { max-width: 550px; z-index: 2; margin-left: auto; }
         .hero-box { background-color: var(--teal-box); padding: 30px; border-radius: 10px; font-size: 22px; font-weight: 700; line-height: 1.6; margin-bottom: 20px; }
         .btn { display: inline-block; padding: 10px 25px; background-color: var(--teal-box); color: white; border-radius: 25px; font-weight: 700; border: none; cursor: pointer; font-family: var(--font-main); font-size: 16px;}
         .btn-blue { background-color: var(--btn-blue); border-radius: 0; padding: 12px 30px; width: 100%; font-size: 18px; color: white;}
-        .hero-image { position: absolute; left: 0; bottom: 0; height: 100%; width: auto; z-index: 1; object-fit: cover; }
+        
+        /* تعديل الصورة لليمين */
+        .hero-image { 
+            position: absolute; 
+            right: 0; 
+            bottom: 0; 
+            height: 100%; 
+            width: auto; 
+            z-index: 1; 
+            object-fit: cover; 
+        }
 
         /* الخدمات */
         .services-sec { padding: 60px 5%; text-align: center; }
@@ -63,6 +73,7 @@
 
         /* تعديلات الموبايل */
         @media (max-width: 768px) {
+            .text-logo { font-size: 20px; } /* تصغير الخط للموبايل */
             .hero { flex-direction: column-reverse; padding: 20px; text-align: center; height: auto; }
             .hero-image { position: relative; width: 100%; height: 350px; }
             .hero-content { margin-right: 0; width: 100%; }
@@ -91,7 +102,7 @@
     <section class="hero">
         <div class="hero-content">
             <div class="hero-box">
-                خيارك الأول في جراحات الأورام المتقدمة والاكتشاف المبكر بأحدث الأساليب الطبية والتحفظية.
+                دكتور أيمن جمعة | خيارك الأول في جراحات الأورام المتقدمة والاكتشاف المبكر بأحدث الأساليب الطبية والتحفظية.
             </div>
             <button class="btn" onclick="document.getElementById('appointment').scrollIntoView({behavior: 'smooth'})">احجز موعدك الآن</button>
         </div>
