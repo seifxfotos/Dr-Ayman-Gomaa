@@ -32,7 +32,6 @@
         /* Hero */
         .hero { background: linear-gradient(135deg, #0a84c6 0%, #034b75 100%); display: flex; align-items: center; justify-content: flex-start; padding: 50px 5%; color: white; min-height: 500px; position: relative; overflow: hidden; }
         
-        /* هنا التعديل: الكلام لليسار */
         .hero-content { max-width: 550px; z-index: 2; margin-right: 0; margin-left: auto; }
         
         .hero-box { background-color: var(--teal-box); padding: 30px; border-radius: 10px; font-size: 22px; font-weight: 700; line-height: 1.6; margin-bottom: 20px; }
@@ -74,8 +73,9 @@
         .footer { background-color: var(--footer-dark); color: white; padding: 60px 5% 20px; }
         .footer-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; margin-bottom: 40px; }
         .social-links { display: flex; gap: 15px; margin-top: 10px; justify-content: center; }
-        .social-links a { color: white; font-size: 28px; transition: 0.3s; }
-        .social-links a:hover { color: var(--btn-blue); }
+        /* تعديل إجباري للأيقونات */
+        .social-links a { color: white !important; font-size: 28px !important; transition: 0.3s; display: inline-block !important; }
+        .social-links a:hover { color: var(--btn-blue) !important; }
         .copyright { text-align: center; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; font-size: 14px; }
         .fab { position: fixed; bottom: 30px; left: 30px; background-color: #25D366; color: white; width: 55px; height: 55px; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 30px; box-shadow: 0 4px 10px rgba(0,0,0,0.3); z-index: 1000; }
 
@@ -83,7 +83,7 @@
         @media (max-width: 768px) {
             html { scroll-padding-top: 150px; }
             .header { flex-direction: column; gap: 10px; }
-            .text-logo { font-size: 20px; }
+            .text-logo { font-size: 32px; } /* تم التعديل هنا لـ 32 */
             .nav-links { margin-right: 0; gap: 15px; font-size: 13px; }
             .hero { flex-direction: column-reverse; padding: 20px; text-align: center; height: auto; }
             .hero-image { position: relative; width: 100%; height: 350px; }
