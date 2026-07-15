@@ -30,8 +30,11 @@
         .nav-links a:hover { color: var(--btn-blue); }
 
         /* Hero */
-        .hero { background: linear-gradient(135deg, #0a84c6 0%, #034b75 100%); display: flex; align-items: center; justify-content: space-between; padding: 50px 5%; color: white; min-height: 500px; position: relative; overflow: hidden; }
-        .hero-content { max-width: 550px; z-index: 2; margin-left: auto; }
+        .hero { background: linear-gradient(135deg, #0a84c6 0%, #034b75 100%); display: flex; align-items: center; justify-content: flex-start; padding: 50px 5%; color: white; min-height: 500px; position: relative; overflow: hidden; }
+        
+        /* هنا التعديل: الكلام لليسار */
+        .hero-content { max-width: 550px; z-index: 2; margin-right: 0; margin-left: auto; }
+        
         .hero-box { background-color: var(--teal-box); padding: 30px; border-radius: 10px; font-size: 22px; font-weight: 700; line-height: 1.6; margin-bottom: 20px; }
         .btn { display: inline-block; padding: 10px 25px; background-color: var(--teal-box); color: white; border-radius: 25px; font-weight: 700; border: none; cursor: pointer; font-family: var(--font-main); font-size: 16px;}
         .btn-blue { background-color: var(--btn-blue); border-radius: 0; padding: 12px 30px; width: 100%; font-size: 18px; color: white;}
@@ -78,7 +81,7 @@
 
         /* تعديلات الموبايل */
         @media (max-width: 768px) {
-            html { scroll-padding-top: 150px; } /* زيادة المساحة في الموبايل */
+            html { scroll-padding-top: 150px; }
             .header { flex-direction: column; gap: 10px; }
             .text-logo { font-size: 20px; }
             .nav-links { margin-right: 0; gap: 15px; font-size: 13px; }
