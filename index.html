@@ -4,13 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>دكتور أيمن جمعة - استشاري جراحة الأورام</title>
+    <!-- رابط مكتبة الأيقونات المحدث -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
         :root { --footer-dark: #063e63; --btn-blue: #29b6f6; --teal-box: #36d2cd; --text-dark: #333333; --gray-bg: #e9ecef; --font-main: 'Cairo', sans-serif; }
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: var(--font-main); color: var(--text-dark); line-height: 1.6; background-color: #fff;}
+        body { font-family: var(--font-main); color: var(--text-dark); line-height: 1.6; background-color: #fff; overflow-x: hidden; }
         a { text-decoration: none; color: inherit; }
         .container { width: 90%; max-width: 1200px; margin: auto; }
 
@@ -24,11 +25,11 @@
 
         /* Hero */
         .hero { background: linear-gradient(135deg, #0a84c6 0%, #034b75 100%); display: flex; align-items: center; justify-content: space-between; padding: 50px 5%; color: white; min-height: 500px; position: relative; overflow: hidden; }
-        .hero-content { max-width: 550px; z-index: 2; }
+        .hero-content { max-width: 550px; z-index: 2; margin-right: auto; }
         .hero-box { background-color: var(--teal-box); padding: 30px; border-radius: 10px; font-size: 22px; font-weight: 700; line-height: 1.6; margin-bottom: 20px; }
         .btn { display: inline-block; padding: 10px 25px; background-color: var(--teal-box); color: white; border-radius: 25px; font-weight: 700; border: none; cursor: pointer; font-family: var(--font-main); font-size: 16px;}
         .btn-blue { background-color: var(--btn-blue); border-radius: 0; padding: 12px 30px; width: 100%; font-size: 18px; color: white;}
-        .hero-image { position: absolute; left: 0%; bottom: 0; height: 100%; width: auto; z-index: 1; object-fit: cover; }
+        .hero-image { position: absolute; left: 0; bottom: 0; height: 100%; width: auto; z-index: 1; object-fit: cover; }
 
         /* الخدمات */
         .services-sec { padding: 60px 5%; text-align: center; }
@@ -54,8 +55,19 @@
         /* الفوتر */
         .footer { background-color: var(--footer-dark); color: white; padding: 60px 5% 20px; }
         .footer-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; margin-bottom: 40px; }
+        .social-links { display: flex; gap: 15px; margin-top: 10px; }
+        .social-links a { color: white; font-size: 28px; transition: 0.3s; }
+        .social-links a:hover { color: var(--btn-blue); }
         .copyright { text-align: center; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; font-size: 14px; }
         .fab { position: fixed; bottom: 30px; left: 30px; background-color: #25D366; color: white; width: 55px; height: 55px; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 30px; box-shadow: 0 4px 10px rgba(0,0,0,0.3); z-index: 1000; }
+
+        /* تعديلات الموبايل */
+        @media (max-width: 768px) {
+            .hero { flex-direction: column-reverse; padding: 20px; text-align: center; height: auto; }
+            .hero-image { position: relative; width: 100%; height: 350px; }
+            .hero-content { margin-right: 0; width: 100%; }
+            .services-grid, .maps-grid, .footer-grid { grid-template-columns: 1fr; }
+        }
     </style>
 </head>
 <body>
@@ -79,7 +91,7 @@
     <section class="hero">
         <div class="hero-content">
             <div class="hero-box">
-                خيارك الأول في جراحات الأورام المتقدمة والاكتشاف المبكر بأحدث الأساليب الطبية والتحفظية.
+                دكتور أيمن جمعة | خيارك الأول في جراحات الأورام المتقدمة والاكتشاف المبكر بأحدث الأساليب الطبية والتحفظية.
             </div>
             <button class="btn" onclick="document.getElementById('appointment').scrollIntoView({behavior: 'smooth'})">احجز موعدك الآن</button>
         </div>
@@ -106,7 +118,8 @@
             <h2 class="section-title" style="text-align: center;">احجز موعداً</h2>
             <form>
                 <div class="form-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
-                    <div><label>الاسم <span>*</span></label><input type="text"></div>
+                    <div><label>الاسم الأول <span>*</span></label><input type="text"></div>
+                    <div><label>اسم العائلة <span>*</span></label><input type="text"></div>
                     <div><label>رقم الهاتف <span>*</span></label><input type="tel"></div>
                     <div><label>الدولة <span>*</span></label>
                         <select>
@@ -136,7 +149,7 @@
                     <div style="grid-column: span 2;"><label>كيف تعرفت علينا؟</label>
                         <select>
                             <option value="" disabled selected>اختر طريقة معرفتك بنا</option>
-                            <option>عميل سابق للدكتور</option>
+                            <option>مريض سابق للدكتور</option>
                             <option>فيسبوك</option>
                             <option>انستاجرام</option>
                             <option>تيك توك</option>
@@ -179,10 +192,10 @@
             </div>
             <div class="footer-col">
                 <h3>تابعنا</h3>
-                <div class="social-icons" style="display:flex; gap:15px; font-size: 24px;">
-                    <a href="https://www.facebook.com/profile.php?id=61565387397714" target="_blank" style="color: white;"><i class="fab fa-facebook-f"></i></a>
-                    <a href="https://www.instagram.com/dr.ayman.surgeon/" target="_blank" style="color: white;"><i class="fab fa-instagram"></i></a>
-                    <a href="https://www.tiktok.com/@dr.aymangomaa" target="_blank" style="color: white;"><i class="fab fa-tiktok"></i></a>
+                <div class="social-links">
+                    <a href="https://www.facebook.com/profile.php?id=61565387397714" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://www.instagram.com/dr.ayman.surgeon/" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.tiktok.com/@dr.aymangomaa" target="_blank"><i class="fab fa-tiktok"></i></a>
                 </div>
             </div>
         </div>
