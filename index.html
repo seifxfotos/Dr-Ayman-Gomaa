@@ -16,11 +16,14 @@
         .container { width: 90%; max-width: 1200px; margin: auto; }
 
         /* الهيدر */
-        .top-bar { display: flex; justify-content: flex-end; gap: 15px; padding: 5px 5%; font-size: 13px; border-bottom: 1px solid #eee; }
+        .top-bar { display: flex; justify-content: flex-end; gap: 20px; padding: 5px 5%; font-size: 13px; border-bottom: 1px solid #eee; }
         .header { display: flex; justify-content: space-between; align-items: center; padding: 15px 5%; background: #fff; position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
         .text-logo { font-size: 26px; font-weight: 800; color: var(--footer-dark); margin: 0; letter-spacing: -0.5px;}
         .text-logo span { color: var(--btn-blue); }
-        .nav-links { display: flex; gap: 20px; font-weight: 700; font-size: 15px; color: var(--footer-dark); }
+        
+        /* ضبط القائمة والمسافات */
+        .nav-links { display: flex; gap: 30px; align-items: center; font-weight: 700; font-size: 15px; color: var(--footer-dark); margin-right: 40px; }
+        .nav-links a { white-space: nowrap; }
         .nav-links a:hover { color: var(--btn-blue); }
 
         /* Hero */
@@ -30,16 +33,7 @@
         .btn { display: inline-block; padding: 10px 25px; background-color: var(--teal-box); color: white; border-radius: 25px; font-weight: 700; border: none; cursor: pointer; font-family: var(--font-main); font-size: 16px;}
         .btn-blue { background-color: var(--btn-blue); border-radius: 0; padding: 12px 30px; width: 100%; font-size: 18px; color: white;}
         
-        /* تعديل الصورة لليمين */
-        .hero-image { 
-            position: absolute; 
-            right: 0; 
-            bottom: 0; 
-            height: 100%; 
-            width: auto; 
-            z-index: 1; 
-            object-fit: cover; 
-        }
+        .hero-image { position: absolute; right: 0; bottom: 0; height: 100%; width: auto; z-index: 1; object-fit: cover; }
 
         /* الخدمات */
         .services-sec { padding: 60px 5%; text-align: center; }
@@ -73,7 +67,10 @@
 
         /* تعديلات الموبايل */
         @media (max-width: 768px) {
-            .text-logo { font-size: 20px; } /* تصغير الخط للموبايل */
+            .top-bar { justify-content: center; }
+            .header { flex-direction: column; gap: 10px; }
+            .text-logo { font-size: 20px; }
+            .nav-links { margin-right: 0; gap: 15px; font-size: 13px; }
             .hero { flex-direction: column-reverse; padding: 20px; text-align: center; height: auto; }
             .hero-image { position: relative; width: 100%; height: 350px; }
             .hero-content { margin-right: 0; width: 100%; }
@@ -90,7 +87,7 @@
 
     <header class="header">
         <div class="logo">
-            <h1 class="text-logo">دكتور <span>أيمن جمعة</span></h1>
+            <h1 class="text-logo">د. <span>أيمن جمعة</span></h1>
         </div>
         <nav class="nav-links">
             <a href="#">الرئيسية</a>
@@ -102,7 +99,7 @@
     <section class="hero">
         <div class="hero-content">
             <div class="hero-box">
-                خيارك الأول في جراحات الأورام المتقدمة والاكتشاف المبكر بأحدث الأساليب الطبية
+                دكتور أيمن جمعة | خيارك الأول في جراحات الأورام المتقدمة والاكتشاف المبكر بأحدث الأساليب الطبية والتحفظية.
             </div>
             <button class="btn" onclick="document.getElementById('appointment').scrollIntoView({behavior: 'smooth'})">احجز موعدك الآن</button>
         </div>
