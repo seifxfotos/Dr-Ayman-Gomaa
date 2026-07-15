@@ -28,7 +28,15 @@
         .hero-box { background-color: var(--teal-box); padding: 30px; border-radius: 10px; font-size: 22px; font-weight: 700; line-height: 1.6; margin-bottom: 20px; }
         .btn { display: inline-block; padding: 10px 25px; background-color: var(--teal-box); color: white; border-radius: 25px; font-weight: 700; border: none; cursor: pointer; font-family: var(--font-main); font-size: 16px;}
         .btn-blue { background-color: var(--btn-blue); border-radius: 0; padding: 12px 30px; width: 100%; font-size: 18px; color: white;}
-        .hero-image { position: absolute; left: 5%; bottom: 0; height: 90%; z-index: 1; }
+        .hero-image { 
+    position: absolute; 
+    left: 5%; 
+    bottom: 0; 
+    height: 95%; /* زودناها شوية عشان تملأ المساحة */
+    width: auto; /* العرض يتناسب أوتوماتيك مع الطول */
+    z-index: 1; 
+    object-fit: cover; /* دي أهم حاجة، بتخلي الصورة تملا المكان بدون ما تضغطها أو تشوهها */
+}
 
         /* الخدمات */
         .services-sec { padding: 60px 5%; text-align: center; }
