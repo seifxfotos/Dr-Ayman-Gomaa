@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>دكتور أيمن جمعة</title>
+    <title>دكتور أيمن جمعة - استشاري جراحة الأورام</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
@@ -28,15 +28,7 @@
         .hero-box { background-color: var(--teal-box); padding: 30px; border-radius: 10px; font-size: 22px; font-weight: 700; line-height: 1.6; margin-bottom: 20px; }
         .btn { display: inline-block; padding: 10px 25px; background-color: var(--teal-box); color: white; border-radius: 25px; font-weight: 700; border: none; cursor: pointer; font-family: var(--font-main); font-size: 16px;}
         .btn-blue { background-color: var(--btn-blue); border-radius: 0; padding: 12px 30px; width: 100%; font-size: 18px; color: white;}
-        .hero-image { 
-    position: absolute; 
-    left: 5%; 
-    bottom: 0; 
-    height: 95%; /* زودناها شوية عشان تملأ المساحة */
-    width: auto; /* العرض يتناسب أوتوماتيك مع الطول */
-    z-index: 1; 
-    object-fit: cover; /* دي أهم حاجة، بتخلي الصورة تملا المكان بدون ما تضغطها أو تشوهها */
-}
+        .hero-image { position: absolute; left: 5%; bottom: 0; height: 95%; width: auto; z-index: 1; object-fit: cover; }
 
         /* الخدمات */
         .services-sec { padding: 60px 5%; text-align: center; }
@@ -87,7 +79,7 @@
     <section class="hero">
         <div class="hero-content">
             <div class="hero-box">
-                خيارك الأول في جراحات الأورام المتقدمة والاكتشاف المبكر بأحدث الأساليب
+                دكتور أيمن جمعة | خيارك الأول في جراحات الأورام المتقدمة والاكتشاف المبكر بأحدث الأساليب الطبية والتحفظية.
             </div>
             <button class="btn" onclick="document.getElementById('appointment').scrollIntoView({behavior: 'smooth'})">احجز موعدك الآن</button>
         </div>
@@ -117,25 +109,47 @@
                     <div><label>الاسم الأول <span>*</span></label><input type="text"></div>
                     <div><label>اسم العائلة <span>*</span></label><input type="text"></div>
                     <div><label>رقم الهاتف <span>*</span></label><input type="tel"></div>
-                    <div><label>الدولة <span>*</span></label><input type="text"></div>
+                    <div><label>الدولة <span>*</span></label>
+                        <select>
+                            <option value="" disabled selected>اختر الدولة</option>
+                            <option value="EG">مصر</option>
+                            <option value="SA">السعودية</option>
+                            <option value="AE">الإمارات</option>
+                            <option value="KW">الكويت</option>
+                            <option value="QA">قطر</option>
+                            <option value="BH">البحرين</option>
+                            <option value="OM">عمان</option>
+                            <option value="JO">الأردن</option>
+                            <option value="LB">لبنان</option>
+                            <option value="SY">سوريا</option>
+                            <option value="IQ">العراق</option>
+                            <option value="YE">اليمن</option>
+                            <option value="LY">ليبيا</option>
+                            <option value="TN">تونس</option>
+                            <option value="DZ">الجزائر</option>
+                            <option value="MA">المغرب</option>
+                            <option value="SD">السودان</option>
+                            <option value="OTHER">أخرى</option>
+                        </select>
+                    </div>
                     <div><label>المحافظة <span>*</span></label><input type="text"></div>
                     <div style="grid-column: span 2;"><label>الجنسية <span>*</span></label><input type="text"></div>
                     <div style="grid-column: span 2;"><label>كيف تعرفت علينا؟</label>
                         <select>
-                            <option>عميل جديد</option>
-                            <option>عميل سابق</option>
+                            <option value="" disabled selected>اختر طريقة معرفتك بنا</option>
+                            <option>مريض سابق للدكتور</option>
                             <option>فيسبوك</option>
                             <option>انستاجرام</option>
                             <option>تيك توك</option>
                             <option>صديق/قريب</option>
                             <option>أخرى</option>
-                            
                         </select>
                     </div>
                     <div style="grid-column: span 2;"><label>الوظيفة <span>*</span></label><input type="text"></div>
                     <div><label>العمر <span>*</span></label><input type="number"></div>
                     <div><label>الجنس <span>*</span></label>
                         <select>
+                            <option value="" disabled selected>اختر الجنس</option>
                             <option>ذكر</option>
                             <option>أنثى</option>
                         </select>
@@ -167,9 +181,9 @@
             <div class="footer-col">
                 <h3>تابعنا</h3>
                 <div class="social-icons" style="display:flex; gap:15px; font-size: 24px;">
-                    <a href="https://www.facebook.com/profile.php?id=61565387397714" target="_blank"><i class="fab fa-facebook-f"></i></a>
-                    <a href="https://www.instagram.com/dr.ayman.surgeon/" target="_blank"><i class="fab fa-instagram"></i></a>
-                    <a href="https://www.tiktok.com/@dr.aymangomaa" target="_blank"><i class="fab fa-tiktok"></i></a>
+                    <a href="https://www.facebook.com/profile.php?id=61565387397714" target="_blank" style="color: white;"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://www.instagram.com/dr.ayman.surgeon/" target="_blank" style="color: white;"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.tiktok.com/@dr.aymangomaa" target="_blank" style="color: white;"><i class="fab fa-tiktok"></i></a>
                 </div>
             </div>
         </div>
