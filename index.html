@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>دكتور أيمن - استشاري جراحة الأورام</title>
+    <!-- استدعاء خط Cairo العربي من جوجل -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <!-- استدعاء أيقونات FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* --- المتغيرات ودرجات الألوان --- */
+        :root {
+            --footer-dark: #063e63;
+            --btn-blue: #29b6f6;
+            --teal-box: #36d2cd;
+            --text-dark: #333333;
+            --gray-bg: #e9ecef;
+            --font-main: 'Cairo', sans-serif;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: var(--font-main); color: var(--text-dark); line-height: 1.6; background-color: #fff;}
+        a { text-decoration: none; color: inherit; }
+        .container { width: 90%; max-width: 1200px; margin: auto; }
+
+        /* --- Top Bar & Header --- */
+        .top-bar { display: flex; justify-content: flex-end; gap: 15px; padding: 5px 5%; font-size: 13px; border-bottom: 1px solid #eee; }
+        .header { display: flex; justify-content: space-between; align-items: center; padding: 15px 5%; background: #fff; position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+        .logo img { height: 60px; }
+        .nav-links { display: flex; gap: 20px; font-weight: 700; font-size: 15px; color: var(--footer-dark); }
+        .nav-links a:hover { color: var(--btn-blue); }
+
+        /* --- Hero Section --- */
+        .hero { 
+            background: linear-gradient(135deg, #0a84c6 0%, #034b75 100%);
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 50px 5%; color: white; min-height: 500px; position: relative; overflow: hidden;
+        }
+        .hero-content { max-width: 550px; z-index: 2; }
+        .hero-box { background-color: var(--teal-box); padding: 30px; border-radius: 10px; font-size: 22px; font-weight: 700; line-height: 1.6; margin-bottom: 20px; }
+        .hero-quote { font-style: italic; margin-bottom: 20px; font-size: 18px;}
+        .btn { display: inline-block; padding: 10px 25px; background-color: var(--teal-box); color: white; border-radius: 25px; font-weight: 700; border: none; cursor: pointer; font-family: var(--font-main); font-size: 16px;}
+        .btn-blue { background-color: var(--btn-blue); border-radius: 0; padding: 12px 30px;}
+        .hero-image { position: absolute; left: 5%; bottom: 0; height: 90%; z-index: 1; }
+
+        /* --- About Section --- */
+        .about-sec { display: flex; padding: 80px 5%; gap: 50px; align-items: center; }
+        .about-img { flex: 1; }
+        .about-img img { width: 100%; border-radius: 10px; }
+        .about-text { flex: 1; }
+        .about-text h2 { font-weight: 800; font-size: 32px; margin-bottom: 10px; }
+        .about-text h3 { color: #555; margin-bottom: 20px; font-size: 20px; }
+        .about-text ul { list-style: none; margin: 20px 0; }
+        .about-text li { margin-bottom: 15px; position: relative; padding-right: 20px; font-weight: 600; font-size: 17px;}
+        .about-text li::before { content: "•"; color: var(--btn-blue); font-size: 20px; position: absolute; right: 0; top: -5px; }
+
+        /* --- Services Section --- */
+        .services-sec { padding: 60px 5%; text-align: center; }
+        .section-title { font-weight: 800; font-size: 36px; margin-bottom: 50px; }
+        /* تم تعديل الشبكة لتناسب 9 خدمات بشكل أنيق (3 أعمدة) */
+        .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; }
+        .service-item { display: flex; flex-direction: column; align-items: center; padding: 15px;}
+        .icon-circle { width: 80px; height: 80px; background-color: #5c8ab3; border-radius: 50%; display: flex; justify-content: center; align-items: center; margin-bottom: 15px; color: white; font-size: 35px; transition: 0.3s;}
+        .service-item:hover .icon-circle { background-color: var(--btn-blue); transform: scale(1.05); }
+        .service-item h4 { font-size: 18px; font-weight: 700; color: var(--footer-dark);}
+
+        /* --- Reviews & Support Section --- */
+        .reviews-sec { padding: 60px 5%; text-align: center; background: #fafafa; }
+        .video-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: 60px; }
+        .video-box { background: #000; height: 200px; border-radius: 8px; display: flex; justify-content: center; align-items: center; color: red; font-size: 40px; cursor: pointer; }
+        
+        .support-banner { background-color: var(--gray-bg); display: flex; align-items: center; padding: 40px 5%; gap: 30px; border-radius: 10px;}
+        .support-text { flex: 1; text-align: right; font-size: 20px; font-weight: 700; }
+        .support-text a { color: var(--btn-blue); font-size: 16px; display: block; margin-top: 10px; font-weight: 600;}
+        .support-img { flex: 1; text-align: left; }
+        .support-img img { max-height: 250px; }
+
+        /* --- Appointment Form Section --- */
+        .appointment-sec { padding: 80px 5%; }
+        .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .form-group { display: flex; flex-direction: column; }
+        .full-width { grid-column: span 2; }
+        label { font-size: 15px; font-weight: 700; margin-bottom: 5px; }
+        label span { color: red; }
+        input, select, textarea { padding: 12px; border: 1px solid #ccc; border-radius: 4px; font-family: var(--font-main); font-size: 14px;}
+        textarea { resize: vertical; min-height: 100px; }
+
+        /* --- Footer --- */
+        .footer { background-color: var(--footer-dark); color: white; padding: 60px 5% 20px; }
+        .footer-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px; margin-bottom: 40px; }
+        .footer-logo img { width: 80%; filter: brightness(0) invert(1); }
+        .footer-col h3 { margin-bottom: 20px; font-size: 20px; font-weight: 700;}
+        .footer-col p { font-size: 14px; margin-bottom: 10px; }
+        .social-icons { margin-bottom: 15px; }
+        .social-icons i { font-size: 20px; margin-left: 10px; cursor: pointer; }
+        .copyright { text-align: center; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; font-size: 14px; }
+        
+        /* Floating Action Button */
+        .fab { position: fixed; bottom: 30px; left: 30px; background-color: var(--btn-blue); color: white; width: 50px; height: 50px; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 24px; box-shadow: 0 4px 10px rgba(0,0,0,0.3); z-index: 1000; cursor: pointer;}
+    </style>
+</head>
+<body>
+
+    <!-- Top Bar -->
+    <div class="top-bar">
+        <a href="#"><i class="fas fa-phone-alt"></i> للحجز: 01093553286</a>
+        <a href="#"><i class="fab fa-whatsapp"></i> واتساب: 01039166291</a>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="logo">
+            <img src="logo-placeholder.png" alt="شعار دكتور أيمن">
+        </div>
+        <nav class="nav-links">
+            <a href="#">الرئيسية</a>
+            <a href="#">من نحن</a>
+            <a href="#">الخدمات والجراحات <i class="fas fa-chevron-down"></i></a>
+            <a href="#">قصص النجاح</a>
+            <a href="#">احجز موعداً</a>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-box">
+                دكتور أيمن | خيارك الأول في جراحات الأورام المتقدمة والاكتشاف المبكر بأحدث الأساليب الطبية والتحفظية.
+            </div>
+            <div class="hero-quote">
+                "الاكتشاف المبكر والرعاية المتكاملة هما مفتاح الشفاء بإذن الله"<br>
+                <em>د. أيمن</em>
+            </div>
+            <button class="btn">احجز موعدك الآن</button>
+        </div>
+        <!-- مسار صورة الدكتور في الهيرو -->
+        <img src="hero-doctor.png" alt="دكتور أيمن" class="hero-image">
+    </section>
+
+    <!-- About Section -->
+    <section class="about-sec container">
+        <div class="about-img">
+            <img src="doctor-profile.jpg" alt="دكتور أيمن">
+        </div>
+        <div class="about-text">
+            <h2>دكتور أيمن</h2>
+            <h3>استشاري الجراحة</h3>
+            <hr style="border: 0; height: 1px; background: #eee; margin-bottom: 20px;">
+            <ul>
+                <li>أستاذ مساعد جراحة الأورام بكلية الطب.</li>
+                <li>استشاري الجراحة العامة والأورام.</li>
+                <li>عضو الجمعية المصرية لجراحة الأورام.</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services-sec container">
+        <h2 class="section-title">الخدمات الطبية</h2>
+        <div class="services-grid">
+            <div class="service-item">
+                <div class="icon-circle"><i class="fas fa-microscope"></i></div>
+                <h4>الاكتشاف المبكر للأورام والفحص الدوري</h4>
+            </div>
+            <div class="service-item">
+                <div class="icon-circle"><i class="fas fa-user-md"></i></div>
+                <h4>جراحات الأورام المتقدمة</h4>
+            </div>
+            <div class="service-item">
+                <div class="icon-circle"><i class="fas fa-ribbon"></i></div>
+                <h4>جراحات أورام الثدي التحفظية</h4>
+            </div>
+            <div class="service-item">
+                <div class="icon-circle"><i class="fas fa-procedures"></i></div>
+                <h4>جراحات أورام القولون والمستقيم</h4>
+            </div>
+            <div class="service-item">
+                <div class="icon-circle"><i class="fas fa-stomach"></i></div>
+                <h4>جراحات أورام المعدة والمريء</h4>
+            </div>
+            <div class="service-item">
+                <div class="icon-circle"><i class="fas fa-notes-medical"></i></div>
+                <h4>جراحات أورام البنكرياس والكبد والقنوات المرارية</h4>
+            </div>
+            <div class="service-item">
+                <div class="icon-circle"><i class="fas fa-head-side-mask"></i></div>
+                <h4>جراحات أورام الغدة الدرقية والجار درقية</h4>
+            </div>
+            <div class="service-item">
+                <div class="icon-circle"><i class="fas fa-female"></i></div>
+                <h4>جراحات أورام الرحم والمبايض</h4>
+            </div>
+            <div class="service-item">
+                <div class="icon-circle"><i class="fas fa-vial"></i></div>
+                <h4>جراحات أورام الكلى والحالب والمثانة</h4>
+            </div>
+        </div>
+    </section>
+
+    <!-- Appointment Form -->
+    <section class="appointment-sec container">
+        <h2 class="section-title" style="text-align: center;">احجز موعداً</h2>
+        <form>
+            <div class="form-grid">
+                <div class="form-group full-width">
+                    <label>الاسم <span>*</span></label>
+                    <div style="display: flex; gap: 20px;">
+                        <input type="text" placeholder="الاسم الأول" style="width: 100%;">
+                        <input type="text" placeholder="اسم العائلة" style="width: 100%;">
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label>رقم الهاتف <span>*</span></label>
+                    <input type="tel" dir="ltr" placeholder="010XXXXXXXX">
+                </div>
+                <div class="form-group">
+                    <label>الفرع المفضل <span>*</span></label>
+                    <select>
+                        <option>عيادة السويس</option>
+                        <option>عيادة الإسماعيلية</option>
+                    </select>
+                </div>
+
+                <div class="form-group full-width">
+                    <label>هل تعاني من أي حالة طبية سابقة؟ (يرجى ذكر التفاصيل) <span>*</span></label>
+                    <textarea></textarea>
+                </div>
+                
+                <div class="form-group full-width">
+                    <label>نوع الخدمة المطلوبة:</label>
+                    <select>
+                        <option>فحص دوري واكتشاف مبكر</option>
+                        <option>استشارة جراحية</option>
+                        <option>متابعة بعد الجراحة</option>
+                    </select>
+                </div>
+
+                <div class="form-group full-width" style="margin-top: 20px;">
+                    <button type="submit" class="btn btn-blue">إرسال الطلب</button>
+                </div>
+            </div>
+        </form>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container footer-grid">
+            <div class="footer-logo">
+                <img src="logo-placeholder.png" alt="شعار دكتور أيمن">
+            </div>
+            <div class="footer-col">
+                <h3>عناوين العيادات</h3>
+                <p><strong>عيادة السويس:</strong><br> شارع الجيش، أمام قسم الأربعين، أعلى بنك الإسكان والتعمير.</p>
+                <p style="margin-top: 15px;"><strong>عيادة الإسماعيلية:</strong><br> برج الجوهرة أمام الموقف الجديد - الدور الأول.</p>
+            </div>
+            <div class="footer-col">
+                <h3>تواصل معنا</h3>
+                <p style="direction: ltr; text-align: right; font-size: 16px;"><strong>للحجز:</strong> 01093553286</p>
+                <p style="direction: ltr; text-align: right; font-size: 16px;"><strong>واتساب:</strong> 01039166291</p>
+                <div class="social-icons" style="margin-top: 20px;">
+                    <i class="fab fa-facebook-f"></i>
+                    <i class="fab fa-instagram"></i>
+                    <i class="fab fa-youtube"></i>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h3>خريطة الوصول</h3>
+                <!-- مكان خريطة جوجل -->
+                <div style="background: #ccc; height: 150px; display: flex; justify-content: center; align-items: center; color: #333; border-radius: 8px;">مكان خريطة جوجل</div>
+            </div>
+        </div>
+        <div class="copyright">
+            حقوق النشر محفوظة © دكتور أيمن
+        </div>
+    </footer>
+
+    <!-- زر الزائد العائم (FAB) -->
+    <div class="fab">
+        <i class="fab fa-whatsapp"></i>
+    </div>
+
+</body>
+</html>
