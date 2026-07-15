@@ -4,14 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>دكتور أيمن جمعة - استشاري جراحة الأورام</title>
-    <!-- رابط مكتبة الأيقونات -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
     
     <style>
         :root { --footer-dark: #063e63; --btn-blue: #29b6f6; --teal-box: #28b6f6; --text-dark: #333333; --gray-bg: #e9ecef; --font-main: 'Cairo', sans-serif; }
         
-        /* هذا السطر هو الحل لمشكلة تداخل الشريط مع العناوين */
+        /* ضبط سكرول الكمبيوتر */
         html { scroll-behavior: smooth; scroll-padding-top: 100px; }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -24,30 +23,19 @@
         .text-logo { font-size: 30px; font-weight: 800; color: var(--footer-dark); margin: 0; letter-spacing: -0.5px;}
         .text-logo span { color: var(--btn-blue); }
         
-        /* ضبط القائمة والمسافات */
         .nav-links { display: flex; gap: 30px; align-items: center; font-weight: 700; font-size: 15px; color: var(--footer-dark); margin-right: 40px; }
         .nav-links a { white-space: nowrap; }
         .nav-links a:hover { color: var(--btn-blue); }
 
         /* Hero */
         .hero { background: linear-gradient(135deg, #0a84c6 0%, #034b75 100%); display: flex; align-items: center; justify-content: flex-start; padding: 50px 5%; color: white; min-height: 500px; position: relative; overflow: hidden; }
-        
-        /* التعديل: الكلام لليسار (margin-right: auto) */
         .hero-content { max-width: 550px; z-index: 2; margin-right: auto; margin-left: 0; }
         
         .hero-box { background-color: var(--teal-box); padding: 30px; border-radius: 10px; font-size: 22px; font-weight: 700; line-height: 1.6; margin-bottom: 20px; }
         .btn { display: inline-block; padding: 10px 25px; background-color: var(--teal-box); color: white; border-radius: 25px; font-weight: 700; border: none; cursor: pointer; font-family: var(--font-main); font-size: 16px;}
         .btn-blue { background-color: var(--btn-blue); border-radius: 0; padding: 12px 30px; width: 100%; font-size: 18px; color: white;}
         
-        .hero-image { 
-            position: absolute; 
-            right: 0; 
-            bottom: 0; 
-            height: 100%; 
-            width: auto; 
-            z-index: 1; 
-            object-fit: cover; 
-        }
+        .hero-image { position: absolute; right: 0; bottom: 0; height: 100%; width: auto; z-index: 1; object-fit: cover; }
 
         /* الخدمات */
         .services-sec { padding: 60px 5%; text-align: center; }
@@ -81,9 +69,9 @@
 
         /* تعديلات الموبايل */
         @media (max-width: 768px) {
-            html { scroll-padding-top: 150px; }
+            html { scroll-padding-top: 260px; } /* تم التعديل لزيادة المسافة */
             .header { flex-direction: column; gap: 10px; }
-            .text-logo { font-size: 30px; }
+            .text-logo { font-size: 32px; } 
             .nav-links { margin-right: 0; gap: 15px; font-size: 13px; }
             .hero { flex-direction: column-reverse; padding: 20px; text-align: center; height: auto; }
             .hero-image { position: relative; width: 100%; height: 350px; }
