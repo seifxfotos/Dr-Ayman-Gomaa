@@ -17,14 +17,13 @@
         a { text-decoration: none; color: inherit; }
         .container { width: 90%; max-width: 1200px; margin: auto; }
 
-        /* الهيدر */
         .header { display: flex; justify-content: space-between; align-items: center; padding: 15px 5%; background: #fff; position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
         .text-logo { font-size: 30px; font-weight: 800; color: var(--footer-dark); margin: 0; letter-spacing: -0.5px;}
         .text-logo span { color: var(--btn-blue); }
+        
         .nav-links { display: flex; gap: 30px; align-items: center; font-weight: 700; font-size: 15px; color: var(--footer-dark); margin-right: 40px; }
         .nav-links a:hover { color: var(--btn-blue); }
 
-        /* Hero */
         .hero { background: linear-gradient(135deg, #0a84c6 0%, #034b75 100%); display: flex; align-items: center; padding: 50px 5%; color: white; min-height: 500px; position: relative; overflow: hidden; }
         .hero-content { max-width: 550px; z-index: 2; }
         .hero-box { background-color: var(--teal-box); padding: 30px; border-radius: 10px; font-size: 22px; font-weight: 700; line-height: 1.6; margin-bottom: 20px; }
@@ -38,21 +37,38 @@
             .hero-image { max-width: 450px; }
         }
 
-        /* الفوتر والأيقونات */
+        .services-sec { padding: 60px 5%; text-align: center; }
+        .section-title { font-weight: 800; font-size: 36px; margin-bottom: 50px; }
+        .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; }
+        .service-item { display: flex; flex-direction: column; align-items: center; padding: 15px;}
+        .icon-circle { width: 80px; height: 80px; background-color: #5c8ab3; border-radius: 50%; display: flex; justify-content: center; align-items: center; margin-bottom: 15px; color: white; font-size: 35px; transition: 0.3s;}
+        .service-item h4 { font-size: 18px; font-weight: 700; color: var(--footer-dark);}
+
+        .appointment-sec { padding: 80px 5%; background-color: #f8f9fa; }
+        input, select, textarea { padding: 12px; border: 1px solid #ccc; border-radius: 4px; font-family: var(--font-main); font-size: 14px; width: 100%; }
+        label { font-weight: 700; margin-bottom: 5px; display: block; }
+        label span { color: red; }
+
+        .maps-section { padding: 60px 5%; }
+        .maps-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 30px; }
+        .map-item { background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .map-item h4 { margin-bottom: 15px; text-align: center; color: var(--footer-dark); font-size: 18px; }
+        .map-item iframe { width: 100%; height: 250px; border: 0; border-radius: 4px; }
+
+        /* تعديل الفوتر والأيقونات */
         .footer { background-color: var(--footer-dark); color: white; padding: 60px 5% 20px; }
         .footer-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; margin-bottom: 40px; }
         
-        /* ضبط الأيقونات لتظهر تحت "تابعنا" مباشرة */
-        .social-links { display: flex; gap: 20px; margin-top: 15px; justify-content: flex-start; }
-        .social-links a { font-size: 30px; color: white; transition: 0.3s; }
-        .social-links a:hover { color: var(--btn-blue); }
+        /* الأيقونات بدأت من اليسار (تحت العنوان) */
+        .social-links { display: flex; gap: 15px; margin-top: 15px; justify-content: flex-start; }
+        .social-links a { font-size: 24px; color: white !important; transition: 0.3s; }
+        .social-links a:hover { color: var(--btn-blue) !important; }
         
         .copyright { text-align: center; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; font-size: 14px; }
         .fab { position: fixed; bottom: 30px; left: 30px; background-color: #25D366; color: white; width: 55px; height: 55px; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 30px; box-shadow: 0 4px 10px rgba(0,0,0,0.3); z-index: 1000; }
 
-        /* تعديلات الموبايل */
         @media (max-width: 768px) {
-            html { scroll-padding-top: 140px; } 
+            html { scroll-padding-top: 200px; } 
             .header { flex-direction: column; gap: 10px; }
             .text-logo { font-size: 32px; } 
             .nav-links { margin-right: 0; gap: 15px; font-size: 13px; }
@@ -86,7 +102,6 @@
         <img src="Doctor.webp" alt="دكتور أيمن جمعة" class="hero-image">
     </section>
 
-    <!-- باقي الموقع كما هو -->
     <section class="services-sec container" id="services">
         <h2 class="section-title">الخدمات</h2>
         <div class="services-grid">
@@ -109,9 +124,64 @@
                 <div class="form-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
                     <div><label>الاسم <span>*</span></label><input type="text"></div>
                     <div><label>رقم الهاتف <span>*</span></label><input type="tel"></div>
-                    <div style="grid-column: span 2;"><button type="submit" class="btn btn-blue">إرسال</button></div>
+                    <div><label>الدولة <span>*</span></label>
+                        <select>
+                            <option value="" disabled selected>اختر الدولة</option>
+                            <option value="EG">مصر</option>
+                            <option value="SA">السعودية</option>
+                            <option value="AE">الإمارات</option>
+                            <option value="KW">الكويت</option>
+                            <option value="QA">قطر</option>
+                            <option value="BH">البحرين</option>
+                            <option value="OM">عمان</option>
+                            <option value="JO">الأردن</option>
+                            <option value="LB">لبنان</option>
+                            <option value="SY">سوريا</option>
+                            <option value="IQ">العراق</option>
+                            <option value="YE">اليمن</option>
+                            <option value="LY">ليبيا</option>
+                            <option value="TN">تونس</option>
+                            <option value="DZ">الجزائر</option>
+                            <option value="MA">المغرب</option>
+                            <option value="SD">السودان</option>
+                            <option value="OTHER">أخرى</option>
+                        </select>
+                    </div>
+                    <div><label>المحافظة <span>*</span></label><input type="text"></div>
+                    <div style="grid-column: span 2;"><label>الجنسية <span>*</span></label><input type="text"></div>
+                    <div style="grid-column: span 2;"><label>كيف تعرفت علينا؟</label>
+                        <select>
+                            <option value="" disabled selected>اختر طريقة معرفتك بنا</option>
+                            <option>مريض سابق للدكتور</option>
+                            <option>فيسبوك</option>
+                            <option>انستاجرام</option>
+                            <option>تيك توك</option>
+                            <option>صديق/قريب</option>
+                            <option>أخرى</option>
+                        </select>
+                    </div>
+                    <div style="grid-column: span 2;"><label>الوظيفة <span>*</span></label><input type="text"></div>
+                    <div><label>العمر <span>*</span></label><input type="number"></div>
+                    <div><label>الجنس <span>*</span></label>
+                        <select>
+                            <option value="" disabled selected>اختر الجنس</option>
+                            <option>ذكر</option>
+                            <option>أنثى</option>
+                        </select>
+                    </div>
+                    <div style="grid-column: span 2;"><label>هل تعاني من أي حالة طبية؟ (يرجى ذكر التفاصيل) <span>*</span></label><textarea></textarea></div>
+                    <button type="submit" class="btn btn-blue" style="grid-column: span 2;">إرسال</button>
                 </div>
             </form>
+        </div>
+    </section>
+
+    <section class="maps-section container">
+        <h2 class="section-title" style="text-align: center;">مواقع العيادات</h2>
+        <div class="maps-grid">
+            <div class="map-item"><h4>عيادة بورسعيد</h4><iframe src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d5770.8677159385015!2d32.28671590229934!3d31.272304776801185!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMzHCsDE2JzIwLjQiTiAzMsKwMTcnMDQuNyJF!5e1!3m2!1sar!2seg!4v1784148705810!5m2!1sar!2seg" allowfullscreen=""></iframe></div>
+            <div class="map-item"><h4>عيادة السويس</h4><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4135.795994084296!2d32.5501253!3d29.972320399999997!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14562582e01c888f%3A0xe8e26e44033fbde3!2z2KjZhtmDINin2YTYqti52YXZitixINmI2KfZhNin2LPZg9in2YYg2YHYsdi5INin2YTYs9mI2YrYsw!5e1!3m2!1sar!2seg!4v1784148840058!5m2!1sar!2seg" allowfullscreen=""></iframe></div>
+            <div class="map-item"><h4>عيادة الإسماعيلية</h4><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d513.602292071821!2d32.273462736517!3d30.61415702284743!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14f8590043b4d931!2z2KjYsdisINin2YTYrNmI2YfYsdip!5e1!3m2!1sar!2seg!4v1784148530247!5m2!1sar!2seg" allowfullscreen=""></iframe></div>
         </div>
     </section>
 
@@ -136,5 +206,6 @@
     </footer>
 
     <a href="https://wa.me/201039166291" target="_blank" class="fab"><i class="fab fa-whatsapp"></i></a>
+
 </body>
 </html>
