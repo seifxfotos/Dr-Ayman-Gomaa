@@ -40,9 +40,9 @@
         .services-sec { padding: 60px 5%; text-align: center; }
         .section-title { font-weight: 800; font-size: 36px; margin-bottom: 50px; }
         
-        /* التعديل لسنترة الخدمات بالملي باستخدام Flexbox */
-        .services-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 40px; }
-        .service-item { display: flex; flex-direction: column; align-items: center; padding: 15px; flex: 0 1 320px; text-align: center; }
+        /* التعديل الجديد لسنترة 3 خدمات بالظبط في الشاشات الكبيرة */
+        .services-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; }
+        .service-item { display: flex; flex-direction: column; align-items: center; padding: 15px; flex: 0 1 calc(33% - 20px); min-width: 250px; text-align: center; }
         
         .icon-circle { width: 80px; height: 80px; background-color: #5c8ab3; border-radius: 50%; display: flex; justify-content: center; align-items: center; margin-bottom: 15px; color: white; font-size: 35px; transition: 0.3s;}
         .service-item h4 { font-size: 18px; font-weight: 700; color: var(--footer-dark);}
@@ -91,12 +91,15 @@
             .hero { flex-direction: column-reverse; padding: 20px; text-align: center; height: auto; }
             .hero-image { position: relative; width: 100%; height: 350px; }
             .hero-content { margin-right: 0; width: 100%; }
-            /* تم إزالة services-grid من هنا لأن الـ Flexbox هيضبطه لوحده على الموبايل */
             .maps-grid, .footer-grid { grid-template-columns: 1fr; }
             .hero-box {
                 padding: 13px !important;
                 font-size: 17px !important;
             }
+            
+            /* إعدادات الشاشة الصغيرة عشان تطلع بيرفكت */
+            .services-grid { gap: 10px; }
+            .service-item { flex: 0 1 100%; min-width: 100%; }
         }
     </style>
 </head>
@@ -126,7 +129,7 @@
     <section class="services-sec container" id="services">
         <h2 class="section-title">الخدمات</h2>
 
-        <!-- تم تعديل العناوين لتكون text-align: center -->
+        <!-- العناوين text-align: center -->
         <h3 style="text-align: center; color: var(--footer-dark); font-size: 24px; font-weight: 800; margin: 40px 0 20px; padding-bottom: 10px; border-bottom: 2px solid var(--gray-bg);">جراحة الأورام</h3>
         <div class="services-grid">
             <div class="service-item"><div class="icon-circle"><i class="fas fa-ribbon"></i></div><h4>أورام الثدي</h4></div>
