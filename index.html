@@ -78,7 +78,7 @@
         /* قسم أراء العملاء الجديد */
         .testimonials-sec { padding: 60px 5%; background-color: #fff; overflow: hidden; }
         .carousel-wrapper { position: relative; max-width: 900px; margin: 0 auto; direction: rtl; padding: 20px 0; }
-        .carousel-track { display: flex; transition: transform 0.5s ease-in-out; will-change: transform; }
+        .carousel-track { display: flex; transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1); will-change: transform; }
         .testimonial-slide { flex: 0 0 100%; width: 100%; box-sizing: border-box; padding: 0 15px; }
         .review-card { 
             background: #fdfdfd; 
@@ -101,7 +101,7 @@
             align-items: flex-end; 
             overflow: hidden;
             color: #adb5bd; 
-            font-size: 65px; /* لتتناسب مع حجم الايقونة الافتراضية للفيسبوك */
+            font-size: 65px; 
             margin-bottom: 20px;
         }
         .quote-mark { color: var(--btn-blue); font-size: 28px; opacity: 0.3; margin-bottom: 15px; }
@@ -127,8 +127,11 @@
             transition: 0.3s;
         }
         .carousel-btn:hover { background: var(--btn-blue); color: white; border-color: var(--btn-blue); }
-        .btn-prev { right: -25px; } /* السهم اليمين يرجع لورا */
-        .btn-next { left: -25px; } /* السهم الشمال يطلع قدام */
+        .btn-prev { right: -25px; } 
+        .btn-next { left: -25px; } 
+
+        /* إخفاء الأزرار عند الأطراف */
+        .hidden-btn { opacity: 0; pointer-events: none; }
 
         .maps-section { padding: 60px 5%; background-color: #f8f9fa; }
         .maps-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 30px; }
@@ -456,7 +459,7 @@
             });
         });
 
-        // سكريبت سلايدر أراء العملاء
+        // سكريبت سلايدر أراء العملاء المعدل
         const sliderTrack = document.getElementById('sliderTrack');
         const slides = document.querySelectorAll('.testimonial-slide');
         const btnNext = document.getElementById('btnNext');
@@ -466,54 +469,90 @@
         let currentIndex = 0;
         const totalSlides = slides.length;
         let slideInterval;
+        let slideDirection = 1; // 1 للأمام، -1 للخلف
 
         function updateSliderPosition() {
-            // التحريك بالموجب لأن اتجاه الموقع من اليمين لليسار (RTL)
             sliderTrack.style.transform = `translateX(${currentIndex * 100}%)`;
+            updateButtonsVisibility();
+        }
+
+        function updateButtonsVisibility() {
+            if(btnNext && btnPrev) {
+                // إخفاء السهم اليمين في أول كومنت 
+                if(currentIndex === 0) {
+                    btnPrev.classList.add('hidden-btn');
+                } else {
+                    btnPrev.classList.remove('hidden-btn');
+                }
+                
+                // إخفاء السهم الشمال في آخر كومنت
+                if(currentIndex === totalSlides - 1) {
+                    btnNext.classList.add('hidden-btn');
+                } else {
+                    btnNext.classList.remove('hidden-btn');
+                }
+            }
         }
 
         function showNextSlide() {
+            if (currentIndex >= totalSlides - 1) return; // قفل التقليب عند النهاية
             currentIndex++;
-            if (currentIndex >= totalSlides) currentIndex = 0;
+            slideDirection = 1;
             updateSliderPosition();
         }
 
         function showPrevSlide() {
+            if (currentIndex <= 0) return; // قفل التقليب قبل البداية
             currentIndex--;
-            if (currentIndex < 0) currentIndex = totalSlides - 1;
+            slideDirection = -1;
             updateSliderPosition();
         }
 
-        // تشغيل أوتوماتيكي كل 4 ثواني
+        // حركة أوتوماتيكية بتمشي للأمام، ولما توصل للآخر بترجع للخلف بنعومة بدون لفة سريعة
         function startAutoSlide() {
-            slideInterval = setInterval(showNextSlide, 4000);
+            slideInterval = setInterval(() => {
+                if (currentIndex >= totalSlides - 1) {
+                    slideDirection = -1; // يعكس الاتجاه لو وصل للنهاية
+                } else if (currentIndex <= 0) {
+                    slideDirection = 1;  // يعكس الاتجاه لو وصل للبداية
+                }
+                
+                if (slideDirection === 1) {
+                    showNextSlide();
+                } else {
+                    showPrevSlide();
+                }
+            }, 4000);
         }
 
         function stopAutoSlide() {
             clearInterval(slideInterval);
         }
 
-        btnNext.addEventListener('click', () => {
-            showNextSlide();
-            stopAutoSlide();
-            startAutoSlide();
-        });
+        if(btnNext && btnPrev) {
+            btnNext.addEventListener('click', () => {
+                showNextSlide();
+                stopAutoSlide();
+                startAutoSlide();
+            });
 
-        btnPrev.addEventListener('click', () => {
-            showPrevSlide();
-            stopAutoSlide();
-            startAutoSlide();
-        });
+            btnPrev.addEventListener('click', () => {
+                showPrevSlide();
+                stopAutoSlide();
+                startAutoSlide();
+            });
+        }
 
+        updateButtonsVisibility(); // لتحديث الأزرار عند التحميل
         startAutoSlide();
 
-        // برمجة السحب (Swipe) للموبايل
+        // برمجة السحب (Swipe) للموبايل مع اللوك
         let startX = 0;
         let endX = 0;
 
         carouselWrapper.addEventListener('touchstart', (e) => {
             startX = e.touches[0].clientX;
-            stopAutoSlide(); // إيقاف الأوتوماتيك وقت السحب
+            stopAutoSlide(); 
         }, {passive: true});
 
         carouselWrapper.addEventListener('touchmove', (e) => {
@@ -524,16 +563,14 @@
             if (startX > 0 && endX > 0) {
                 let diffX = startX - endX;
                 if (diffX > 50) {
-                    // سحب لليسار (يعرض العنصر السابق في سياق RTL)
-                    showPrevSlide();
+                    showPrevSlide(); 
                 } else if (diffX < -50) {
-                    // سحب لليمين (يعرض العنصر التالي في سياق RTL)
-                    showNextSlide();
+                    showNextSlide(); 
                 }
             }
             startX = 0;
             endX = 0;
-            startAutoSlide(); // إعادة تشغيل الأوتوماتيك
+            startAutoSlide(); 
         });
 
     </script>
