@@ -38,14 +38,19 @@
         }
 
         .services-sec { padding: 60px 5%; text-align: center; }
-        .section-title { font-weight: 800; font-size: 36px; margin-bottom: 50px; }
+        .section-title { font-weight: 800; font-size: 36px; margin-bottom: 30px; }
         
-        /* التعديل الجديد لسنترة 3 خدمات بالظبط في الشاشات الكبيرة */
-        .services-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; }
-        .service-item { display: flex; flex-direction: column; align-items: center; padding: 15px; flex: 0 1 calc(33% - 20px); min-width: 250px; text-align: center; }
+        /* التعديل الجديد: قسمين جنب بعض وكل عملية في شيب منفصل مرصوصين تحت بعض */
+        .departments-wrapper { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 20px; align-items: start; }
+        .department-column { display: flex; flex-direction: column; gap: 15px; }
         
-        .icon-circle { width: 80px; height: 80px; background-color: #5c8ab3; border-radius: 50%; display: flex; justify-content: center; align-items: center; margin-bottom: 15px; color: white; font-size: 35px; transition: 0.3s;}
-        .service-item h4 { font-size: 18px; font-weight: 700; color: var(--footer-dark);}
+        .category-title { text-align: center; color: var(--footer-dark); font-size: 26px; font-weight: 800; margin-bottom: 20px; padding-bottom: 10px; border-bottom: 2px solid var(--gray-bg); }
+        
+        /* تصميم الشيب (المربع) الخاص بكل خدمة */
+        .service-item-horizontal { display: flex; align-items: center; gap: 20px; padding: 20px; background: #fdfdfd; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.04); border: 1px solid #eee; transition: 0.3s; text-align: right; }
+        .service-item-horizontal:hover { transform: translateX(-5px); box-shadow: 0 8px 15px rgba(0,0,0,0.08); border-color: var(--btn-blue); }
+        .service-item-horizontal .icon-circle { width: 65px; height: 65px; background-color: #5c8ab3; border-radius: 50%; display: flex; justify-content: center; align-items: center; color: white; font-size: 28px; flex-shrink: 0; transition: 0.3s;}
+        .service-item-horizontal h4 { margin: 0; font-size: 19px; font-weight: 700; color: var(--footer-dark);}
 
         .appointment-sec { padding: 80px 5%; background-color: #f8f9fa; }
         input, select, textarea { padding: 12px; border: 1px solid #ccc; border-radius: 4px; font-family: var(--font-main); font-size: 14px; width: 100%; }
@@ -62,7 +67,6 @@
         .footer { background-color: var(--footer-dark); color: white; padding: 60px 5% 20px; }
         .footer-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; margin-bottom: 40px; }
         
-        /* الأيقونات بدأت من اليسار (تحت العنوان) */
         .social-links { 
             display: flex; 
             gap: 15px; 
@@ -97,9 +101,13 @@
                 font-size: 17px !important;
             }
             
-            /* إعدادات الشاشة الصغيرة عشان تطلع بيرفكت */
-            .services-grid { gap: 10px; }
-            .service-item { flex: 0 1 100%; min-width: 100%; }
+            /* تظبيط عرض الموبايل للأقسام الجديدة عشان يجوا تحت بعض */
+            .departments-wrapper { grid-template-columns: 1fr; gap: 30px; }
+            .category-title { font-size: 24px; }
+            .service-item-horizontal { padding: 15px; gap: 15px; }
+            .service-item-horizontal:hover { transform: translateY(-3px); }
+            .service-item-horizontal .icon-circle { width: 55px; height: 55px; font-size: 22px; }
+            .service-item-horizontal h4 { font-size: 17px; }
         }
     </style>
 </head>
@@ -129,56 +137,72 @@
     <section class="services-sec container" id="services">
         <h2 class="section-title">الخدمات</h2>
 
-        <!-- العناوين text-align: center -->
-        <h3 style="text-align: center; color: var(--footer-dark); font-size: 24px; font-weight: 800; margin: 40px 0 20px; padding-bottom: 10px; border-bottom: 2px solid var(--gray-bg);">جراحة الأورام</h3>
-        <div class="services-grid">
-            <div class="service-item"><div class="icon-circle"><i class="fas fa-ribbon"></i></div><h4>أورام الثدي</h4></div>
-            <div class="service-item"><div class="icon-circle"><i class="fas fa-bed-pulse"></i></div><h4>أورام الجهاز الهضمي</h4></div>
-            <div class="service-item"><div class="icon-circle"><i class="fas fa-vial"></i></div><h4>أورام الكبد والبنكرياس والقنوات المرارية</h4></div>
-            <div class="service-item"><div class="icon-circle"><i class="fas fa-microscope"></i></div><h4>أورام الغشاء البريتوني (HIPEC)</h4></div>
-        </div>
+        <div class="departments-wrapper">
+            
+            <!-- قسم الجراحة العامة -->
+            <div class="department-column">
+                <h3 class="category-title">الجراحة العامة</h3>
+                
+                <div class="service-item-horizontal">
+                    <div class="icon-circle"><i class="fas fa-notes-medical"></i></div>
+                    <h4>جراحات الثدي الحميدة وإعادة البناء</h4>
+                </div>
+                <div class="service-item-horizontal">
+                    <div class="icon-circle"><i class="fas fa-disease"></i></div>
+                    <h4>جراحات القولون والمستقيم وأمراض الشرج</h4>
+                </div>
+                <div class="service-item-horizontal">
+                    <div class="icon-circle"><i class="fas fa-user-doctor"></i></div>
+                    <h4>جراحات الكبد والبنكرياس والقنوات المرارية</h4>
+                </div>
+                <div class="service-item-horizontal">
+                    <div class="icon-circle"><i class="fas fa-video"></i></div>
+                    <h4>جراحة المناظير والجراحة طفيفة التوغل</h4>
+                </div>
+                <div class="service-item-horizontal">
+                    <div class="icon-circle"><i class="fas fa-weight-scale"></i></div>
+                    <h4>جراحة السمنة والتمثيل الغذائي</h4>
+                </div>
+                <div class="service-item-horizontal">
+                    <div class="icon-circle"><i class="fas fa-clipboard-list"></i></div>
+                    <h4>جراحات الغدد الصماء</h4>
+                </div>
+                <div class="service-item-horizontal">
+                    <div class="icon-circle"><i class="fas fa-heart-pulse"></i></div>
+                    <h4>جراحات الأوعية الدموية</h4>
+                </div>
+            </div>
 
-        <h3 style="text-align: center; color: var(--footer-dark); font-size: 24px; font-weight: 800; margin: 40px 0 20px; padding-bottom: 10px; border-bottom: 2px solid var(--gray-bg);">جراحة الثدي</h3>
-        <div class="services-grid">
-            <div class="service-item"><div class="icon-circle"><i class="fas fa-notes-medical"></i></div><h4>أورام الثدي الحميدة والخبيثة</h4></div>
-            <div class="service-item"><div class="icon-circle"><i class="fas fa-person-dress"></i></div><h4>جراحات الحفاظ على الثدي وإعادة البناء</h4></div>
-        </div>
+            <!-- قسم جراحة الأورام -->
+            <div class="department-column">
+                <h3 class="category-title">جراحة الأورام</h3>
+                
+                <div class="service-item-horizontal">
+                    <div class="icon-circle"><i class="fas fa-ribbon"></i></div>
+                    <h4>أورام الثدي</h4>
+                </div>
+                <div class="service-item-horizontal">
+                    <div class="icon-circle"><i class="fas fa-bed-pulse"></i></div>
+                    <h4>أورام الجهاز الهضمي</h4>
+                </div>
+                <div class="service-item-horizontal">
+                    <div class="icon-circle"><i class="fas fa-vial"></i></div>
+                    <h4>أورام الكبد والبنكرياس والقنوات المرارية</h4>
+                </div>
+                <div class="service-item-horizontal">
+                    <div class="icon-circle"><i class="fas fa-microscope"></i></div>
+                    <h4>أورام الغشاء البريتوني (HIPEC)</h4>
+                </div>
+            </div>
 
-        <h3 style="text-align: center; color: var(--footer-dark); font-size: 24px; font-weight: 800; margin: 40px 0 20px; padding-bottom: 10px; border-bottom: 2px solid var(--gray-bg);">جراحة القولون والمستقيم</h3>
-        <div class="services-grid">
-            <div class="service-item"><div class="icon-circle"><i class="fas fa-disease"></i></div><h4>سرطان القولون والمستقيم</h4></div>
-            <div class="service-item"><div class="icon-circle"><i class="fas fa-kit-medical"></i></div><h4>أمراض الشرج</h4></div>
-            <div class="service-item"><div class="icon-circle"><i class="fas fa-shield-virus"></i></div><h4>أمراض الأمعاء الالتهابية</h4></div>
-        </div>
-
-        <h3 style="text-align: center; color: var(--footer-dark); font-size: 24px; font-weight: 800; margin: 40px 0 20px; padding-bottom: 10px; border-bottom: 2px solid var(--gray-bg);">جراحة الكبد والبنكرياس والقنوات المرارية</h3>
-        <div class="services-grid">
-            <div class="service-item"><div class="icon-circle"><i class="fas fa-user-doctor"></i></div><h4>استئصال أورام الكبد</h4></div>
-            <div class="service-item"><div class="icon-circle"><i class="fas fa-vials"></i></div><h4>أورام البنكرياس</h4></div>
-            <div class="service-item"><div class="icon-circle"><i class="fas fa-x-ray"></i></div><h4>جراحات القنوات المرارية المعقدة</h4></div>
-        </div>
-
-        <h3 style="text-align: center; color: var(--footer-dark); font-size: 24px; font-weight: 800; margin: 40px 0 20px; padding-bottom: 10px; border-bottom: 2px solid var(--gray-bg);">جراحة المناظير والجراحة طفيفة التوغل</h3>
-        <div class="services-grid">
-            <div class="service-item"><div class="icon-circle"><i class="fas fa-video"></i></div><h4>جراحات المناظير المتقدمة</h4></div>
-            <div class="service-item"><div class="icon-circle"><i class="fas fa-robot"></i></div><h4>الجراحة الروبوتية</h4></div>
-        </div>
-
-        <h3 style="text-align: center; color: var(--footer-dark); font-size: 24px; font-weight: 800; margin: 40px 0 20px; padding-bottom: 10px; border-bottom: 2px solid var(--gray-bg);">جراحة الغدد الصماء</h3>
-        <div class="services-grid">
-            <div class="service-item"><div class="icon-circle"><i class="fas fa-clipboard-list"></i></div><h4>الغدة الدرقية</h4></div>
-            <div class="service-item"><div class="icon-circle"><i class="fas fa-notes-medical"></i></div><h4>الغدة الجار درقية</h4></div>
-            <div class="service-item"><div class="icon-circle"><i class="fas fa-vial"></i></div><h4>الغدة الكظرية</h4></div>
         </div>
     </section>
 
     <section class="appointment-sec" id="appointment">
         <div class="container">
             <h2 class="section-title" style="text-align: center;">احجز موعداً</h2>
-            <!-- تم إضافة id="bookingForm" هنا -->
             <form id="bookingForm">
                 <div class="form-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
-                    <!-- تم إضافة name و required لكل الحقول -->
                     <div><label>الاسم <span>*</span></label><input type="text" name="name" required></div>
                     <div><label>رقم الهاتف <span>*</span></label><input type="tel" name="phone" required></div>
                     <div><label>رقم الواتساب <span>*</span></label><input type="tel" name="whatsapp" required></div>
@@ -228,7 +252,6 @@
                     </div>
                     <div style="grid-column: span 2;"><label>هل تعاني من أي حالة طبية؟ (يرجى ذكر التفاصيل) <span>*</span></label><textarea name="details" required></textarea></div>
                     
-                    <!-- تم إضافة id لزر الإرسال -->
                     <button type="submit" id="submitBtn" class="btn btn-blue" style="grid-column: span 2;">إرسال</button>
                 </div>
             </form>
