@@ -24,12 +24,55 @@
         .nav-links { display: flex; gap: 30px; align-items: center; font-weight: 700; font-size: 15px; color: var(--footer-dark); margin-right: 40px; }
         .nav-links a:hover { color: var(--btn-blue); }
 
-        .hero { background: linear-gradient(135deg, #0a84c6 0%, #034b75 100%); display: flex; align-items: center; padding: 50px 5%; color: white; min-height: 500px; position: relative; overflow: hidden; }
-        .hero-content { max-width: 550px; z-index: 2; }
+        /* تعديلات الـ Hero Background */
+        .hero { 
+            background: linear-gradient(135deg, #0a84c6 0%, #034b75 100%); 
+            display: flex; 
+            align-items: center; 
+            padding: 50px 5%; 
+            color: white; 
+            min-height: 500px; 
+            position: relative; 
+            overflow: hidden; 
+        }
+        
+        /* إضافة كور الإضاءة المتحركة في الخلفية */
+        .hero::before, .hero::after {
+            content: '';
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(41, 182, 246, 0.4) 0%, rgba(3, 75, 117, 0) 70%);
+            filter: blur(40px);
+            z-index: 0;
+            animation: moveFlare 15s infinite alternate ease-in-out;
+        }
+        
+        .hero::before {
+            top: -100px;
+            left: -100px;
+        }
+        
+        .hero::after {
+            bottom: -100px;
+            right: -100px;
+            animation-duration: 20s;
+            animation-direction: alternate-reverse;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.15) 0%, rgba(3, 75, 117, 0) 70%);
+        }
+
+        @keyframes moveFlare {
+            0% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(100px, 50px) scale(1.2); }
+            100% { transform: translate(-50px, 150px) scale(0.9); }
+        }
+
+        .hero-content { max-width: 550px; z-index: 2; position: relative;} /* تأكيد ظهور المحتوى فوق الخلفية */
         .hero-box { background-color: var(--teal-box); padding: 30px; border-radius: 10px; font-size: 22px; font-weight: 700; line-height: 1.6; margin-bottom: 20px; }
-        .btn { display: inline-block; padding: 10px 25px; background-color: var(--teal-box); color: white; border-radius: 25px; font-weight: 700; border: none; cursor: pointer; font-family: var(--font-main); font-size: 16px;}
+        .btn { display: inline-block; padding: 10px 25px; background-color: var(--teal-box); color: white; border-radius: 25px; font-weight: 700; border: none; cursor: pointer; font-family: var(--font-main); font-size: 16px; position: relative; z-index: 2;}
         .btn-blue { background-color: var(--btn-blue); border-radius: 0; padding: 12px 30px; width: 100%; font-size: 18px; color: white;}
-        .hero-image { z-index: 1; object-fit: cover; }
+        .hero-image { z-index: 2; object-fit: cover; position: relative;} /* تأكيد ظهور الصورة فوق الخلفية */
 
         @media (min-width: 769px) {
             .hero { justify-content: center; gap: 75px; }
@@ -167,8 +210,8 @@
             .text-logo { font-size: 32px; } 
             .nav-links { margin-right: 0; gap: 15px; font-size: 13px; }
             .hero { flex-direction: column-reverse; padding: 20px; text-align: center; height: auto; }
-            .hero-image { position: relative; width: 100%; height: 350px; }
-            .hero-content { margin-right: 0; width: 100%; }
+            .hero-image { position: relative; width: 100%; height: 350px; z-index: 2;}
+            .hero-content { margin-right: 0; width: 100%; z-index: 2;}
             .maps-grid, .footer-grid { grid-template-columns: 1fr; }
             .hero-box { padding: 13px !important; font-size: 17px !important; }
             
