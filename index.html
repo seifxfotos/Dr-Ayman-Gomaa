@@ -18,8 +18,10 @@
         .container { width: 90%; max-width: 1200px; margin: auto; }
 
         .header { display: flex; justify-content: space-between; align-items: center; padding: 15px 5%; background: #fff; position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
-        .text-logo { font-size: 30px; font-weight: 800; color: var(--footer-dark); margin: 0; letter-spacing: -0.5px;}
-        .text-logo span { color: var(--btn-blue); }
+        
+        /* تنسيقات اللوجو الصور الجديدة */
+        .header-logo-img { max-height: 60px; width: auto; display: block; }
+        .footer-logo-img { max-height: 70px; width: auto; display: block; margin-bottom: 10px; }
         
         .nav-links { display: flex; gap: 30px; align-items: center; font-weight: 700; font-size: 15px; color: var(--footer-dark); margin-right: 40px; }
         .nav-links a:hover { color: var(--btn-blue); }
@@ -216,7 +218,7 @@
         @media (max-width: 768px) {
             html { scroll-padding-top: 75px; } 
             .header { flex-direction: column; gap: 10px; }
-            .text-logo { font-size: 32px; } 
+            .header-logo-img { max-height: 50px; } /* تصغير اللوجو قليلاً في الموبايل */
             .nav-links { margin-right: 0; gap: 15px; font-size: 13px; }
             .hero { flex-direction: column-reverse; padding: 20px; text-align: center; height: auto; }
             .hero-image { position: relative; width: 100%; height: 350px; z-index: 2;}
@@ -233,6 +235,9 @@
             .carousel-btn { display: none; }
             .review-card { padding: 30px 15px; }
             .review-card p { font-size: 16px; line-height: 1.6;}
+            
+            .footer-logo { display: flex; justify-content: center; } /* توسيط لوجو الفوتر في الموبايل */
+            .footer-logo-img { max-height: 60px; margin: 0 auto 15px auto; }
         }
     </style>
 </head>
@@ -240,7 +245,7 @@
 
     <header class="header">
         <div class="logo">
-            <h1 class="text-logo">د. <span>أيمن جمعة</span></h1>
+            <a href="#"><img src="Logo-Dr-Ayman.webp" alt="دكتور أيمن جمعة" class="header-logo-img"></a>
         </div>
         <nav class="nav-links">
             <a href="#">الرئيسية</a>
@@ -481,7 +486,9 @@
 
     <footer class="footer">
         <div class="container footer-grid">
-            <div class="footer-logo"><h2>دكتور <span>أيمن جمعة</span></h2></div>
+            <div class="footer-logo">
+                <a href="#"><img src="Logo-Dr-Ayman-w.webp" alt="دكتور أيمن جمعة" class="footer-logo-img"></a>
+            </div>
             <div class="footer-col">
                 <h3>أرقام التواصل</h3>
                 <p>الحجز: 01093553286</p>
