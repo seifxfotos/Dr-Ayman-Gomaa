@@ -13,7 +13,7 @@
         
         html { scroll-behavior: smooth; scroll-padding-top: 75px; }
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: var(--font-main); color: var(--text-dark); line-height: 1.6; background-color: #fff; overflow-x: hidden; transition: all 0.3s ease; }
+        body { font-family: var(--font-main); color: var(--text-dark); line-height: 1.6; background-color: #fff; overflow-x: hidden; transition: background-color 0.3s; }
         a { text-decoration: none; color: inherit; }
         .container { width: 90%; max-width: 1200px; margin: auto; }
 
@@ -28,14 +28,20 @@
         
         .header { display: flex; justify-content: space-between; align-items: center; padding: 15px 5%; background: #fff; position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
         
-        /* تأثير كليك على اللوجو لتبديل اللغة */
-        .logo a { cursor: pointer; display: block; transition: transform 0.2s; }
-        .logo a:active { transform: scale(0.95); }
+        .logo { display: flex; align-items: center; }
         .header-logo-img { max-height: 60px; width: auto; display: block; }
         .footer-logo-img { max-height: 70px; width: auto; display: block; margin-bottom: 10px; }
         
-        .nav-links { display: flex; gap: 30px; align-items: center; font-weight: 700; font-size: 15px; color: var(--footer-dark); margin-right: 40px; }
+        .nav-links { display: flex; gap: 30px; align-items: center; font-weight: 700; font-size: 15px; color: var(--footer-dark); margin-right: 40px; transition: margin 0.3s; }
         .nav-links a:hover { color: var(--btn-blue); }
+
+        /* --- زر تبديل اللغة --- */
+        .lang-btn {
+            background: rgba(41, 182, 246, 0.1); color: var(--btn-blue); border: 2px solid var(--btn-blue);
+            padding: 6px 18px; border-radius: 20px; font-weight: 700; font-size: 14px; cursor: pointer;
+            transition: 0.3s; font-family: var(--font-main);
+        }
+        .lang-btn:hover { background: var(--btn-blue); color: #fff; }
 
         .hero { 
             background: linear-gradient(135deg, #0a84c6 0%, #034b75 100%); 
@@ -100,7 +106,7 @@
         label span { color: red; }
 
         .testimonials-sec { padding: 60px 5%; background-color: #fff; overflow: hidden; }
-        .carousel-wrapper { position: relative; max-width: 900px; margin: 0 auto; direction: ltr; /* Handle logic in JS to keep swipe smooth */ padding: 20px 0; }
+        .carousel-wrapper { position: relative; max-width: 900px; margin: 0 auto; direction: ltr; padding: 20px 0; }
         .carousel-track { display: flex; transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1); will-change: transform; }
         .testimonial-slide { flex: 0 0 100%; width: 100%; box-sizing: border-box; padding: 0 15px; }
         .review-card { background: #fdfdfd; border-radius: 15px; padding: 40px 30px; box-shadow: 0 5px 20px rgba(0,0,0,0.05); border: 1px solid #e4e6eb; display: flex; flex-direction: column; align-items: center; text-align: center; }
@@ -131,10 +137,40 @@
         .copyright { text-align: center; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; font-size: 14px; }
         .fab { position: fixed; bottom: 30px; left: 30px; background-color: #25D366; color: white; width: 55px; height: 55px; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 30px; box-shadow: 0 4px 10px rgba(0,0,0,0.3); z-index: 1000; transition: left 0.3s, right 0.3s; }
 
+        /* -------------------------------------------------------------------------- */
+        /* ستايلات الـ Transition والـ Loader للأنيميشن السحري */
+        /* -------------------------------------------------------------------------- */
+        .page-transition-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+            z-index: 100000; opacity: 0; visibility: hidden; transition: all 0.5s ease;
+        }
+        .page-transition-overlay.active { opacity: 1; visibility: visible; }
+
+        .cool-loader {
+            display: flex; gap: 8px; position: fixed; top: calc(50% + 70px); left: 50%;
+            transform: translateX(-50%); z-index: 100001; opacity: 0; visibility: hidden; transition: opacity 0.3s;
+        }
+        .cool-loader.active { opacity: 1; visibility: visible; }
+        .cool-loader span { width: 14px; height: 14px; border-radius: 50%; background-color: var(--footer-dark); animation: loaderBounce 0.5s alternate infinite cubic-bezier(0.2, 0.65, 0.6, 1); }
+        .cool-loader span:nth-child(1) { animation-delay: 0s; }
+        .cool-loader span:nth-child(2) { background-color: var(--btn-blue); animation-delay: 0.15s; }
+        .cool-loader span:nth-child(3) { background-color: var(--teal-box); animation-delay: 0.3s; }
+        
+        @keyframes loaderBounce {
+            0% { transform: translateY(0) scale(1); }
+            100% { transform: translateY(-15px) scale(1.2); }
+        }
+
+        /* -------------------------------------------------------------------------- */
+        /* الموبايل */
+        /* -------------------------------------------------------------------------- */
         @media (max-width: 768px) {
             html { scroll-padding-top: 75px; } 
             .header { flex-direction: column; gap: 10px; }
-            .header-logo-img { max-height: 50px; } 
+            .logo { justify-content: center; width: 100%; display: flex; margin: 0 auto; } /* لتوسيط اللوجو بدقة للأنيميشن */
+            .header-logo-img { max-height: 50px; margin: 0 auto; display: block; } 
+            
             .nav-links { margin-right: 0; gap: 15px; font-size: 13px; margin-left: 0 !important;}
             .hero { flex-direction: column-reverse; padding: 20px; text-align: center; height: auto; }
             .hero-image { position: relative; width: 100%; height: 350px; z-index: 2;}
@@ -156,17 +192,22 @@
 </head>
 <body>
 
+    <!-- Transition Elements للأنيميشن -->
+    <div class="page-transition-overlay" id="transitionOverlay"></div>
+    <div class="cool-loader" id="transitionLoader">
+        <span></span><span></span><span></span>
+    </div>
+
     <header class="header">
         <div class="logo">
-            <!-- زر تبديل اللغة مدمج في اللوجو -->
-            <a onclick="toggleLanguage()" title="تغيير اللغة | Change Language">
-                <img src="Logo-Dr-Ayman.webp" alt="دكتور أيمن جمعة | Dr. Ayman Gomaa" class="header-logo-img">
-            </a>
+            <a href="#"><img src="Logo-Dr-Ayman.webp" alt="دكتور أيمن جمعة | Dr. Ayman Gomaa" class="header-logo-img" id="mainLogo"></a>
         </div>
         <nav class="nav-links">
             <a href="#"><span class="ar">الرئيسية</span><span class="en">Home</span></a>
             <a href="#services"><span class="ar">الخدمات</span><span class="en">Services</span></a>
             <a href="#appointment"><span class="ar">احجز موعداً</span><span class="en">Book Appointment</span></a>
+            <!-- زر تغيير اللغة المستقل -->
+            <button id="langToggle" class="lang-btn" onclick="toggleLanguage()">English</button>
         </nav>
     </header>
 
@@ -451,20 +492,90 @@
 
     <a href="https://wa.me/201039166291" target="_blank" class="fab"><i class="fab fa-whatsapp"></i></a>
 
-    <!-- سكريبت تبديل اللغة، الإرسال لجوجل شيت والسلايدر -->
+    <!-- سكريبت تبديل اللغة السحري، الإرسال لجوجل شيت والسلايدر -->
     <script>
-        // --- 1. سكريبت تبديل اللغة بالضغط على اللوجو ---
+        // --- 1. سكريبت الأنيميشن وتغيير اللغة (الزرار) ---
         function toggleLanguage() {
-            const html = document.documentElement;
-            if(html.lang === 'ar') {
-                html.lang = 'en';
-                html.dir = 'ltr';
-            } else {
-                html.lang = 'ar';
-                html.dir = 'rtl';
-            }
-            // إعادة ضبط السلايدر عشان المارجن والاتجاهات تتحدث
-            updateSliderPosition();
+            const toggleBtn = document.getElementById('langToggle');
+            // منع الضغط مرتين ورا بعض أثناء الأنيميشن
+            if (toggleBtn.disabled) return;
+            toggleBtn.disabled = true;
+
+            const logo = document.getElementById('mainLogo');
+            const overlay = document.getElementById('transitionOverlay');
+            const loader = document.getElementById('transitionLoader');
+            
+            // حساب مكان اللوجو الأصلي وعمل نسخة تطير لنص الشاشة
+            const firstRect = logo.getBoundingClientRect();
+            const clone = logo.cloneNode(true);
+            clone.style.position = 'fixed';
+            clone.style.top = firstRect.top + 'px';
+            clone.style.left = firstRect.left + 'px';
+            clone.style.width = firstRect.width + 'px';
+            clone.style.height = firstRect.height + 'px';
+            clone.style.margin = '0';
+            clone.style.zIndex = '100001';
+            clone.style.transform = 'translate(0, 0) scale(1)';
+            clone.style.transition = 'all 0.8s cubic-bezier(0.25, 1, 0.5, 1)'; 
+            document.body.appendChild(clone);
+            
+            // إخفاء اللوجو الأصلي وتشغيل الشاشة البيضاء
+            logo.style.opacity = '0';
+            overlay.classList.add('active');
+            
+            // تحريك النسخة لمنتصف الشاشة
+            requestAnimationFrame(() => {
+                clone.style.top = '50%';
+                clone.style.left = '50%';
+                clone.style.transform = 'translate(-50%, -50%) scale(1.6)';
+                
+                // إظهار اللودر تحت اللوجو
+                setTimeout(() => {
+                    loader.classList.add('active');
+                }, 800);
+            });
+            
+            // بعد التمركز: تغيير اللغة والمكان
+            setTimeout(() => {
+                const html = document.documentElement;
+                if(html.lang === 'ar') {
+                    html.lang = 'en';
+                    html.dir = 'ltr';
+                    toggleBtn.innerText = 'العربية';
+                } else {
+                    html.lang = 'ar';
+                    html.dir = 'rtl';
+                    toggleBtn.innerText = 'English';
+                }
+                
+                // تحديث السلايدر عشان المارجن والاتجاهات تتحدث
+                updateSliderPosition(); 
+
+                // إخفاء اللودر وإجبار المتصفح على قراءة الأبعاد الجديدة
+                loader.classList.remove('active');
+                void document.body.offsetHeight; 
+                
+                // سحب مكان اللوجو الجديد
+                const newRect = logo.getBoundingClientRect();
+                
+                // تحريك النسخة لمكانها الجديد
+                clone.style.transform = 'translate(0, 0) scale(1)';
+                clone.style.top = newRect.top + 'px';
+                clone.style.left = newRect.left + 'px';
+                clone.style.width = newRect.width + 'px';
+                clone.style.height = newRect.height + 'px';
+                
+                // إخفاء الشاشة البيضاء
+                overlay.classList.remove('active');
+                
+                // التنظيف بعد ما الحركة تخلص
+                setTimeout(() => {
+                    logo.style.opacity = '1';
+                    clone.remove();
+                    toggleBtn.disabled = false;
+                }, 800);
+                
+            }, 2300); // مدة البقاء في المنتصف
         }
 
         // --- 2. سكريبت نموذج الحجز ---
@@ -514,7 +625,6 @@
         let slideDirection = 1; 
 
         function updateSliderPosition() {
-            // التحقق من اللغة عشان نحسب اتجاه الحركة صح
             const isRtl = document.documentElement.dir === 'rtl';
             const movePercentage = currentIndex * 100;
             sliderTrack.style.transform = `translateX(${isRtl ? movePercentage : -movePercentage}%)`;
