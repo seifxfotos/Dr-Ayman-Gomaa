@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>دكتور أيمن جمعة</title>
+    <title>دكتور أيمن جمعة | Dr. Ayman Gomaa</title>
     <!-- رابط مكتبة الأيقونات -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
@@ -13,20 +13,30 @@
         
         html { scroll-behavior: smooth; scroll-padding-top: 75px; }
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: var(--font-main); color: var(--text-dark); line-height: 1.6; background-color: #fff; overflow-x: hidden; }
+        body { font-family: var(--font-main); color: var(--text-dark); line-height: 1.6; background-color: #fff; overflow-x: hidden; transition: all 0.3s ease; }
         a { text-decoration: none; color: inherit; }
         .container { width: 90%; max-width: 1200px; margin: auto; }
 
+        /* --- Language Toggle Styles --- */
+        html[lang="ar"] .en { display: none !important; }
+        html[lang="en"] .ar { display: none !important; }
+        html[lang="en"] { text-align: left; }
+        html[lang="en"] .nav-links { margin-right: 0; margin-left: 40px; }
+        html[lang="en"] .fab { left: auto; right: 30px; }
+        html[lang="en"] .btn-next { right: -25px; left: auto; }
+        html[lang="en"] .btn-prev { left: -25px; right: auto; }
+        
         .header { display: flex; justify-content: space-between; align-items: center; padding: 15px 5%; background: #fff; position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
         
-        /* تنسيقات اللوجو الصور الجديدة */
+        /* تأثير كليك على اللوجو لتبديل اللغة */
+        .logo a { cursor: pointer; display: block; transition: transform 0.2s; }
+        .logo a:active { transform: scale(0.95); }
         .header-logo-img { max-height: 60px; width: auto; display: block; }
         .footer-logo-img { max-height: 70px; width: auto; display: block; margin-bottom: 10px; }
         
         .nav-links { display: flex; gap: 30px; align-items: center; font-weight: 700; font-size: 15px; color: var(--footer-dark); margin-right: 40px; }
         .nav-links a:hover { color: var(--btn-blue); }
 
-        /* تعديلات الـ Hero Background */
         .hero { 
             background: linear-gradient(135deg, #0a84c6 0%, #034b75 100%); 
             display: flex; 
@@ -38,51 +48,29 @@
             overflow: hidden; 
         }
         
-        /* إضافة كور الإضاءة المتحركة في الخلفية بوضوح وحركة أكبر */
         .hero::before, .hero::after {
-            content: '';
-            position: absolute;
-            border-radius: 50%;
-            filter: blur(60px); /* بلور عالي لضمان النعومة */
-            z-index: 0;
-            pointer-events: none; /* عشان متأثرش على الكليك */
+            content: ''; position: absolute; border-radius: 50%; filter: blur(60px); z-index: 0; pointer-events: none;
         }
-        
         .hero::before {
-            top: -150px;
-            left: -150px;
-            width: 600px;
-            height: 600px;
+            top: -150px; left: -150px; width: 600px; height: 600px;
             background: radial-gradient(circle, rgba(41, 182, 246, 0.6) 0%, rgba(41, 182, 246, 0) 70%);
             animation: float1 12s infinite alternate ease-in-out;
         }
-        
         .hero::after {
-            bottom: -150px;
-            right: -100px;
-            width: 500px;
-            height: 500px;
+            bottom: -150px; right: -100px; width: 500px; height: 500px;
             background: radial-gradient(circle, rgba(255, 255, 255, 0.25) 0%, rgba(255, 255, 255, 0) 70%);
             animation: float2 15s infinite alternate ease-in-out;
         }
 
-        /* مساحة حركة أوسع */
-        @keyframes float1 {
-            0% { transform: translate(0, 0) scale(0.8); }
-            50% { transform: translate(350px, 150px) scale(1.2); }
-            100% { transform: translate(150px, 400px) scale(1); }
-        }
-
-        @keyframes float2 {
-            0% { transform: translate(0, 0) scale(1); }
-            50% { transform: translate(-300px, -200px) scale(1.3); }
-            100% { transform: translate(-450px, -100px) scale(0.9); }
-        }
+        @keyframes float1 { 0% { transform: translate(0, 0) scale(0.8); } 50% { transform: translate(350px, 150px) scale(1.2); } 100% { transform: translate(150px, 400px) scale(1); } }
+        @keyframes float2 { 0% { transform: translate(0, 0) scale(1); } 50% { transform: translate(-300px, -200px) scale(1.3); } 100% { transform: translate(-450px, -100px) scale(0.9); } }
 
         .hero-content { max-width: 550px; z-index: 2; position: relative;}
         .hero-box { background-color: var(--teal-box); padding: 30px; border-radius: 10px; font-size: 22px; font-weight: 700; line-height: 1.6; margin-bottom: 20px; }
-        .btn { display: inline-block; padding: 10px 25px; background-color: var(--teal-box); color: white; border-radius: 25px; font-weight: 700; border: none; cursor: pointer; font-family: var(--font-main); font-size: 16px; position: relative; z-index: 2;}
+        .btn { display: inline-block; padding: 10px 25px; background-color: var(--teal-box); color: white; border-radius: 25px; font-weight: 700; border: none; cursor: pointer; font-family: var(--font-main); font-size: 16px; position: relative; z-index: 2; transition: 0.3s;}
+        .btn:hover { background-color: #1ea3df; }
         .btn-blue { background-color: var(--btn-blue); border-radius: 0; padding: 12px 30px; width: 100%; font-size: 18px; color: white;}
+        .btn-blue:hover { background-color: #1ea3df; }
         .hero-image { z-index: 2; object-fit: cover; position: relative;}
 
         @media (min-width: 769px) {
@@ -94,97 +82,36 @@
         .services-sec { padding: 60px 5%; text-align: center; }
         .section-title { font-weight: 800; font-size: 36px; margin-bottom: 30px; text-align: center; }
         
-        /* الأقسام جنب بعض */
         .departments-wrapper { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 20px; align-items: start; }
         .department-column { display: flex; flex-direction: column; gap: 15px; }
-        
         .category-title { text-align: center; color: var(--footer-dark); font-size: 26px; font-weight: 800; margin-bottom: 20px; padding-bottom: 10px; border-bottom: 2px solid var(--gray-bg); }
         
         .service-item-horizontal { 
-            display: flex; 
-            justify-content: center; 
-            align-items: center; 
-            padding: 20px; 
-            background: #e9ecef; 
-            border-radius: 10px; 
-            box-shadow: 0 2px 5px rgba(0,0,0,0.03); 
-            border: 1px solid #dee2e6; 
-            transition: 0.3s; 
-            text-align: center; 
+            display: flex; justify-content: center; align-items: center; padding: 20px; 
+            background: #e9ecef; border-radius: 10px; box-shadow: 0 2px 5px rgba(0,0,0,0.03); 
+            border: 1px solid #dee2e6; transition: 0.3s; text-align: center; 
         }
-        .service-item-horizontal:hover { 
-            transform: translateY(-4px); 
-            box-shadow: 0 6px 15px rgba(0,0,0,0.08); 
-            border-color: var(--btn-blue); 
-        }
-        .service-item-horizontal h4 { 
-            margin: 0; 
-            font-size: 19px; 
-            font-weight: 700; 
-            color: var(--footer-dark);
-        }
+        .service-item-horizontal:hover { transform: translateY(-4px); box-shadow: 0 6px 15px rgba(0,0,0,0.08); border-color: var(--btn-blue); }
+        .service-item-horizontal h4 { margin: 0; font-size: 19px; font-weight: 700; color: var(--footer-dark); }
 
         .appointment-sec { padding: 80px 5%; background-color: #f8f9fa; }
         input, select, textarea { padding: 12px; border: 1px solid #ccc; border-radius: 4px; font-family: var(--font-main); font-size: 14px; width: 100%; }
         label { font-weight: 700; margin-bottom: 5px; display: block; }
         label span { color: red; }
 
-        /* قسم أراء العملاء */
         .testimonials-sec { padding: 60px 5%; background-color: #fff; overflow: hidden; }
-        .carousel-wrapper { position: relative; max-width: 900px; margin: 0 auto; direction: rtl; padding: 20px 0; }
+        .carousel-wrapper { position: relative; max-width: 900px; margin: 0 auto; direction: ltr; /* Handle logic in JS to keep swipe smooth */ padding: 20px 0; }
         .carousel-track { display: flex; transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1); will-change: transform; }
         .testimonial-slide { flex: 0 0 100%; width: 100%; box-sizing: border-box; padding: 0 15px; }
-        .review-card { 
-            background: #fdfdfd; 
-            border-radius: 15px; 
-            padding: 40px 30px; 
-            box-shadow: 0 5px 20px rgba(0,0,0,0.05); 
-            border: 1px solid #e4e6eb;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-        }
-        .review-avatar { 
-            width: 75px; 
-            height: 75px; 
-            background-color: #e9ecef; 
-            border-radius: 50%; 
-            display: flex; 
-            justify-content: center; 
-            align-items: flex-end; 
-            overflow: hidden;
-            color: #adb5bd; 
-            font-size: 65px; 
-            margin-bottom: 20px;
-        }
+        .review-card { background: #fdfdfd; border-radius: 15px; padding: 40px 30px; box-shadow: 0 5px 20px rgba(0,0,0,0.05); border: 1px solid #e4e6eb; display: flex; flex-direction: column; align-items: center; text-align: center; }
+        .review-avatar { width: 75px; height: 75px; background-color: #e9ecef; border-radius: 50%; display: flex; justify-content: center; align-items: flex-end; overflow: hidden; color: #adb5bd; font-size: 65px; margin-bottom: 20px; }
         .quote-mark { color: var(--btn-blue); font-size: 28px; opacity: 0.3; margin-bottom: 15px; }
         .review-card p { font-size: 18px; font-weight: 600; color: var(--text-dark); line-height: 1.8; margin: 0;}
         
-        .carousel-btn { 
-            position: absolute; 
-            top: 50%; 
-            transform: translateY(-50%); 
-            background: #fff; 
-            border: 1px solid #dee2e6; 
-            border-radius: 50%; 
-            width: 50px; 
-            height: 50px; 
-            cursor: pointer; 
-            box-shadow: 0 3px 10px rgba(0,0,0,0.1); 
-            display: flex; 
-            justify-content: center; 
-            align-items: center; 
-            color: var(--footer-dark); 
-            font-size: 20px; 
-            z-index: 10;
-            transition: 0.3s;
-        }
+        .carousel-btn { position: absolute; top: 50%; transform: translateY(-50%); background: #fff; border: 1px solid #dee2e6; border-radius: 50%; width: 50px; height: 50px; cursor: pointer; box-shadow: 0 3px 10px rgba(0,0,0,0.1); display: flex; justify-content: center; align-items: center; color: var(--footer-dark); font-size: 20px; z-index: 10; transition: 0.3s; }
         .carousel-btn:hover { background: var(--btn-blue); color: white; border-color: var(--btn-blue); }
         .btn-prev { right: -25px; } 
         .btn-next { left: -25px; } 
-
-        /* إخفاء الأزرار عند الأطراف */
         .hidden-btn { opacity: 0; pointer-events: none; }
 
         .maps-section { padding: 60px 5%; background-color: #f8f9fa; }
@@ -193,54 +120,36 @@
         .map-item h4 { margin-bottom: 15px; text-align: center; color: var(--footer-dark); font-size: 18px; }
         .map-item iframe { width: 100%; height: 250px; border: 0; border-radius: 4px; }
 
-        /* تعديل الفوتر والأيقونات */
         .footer { background-color: var(--footer-dark); color: white; padding: 60px 5% 20px; }
         .footer-grid { display: flex; justify-content: center; align-items: center; gap: 60px; text-align: center; margin-bottom: 40px; flex-wrap: wrap; }
         .footer-col { display: flex; flex-direction: column; align-items: center; }
         
-        .social-links { 
-            display: flex; 
-            gap: 15px; 
-            margin-top: 15px; 
-            justify-content: center; 
-        }
-        .social-links a { 
-            display: block; 
-            width: 30px; 
-            height: 30px; 
-            color: white; 
-            transition: 0.3s; 
-        }
+        .social-links { display: flex; gap: 15px; margin-top: 15px; justify-content: center; }
+        .social-links a { display: block; width: 30px; height: 30px; color: white; transition: 0.3s; }
         .social-links a:hover { color: #29b6f6; }
         
         .copyright { text-align: center; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; font-size: 14px; }
-        .fab { position: fixed; bottom: 30px; left: 30px; background-color: #25D366; color: white; width: 55px; height: 55px; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 30px; box-shadow: 0 4px 10px rgba(0,0,0,0.3); z-index: 1000; }
+        .fab { position: fixed; bottom: 30px; left: 30px; background-color: #25D366; color: white; width: 55px; height: 55px; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 30px; box-shadow: 0 4px 10px rgba(0,0,0,0.3); z-index: 1000; transition: left 0.3s, right 0.3s; }
 
         @media (max-width: 768px) {
             html { scroll-padding-top: 75px; } 
             .header { flex-direction: column; gap: 10px; }
-            .header-logo-img { max-height: 50px; } /* تصغير اللوجو قليلاً في الموبايل */
-            .nav-links { margin-right: 0; gap: 15px; font-size: 13px; }
+            .header-logo-img { max-height: 50px; } 
+            .nav-links { margin-right: 0; gap: 15px; font-size: 13px; margin-left: 0 !important;}
             .hero { flex-direction: column-reverse; padding: 20px; text-align: center; height: auto; }
             .hero-image { position: relative; width: 100%; height: 350px; z-index: 2;}
             .hero-content { margin-right: 0; width: 100%; z-index: 2;}
-            
             .maps-grid { grid-template-columns: 1fr; }
             .footer-grid { flex-direction: column; gap: 30px; }
-            
             .hero-box { padding: 13px !important; font-size: 17px !important; }
-            
             .departments-wrapper { grid-template-columns: 1fr; gap: 30px; }
             .category-title { font-size: 24px; }
             .service-item-horizontal { padding: 15px; }
             .service-item-horizontal h4 { font-size: 17px; }
-
-            /* إخفاء أزرار السلايدر في الموبايل لتسهيل استخدام اللمس */
             .carousel-btn { display: none; }
             .review-card { padding: 30px 15px; }
             .review-card p { font-size: 16px; line-height: 1.6;}
-            
-            .footer-logo { display: flex; justify-content: center; } /* توسيط لوجو الفوتر في الموبايل */
+            .footer-logo { display: flex; justify-content: center; } 
             .footer-logo-img { max-height: 60px; margin: 0 auto 15px auto; }
         }
     </style>
@@ -249,102 +158,108 @@
 
     <header class="header">
         <div class="logo">
-            <a href="#"><img src="Logo-Dr-Ayman.webp" alt="دكتور أيمن جمعة" class="header-logo-img"></a>
+            <!-- زر تبديل اللغة مدمج في اللوجو -->
+            <a onclick="toggleLanguage()" title="تغيير اللغة | Change Language">
+                <img src="Logo-Dr-Ayman.webp" alt="دكتور أيمن جمعة | Dr. Ayman Gomaa" class="header-logo-img">
+            </a>
         </div>
         <nav class="nav-links">
-            <a href="#">الرئيسية</a>
-            <a href="#services">الخدمات</a>
-            <a href="#appointment">احجز موعداً</a>
+            <a href="#"><span class="ar">الرئيسية</span><span class="en">Home</span></a>
+            <a href="#services"><span class="ar">الخدمات</span><span class="en">Services</span></a>
+            <a href="#appointment"><span class="ar">احجز موعداً</span><span class="en">Book Appointment</span></a>
         </nav>
     </header>
 
     <section class="hero">
         <div class="hero-content">
             <div class="hero-box">
-دكتور أيمن جمعة | خيارك الاول فى حالات الجراحة العامة و جراحات الاورام المتقدمة .
-        </div>
-            <button class="btn" onclick="document.getElementById('appointment').scrollIntoView({behavior: 'smooth'})">احجز موعدك الآن</button>
+                <span class="ar">دكتور أيمن جمعة | خيارك الاول فى حالات الجراحة العامة و جراحات الاورام المتقدمة.</span>
+                <span class="en">Dr. Ayman Gomaa | Your First Choice for General Surgery and Advanced Oncology Surgeries.</span>
+            </div>
+            <button class="btn" onclick="document.getElementById('appointment').scrollIntoView({behavior: 'smooth'})">
+                <span class="ar">احجز موعدك الآن</span><span class="en">Book Your Appointment Now</span>
+            </button>
         </div>
         <img src="Doctor.webp" alt="دكتور أيمن جمعة" class="hero-image">
     </section>
 
     <section class="services-sec container" id="services">
-        <h2 class="section-title">الخدمات</h2>
+        <h2 class="section-title"><span class="ar">الخدمات</span><span class="en">Our Services</span></h2>
 
         <div class="departments-wrapper">
             
             <!-- 1. خدمات الجراحة العامة -->
             <div class="department-column">
-                <h3 class="category-title">الجراحة العامة</h3>
+                <h3 class="category-title"><span class="ar">الجراحة العامة</span><span class="en">General Surgery</span></h3>
                 
                 <div class="service-item-horizontal">
-                    <h4>استئصال الزائدة الدودية جراحياً و بالمنظار الجراحى</h4>
+                    <h4><span class="ar">استئصال الزائدة الدودية جراحياً و بالمنظار الجراحى</span><span class="en">Open & Laparoscopic Appendectomy</span></h4>
                 </div>
                 <div class="service-item-horizontal">
-                    <h4>استئصال المرارة بالمنظار الجراحى</h4>
+                    <h4><span class="ar">استئصال المرارة بالمنظار الجراحى</span><span class="en">Laparoscopic Cholecystectomy</span></h4>
                 </div>
                 <div class="service-item-horizontal">
-                    <h4>علاج حالات الصفراء الانسدادية</h4>
+                    <h4><span class="ar">علاج حالات الصفراء الانسدادية</span><span class="en">Management of Obstructive Jaundice</span></h4>
                 </div>
                 <div class="service-item-horizontal">
-                    <h4>إصلاح جميع أنواع الفتق (الإربي، السري، الجراحي، والفخذي)</h4>
+                    <h4><span class="ar">إصلاح جميع أنواع الفتق (الإربي، السري، الجراحي، والفخذي)</span><span class="en">Repair of All Types of Hernias (Inguinal, Umbilical, Incisional & Femoral)</span></h4>
                 </div>
                 <div class="service-item-horizontal">
-                    <h4>علاج البواسير</h4>
+                    <h4><span class="ar">علاج البواسير</span><span class="en">Hemorrhoids Treatment</span></h4>
                 </div>
                 <div class="service-item-horizontal">
-                    <h4>علاج الشرخ الشرجي</h4>
+                    <h4><span class="ar">علاج الشرخ الشرجي</span><span class="en">Anal Fissure Treatment</span></h4>
                 </div>
                 <div class="service-item-horizontal">
-                    <h4>علاج الناسور الشرجي</h4>
+                    <h4><span class="ar">علاج الناسور الشرجي</span><span class="en">Anal Fistula Treatment</span></h4>
                 </div>
                 <div class="service-item-horizontal">
-                    <h4>علاج الناسور العصعصي</h4>
+                    <h4><span class="ar">علاج الناسور العصعصي</span><span class="en">Pilonidal Sinus Treatment</span></h4>
                 </div>
                 <div class="service-item-horizontal">
-                    <h4>جراحات المعدة والأمعاء</h4>
+                    <h4><span class="ar">جراحات المعدة والأمعاء</span><span class="en">Gastrointestinal Surgeries</span></h4>
                 </div>
                 <div class="service-item-horizontal">
-                    <h4>علاج انسداد الأمعاء</h4>
+                    <h4><span class="ar">علاج انسداد الأمعاء</span><span class="en">Intestinal Obstruction Management</span></h4>
                 </div>
                 <div class="service-item-horizontal">
-                    <h4>جراحات القولون والمستقيم</h4>
+                    <h4><span class="ar">جراحات القولون والمستقيم</span><span class="en">Colorectal Surgeries</span></h4>
                 </div>
                 <div class="service-item-horizontal">
-                    <h4>جراحات الطوارئ وحالات البطن الجراحية الطارئة</h4>
+                    <h4><span class="ar">جراحات الطوارئ وحالات البطن الجراحية الطارئة</span><span class="en">Emergency Surgeries & Acute Abdomen</span></h4>
                 </div>
             </div>
 
             <!-- 2. خدمات جراحة الأورام -->
             <div class="department-column">
-                <h3 class="category-title">جراحة الأورام</h3>
+                <h3 class="category-title"><span class="ar">جراحة الأورام</span><span class="en">Oncology Surgery</span></h3>
                 
                 <div class="service-item-horizontal">
-                    <h4>جراحات أورام الثدي (الجذرية والتحفظية مع استئصال العقد بتقنية الغدة الحارثة واعادة بناء الثدى)</h4>
+                    <h4><span class="ar">جراحات أورام الثدي (الجذرية والتحفظية مع استئصال العقد بتقنية الغدة الحارثة واعادة بناء الثدى)</span><span class="en">Breast Cancer Surgeries (Radical, Conservative, Sentinel Lymph Node Biopsy & Reconstruction)</span></h4>
                 </div>
                 <div class="service-item-horizontal">
-                    <h4>جراحات أورام القولون والمستقيم</h4>
+                    <h4><span class="ar">جراحات أورام القولون والمستقيم</span><span class="en">Colorectal Cancer Surgeries</span></h4>
                 </div>
                 <div class="service-item-horizontal">
-                    <h4>جراحات غلق فتحة البراز الجانبية مابعد استئصال اورام القولون والمستقيم</h4>
+                    <h4><span class="ar">جراحات غلق فتحة البراز الجانبية مابعد استئصال اورام القولون والمستقيم</span><span class="en">Closure of Colostomy/Ileostomy Post-Tumor Excision</span></h4>
                 </div>
                 <div class="service-item-horizontal">
-                    <h4>جراحات أورام المعدة والاثنى عشر</h4>
+                    <h4><span class="ar">جراحات أورام المعدة والاثنى عشر</span><span class="en">Stomach & Duodenum Tumors Surgeries</span></h4>
                 </div>
                 <div class="service-item-horizontal">
-                    <h4>جراحات اورام البنكرياس</h4>
+                    <h4><span class="ar">جراحات اورام البنكرياس</span><span class="en">Pancreatic Tumors Surgeries</span></h4>
                 </div>
                 <div class="service-item-horizontal">
-                    <h4>جراحات أورام الغدد (الغدة الدرقية، الغدة الجار درقية، الغدة الكظرية، والغدة النكفية واللعابية)</h4>
+                    <h4><span class="ar">جراحات أورام الغدد (الغدة الدرقية، الغدة الجار درقية، الغدة الكظرية، والغدة النكفية واللعابية)</span><span class="en">Glandular Tumors (Thyroid, Parathyroid, Adrenal, Parotid & Salivary)</span></h4>
                 </div>
                 <div class="service-item-horizontal">
-                    <h4>جراحات أورام الجلد والأنسجة الرخوة (الساركوما)</h4>
+                    <h4><span class="ar">جراحات أورام الجلد والأنسجة الرخوة (الساركوما)</span><span class="en">Skin & Soft Tissue Tumors (Sarcoma) Surgeries</span></h4>
                 </div>
                 <div class="service-item-horizontal">
-                    <h4>جراحات اورام الرحم والمبايض وعنق الرحم مع تفريغ العقد الليمفاوية بالحوض</h4>
+                    <h4><span class="ar">جراحات اورام الرحم والمبايض وعنق الرحم مع تفريغ العقد الليمفاوية بالحوض</span><span class="en">Uterus, Ovarian & Cervical Cancer with Pelvic Lymphadenectomy</span></h4>
                 </div>
                 <div class="service-item-horizontal">
-                    <h4>جراحات اورام الكلى والمثانة</h4>
+                    <h4><span class="ar">جراحات اورام الكلى والمثانة</span><span class="en">Kidney & Bladder Tumors Surgeries</span></h4>
                 </div>
             </div>
 
@@ -353,59 +268,64 @@
 
     <section class="appointment-sec" id="appointment">
         <div class="container">
-            <h2 class="section-title">احجز موعداً</h2>
+            <h2 class="section-title"><span class="ar">احجز موعداً</span><span class="en">Book an Appointment</span></h2>
             <form id="bookingForm">
                 <div class="form-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
-                    <div><label>الاسم <span>*</span></label><input type="text" name="name" required></div>
-                    <div><label>رقم الهاتف <span>*</span></label><input type="tel" name="phone" required></div>
-                    <div><label>رقم الواتساب <span>*</span></label><input type="tel" name="whatsapp" required></div>
-                    <div><label>الدولة <span>*</span></label>
+                    <div><label><span class="ar">الاسم</span><span class="en">Full Name</span> <span>*</span></label><input type="text" name="name" required></div>
+                    <div><label><span class="ar">رقم الهاتف</span><span class="en">Phone Number</span> <span>*</span></label><input type="tel" name="phone" required></div>
+                    <div><label><span class="ar">رقم الواتساب</span><span class="en">WhatsApp Number</span> <span>*</span></label><input type="tel" name="whatsapp" required></div>
+                    <div><label><span class="ar">الدولة</span><span class="en">Country</span> <span>*</span></label>
                         <select name="country" required>
-                            <option value="" disabled selected>اختر الدولة</option>
-                            <option value="EG">مصر</option>
-                            <option value="SA">السعودية</option>
-                            <option value="AE">الإمارات</option>
-                            <option value="KW">الكويت</option>
-                            <option value="QA">قطر</option>
-                            <option value="BH">البحرين</option>
-                            <option value="OM">عمان</option>
-                            <option value="JO">الأردن</option>
-                            <option value="LB">لبنان</option>
-                            <option value="SY">سوريا</option>
-                            <option value="IQ">العراق</option>
-                            <option value="YE">اليمن</option>
-                            <option value="LY">ليبيا</option>
-                            <option value="TN">تونس</option>
-                            <option value="DZ">الجزائر</option>
-                            <option value="MA">المغرب</option>
-                            <option value="SD">السودان</option>
-                            <option value="OTHER">أخرى</option>
+                            <option value="" disabled selected class="ar">اختر الدولة</option>
+                            <option value="" disabled selected class="en">Select Country</option>
+                            <option value="EG">مصر / Egypt</option>
+                            <option value="SA">السعودية / Saudi Arabia</option>
+                            <option value="AE">الإمارات / UAE</option>
+                            <option value="KW">الكويت / Kuwait</option>
+                            <option value="QA">قطر / Qatar</option>
+                            <option value="BH">البحرين / Bahrain</option>
+                            <option value="OM">عمان / Oman</option>
+                            <option value="JO">الأردن / Jordan</option>
+                            <option value="LB">لبنان / Lebanon</option>
+                            <option value="SY">سوريا / Syria</option>
+                            <option value="IQ">العراق / Iraq</option>
+                            <option value="YE">اليمن / Yemen</option>
+                            <option value="LY">ليبيا / Libya</option>
+                            <option value="TN">تونس / Tunisia</option>
+                            <option value="DZ">الجزائر / Algeria</option>
+                            <option value="MA">المغرب / Morocco</option>
+                            <option value="SD">السودان / Sudan</option>
+                            <option value="OTHER">أخرى / Other</option>
                         </select>
                     </div>
-                    <div style="grid-column: span 2;"><label>الجنسية <span>*</span></label><input type="text" name="nationality" required></div>
-                    <div style="grid-column: span 2;"><label>كيف تعرفت علينا؟</label>
+                    <div style="grid-column: span 2;"><label><span class="ar">الجنسية</span><span class="en">Nationality</span> <span>*</span></label><input type="text" name="nationality" required></div>
+                    <div style="grid-column: span 2;"><label><span class="ar">كيف تعرفت علينا؟</span><span class="en">How did you hear about us?</span></label>
                         <select name="source">
-                            <option value="" disabled selected>اختر طريقة معرفتك بنا</option>
-                            <option value="عميل سابق">عميل سابق</option>
-                            <option value="فيسبوك">فيسبوك</option>
-                            <option value="انستاجرام">انستاجرام</option>
-                            <option value="تيك توك">تيك توك</option>
-                            <option value="صديق/قريب">صديق/قريب</option>
-                            <option value="أخرى">أخرى</option>
+                            <option value="" disabled selected class="ar">اختر طريقة معرفتك بنا</option>
+                            <option value="" disabled selected class="en">Select an option</option>
+                            <option value="عميل سابق">عميل سابق / Previous Patient</option>
+                            <option value="فيسبوك">فيسبوك / Facebook</option>
+                            <option value="انستاجرام">انستاجرام / Instagram</option>
+                            <option value="تيك توك">تيك توك / TikTok</option>
+                            <option value="صديق/قريب">صديق/قريب / Friend or Relative</option>
+                            <option value="أخرى">أخرى / Other</option>
                         </select>
                     </div>
-                    <div style="grid-column: span 2;"><label>الوظيفة <span>*</span></label><input type="text" name="job" required></div>
-                    <div><label>العمر <span>*</span></label><input type="number" name="age" required></div>
-                    <div><label>الجنس <span>*</span></label>
+                    <div style="grid-column: span 2;"><label><span class="ar">الوظيفة</span><span class="en">Occupation</span> <span>*</span></label><input type="text" name="job" required></div>
+                    <div><label><span class="ar">العمر</span><span class="en">Age</span> <span>*</span></label><input type="number" name="age" required></div>
+                    <div><label><span class="ar">الجنس</span><span class="en">Gender</span> <span>*</span></label>
                         <select name="gender" required>
-                            <option value="" disabled selected>اختر الجنس</option>
-                            <option value="ذكر">ذكر</option>
-                            <option value="أنثى">أنثى</option>
+                            <option value="" disabled selected class="ar">اختر الجنس</option>
+                            <option value="" disabled selected class="en">Select Gender</option>
+                            <option value="ذكر">ذكر / Male</option>
+                            <option value="أنثى">أنثى / Female</option>
                         </select>
                     </div>
-                    <div style="grid-column: span 2;"><label>المشكلة الطبية / الجراحية التى تعانى منها ؟ <span>*</span></label><textarea name="details" required></textarea></div>
+                    <div style="grid-column: span 2;"><label><span class="ar">المشكلة الطبية / الجراحية التى تعانى منها ؟</span><span class="en">Medical / Surgical issue you are suffering from?</span> <span>*</span></label><textarea name="details" required></textarea></div>
                     
-                    <button type="submit" id="submitBtn" class="btn btn-blue" style="grid-column: span 2;">إرسال</button>
+                    <button type="submit" id="submitBtn" class="btn btn-blue" style="grid-column: span 2;">
+                        <span class="ar">إرسال</span><span class="en">Submit</span>
+                    </button>
                 </div>
             </form>
         </div>
@@ -413,7 +333,7 @@
 
     <!-- قسم أراء عملائنا -->
     <section class="testimonials-sec" id="testimonials">
-        <h2 class="section-title">أراء عملائنا</h2>
+        <h2 class="section-title"><span class="ar">أراء عملائنا</span><span class="en">Patients Reviews</span></h2>
         <div class="container carousel-wrapper" id="carouselWrapper">
             
             <button class="carousel-btn btn-prev" id="btnPrev"><i class="fas fa-chevron-right"></i></button>
@@ -421,57 +341,69 @@
             
             <div class="carousel-track" id="sliderTrack">
                 
-                <!-- كومنت 1 -->
                 <div class="testimonial-slide">
                     <div class="review-card">
                         <div class="review-avatar"><i class="fas fa-user"></i></div>
                         <i class="fas fa-quote-right quote-mark"></i>
-                        <p>دكتور ايمن فوق الممتاز واخلاق عاليه جدا ولو حد محتاج دكتور جراح ارشحه طبعا ربنا يباركله ويذيده من فضله</p>
+                        <p>
+                            <span class="ar">دكتور ايمن فوق الممتاز واخلاق عاليه جدا ولو حد محتاج دكتور جراح ارشحه طبعا ربنا يباركله ويذيده من فضله</span>
+                            <span class="en">Dr. Ayman is excellent and highly ethical. I highly recommend him as a surgeon. God bless him.</span>
+                        </p>
                     </div>
                 </div>
 
-                <!-- كومنت 2 -->
                 <div class="testimonial-slide">
                     <div class="review-card">
                         <div class="review-avatar"><i class="fas fa-user"></i></div>
                         <i class="fas fa-quote-right quote-mark"></i>
-                        <p>خدمة طبية ممتازة وبصراحة هما دول ملائكة الرحمة بجد والله خدمة طبية فوق الممتازة وكل الشكر والتقدير والاحترام لدكتور ايمن جمعة والأستاذة شروق الاتعبت معانا بجد المتبعة قبل وبعد العملية والرد على كل استفسار وبسرعة كبيرة وكل الشكر والتقدير والاحترام ليهم كلهم</p>
+                        <p>
+                            <span class="ar">خدمة طبية ممتازة وبصراحة هما دول ملائكة الرحمة بجد والله خدمة طبية فوق الممتازة وكل الشكر والتقدير والاحترام لدكتور ايمن جمعة والأستاذة شروق</span>
+                            <span class="en">Excellent medical service. They are truly angels of mercy. Thanks to Dr. Ayman and Ms. Shorouk for the amazing follow-up.</span>
+                        </p>
                     </div>
                 </div>
 
-                <!-- كومنت 3 -->
                 <div class="testimonial-slide">
                     <div class="review-card">
                         <div class="review-avatar"><i class="fas fa-user"></i></div>
                         <i class="fas fa-quote-right quote-mark"></i>
-                        <p>الدكتور ممتاز ربنا يباركله والمستشفى رائعه والتمريض من المعامله والنظافه والاهتمام وارشح اى حد مريض غدة يعمله مع دكتور ايمن جمعه ويمشى وراء فى كل كلمه هو هيقوله للمريض وهو مغمض واشكر برضو استاذة شروق على تعبه معايا شكرا للكل فريق الدكتور وشكرا للدكتور ايمن جمعه لاهتمامه وسواله عليا يوميا بعد العمليه</p>
+                        <p>
+                            <span class="ar">الدكتور ممتاز ربنا يباركله والمستشفى رائعه والتمريض من المعامله والنظافه والاهتمام وارشح اى حد مريض غدة يعمله مع دكتور ايمن جمعه</span>
+                            <span class="en">Excellent doctor and great hospital. I recommend anyone with a thyroid issue to trust Dr. Ayman completely.</span>
+                        </p>
                     </div>
                 </div>
 
-                <!-- كومنت 4 -->
                 <div class="testimonial-slide">
                     <div class="review-card">
                         <div class="review-avatar"><i class="fas fa-user"></i></div>
                         <i class="fas fa-quote-right quote-mark"></i>
-                        <p>السلام عليكم ورحمة الله حضرتك يادكتور ايمن ماشاء الله عليك شاطر جدا وماهر جدا بتعرف تتعامل مع المرضى سواء فى العملية الجراحية او لمتابعتهم بعد العملية وقبل العملية ربنا يحسن ما بين ايديك مهما اقول مش هقدر اوصف شطاره حضرتك ماشاء الله ربنا يحميك ويحفظك بحفظه يارب تسلم ايدك على العملية اللى عملتهالى فى استئصال الورم فى القولون الف شكر 🌹</p>
+                        <p>
+                            <span class="ar">السلام عليكم ورحمة الله حضرتك يادكتور ايمن ماشاء الله عليك شاطر جدا وماهر جدا بتعرف تتعامل مع المرضى... تسلم ايدك على العملية اللى عملتهالى فى استئصال الورم فى القولون</span>
+                            <span class="en">Dr. Ayman is extremely skilled and knows how to deal with patients perfectly. Thank you for the successful colon tumor excision surgery.</span>
+                        </p>
                     </div>
                 </div>
 
-                <!-- كومنت 5 -->
                 <div class="testimonial-slide">
                     <div class="review-card">
                         <div class="review-avatar"><i class="fas fa-user"></i></div>
                         <i class="fas fa-quote-right quote-mark"></i>
-                        <p>الحمد لله بخير دكتور محترم جدا جدا كفايه ذوقه واخلاقه وعنده ضمير مهني اتمنا تكون عند كل دكتور ومتابعة دقيقه بعد العمليه واستجابة للرد على اي استفسار ورعاية طبية عاليه جدا جدا انا بشكره وربنا يجزي كل خير يارب</p>
+                        <p>
+                            <span class="ar">الحمد لله بخير دكتور محترم جدا جدا كفايه ذوقه واخلاقه وعنده ضمير مهني اتمنا تكون عند كل دكتور ومتابعة دقيقه بعد العمليه</span>
+                            <span class="en">A very respectful doctor with a strong professional conscience. Accurate and caring follow-up post-surgery. May God reward him.</span>
+                        </p>
                     </div>
                 </div>
 
-                <!-- كومنت 6 -->
                 <div class="testimonial-slide">
                     <div class="review-card">
                         <div class="review-avatar"><i class="fas fa-user"></i></div>
                         <i class="fas fa-quote-right quote-mark"></i>
-                        <p>السلام عليكم احب اشكر دكتور /ايمن جمعه بجد هو انسان قبل ان يكون دكتور محترم جدا واهتمامه بالحاله الي عنده كبير وبيقدم دايما النصيحه المظبوطه للحاله ولايمل من الاسأله بل بالعكس بيطمن جدا الحاله بيحاول تبسيط العمليه للحاله وبالنسبه للعمليه فهو دكتور ممتاز واهتمامه بعد العمليه بيطمن المريض ودايما متابع بجد من افضل الدكاتره الي بنصح التوجهه ليهم قليل لما تكون دكتور انسان بالشكل ده شكراً دكتور/ ايمن جمعه 🌹</p>
+                        <p>
+                            <span class="ar">احب اشكر دكتور /ايمن جمعه بجد هو انسان قبل ان يكون دكتور محترم جدا واهتمامه بالحاله الي عنده كبير وبيقدم دايما النصيحه المظبوطه</span>
+                            <span class="en">A true human before being a doctor. He provides the right advice, answers all questions patiently, and ensures the patient is fully reassured.</span>
+                        </p>
                     </div>
                 </div>
 
@@ -480,11 +412,11 @@
     </section>
 
     <section class="maps-section container">
-        <h2 class="section-title">مواقع العيادات</h2>
+        <h2 class="section-title"><span class="ar">مواقع العيادات</span><span class="en">Our Clinics</span></h2>
         <div class="maps-grid">
-            <div class="map-item"><h4>عيادة مدينتي</h4><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2047.7221385850744!2d31.666115941566773!3d30.07754533179577!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1457f50051742097%3A0x65bfb58ea191f8d6!2sYAS%20CLINICS!5e1!3m2!1sar!2seg!4v1784556865313!5m2!1sar!2seg" width="600" height="200" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe></div>
-            <div class="map-item"><h4>عيادة السويس</h4><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4135.795994084296!2d32.5501253!3d29.972320399999997!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14562582e01c888f%3A0xe8e26e44033fbde3!2z2KjZhtmDINin2YTYqti52YXZitixINmI2KfZhNin2LPZg9in2YYg2YHYsdi5INin2YTYs9mI2YrYsw!5e1!3m2!1sar!2seg!4v1784148840058!5m2!1sar!2seg" allowfullscreen=""></iframe></div>
-            <div class="map-item"><h4>عيادة الإسماعيلية</h4><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1452.6794767584438!2d32.272685070568876!3d30.61463542594053!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14f8590043b4d931%3A0xc7368e164b63f1e9!2z2KjYsdisINin2YTYrNmI2YfYsdip!5e1!3m2!1sar!2seg!4v1785244200616!5m2!1sar!2seg" width="600" height="400" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+            <div class="map-item"><h4><span class="ar">عيادة مدينتي</span><span class="en">Madinaty Clinic</span></h4><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2047.7221385850744!2d31.666115941566773!3d30.07754533179577!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1457f50051742097%3A0x65bfb58ea191f8d6!2sYAS%20CLINICS!5e1!3m2!1sar!2seg!4v1784556865313!5m2!1sar!2seg" width="600" height="200" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe></div>
+            <div class="map-item"><h4><span class="ar">عيادة السويس</span><span class="en">Suez Clinic</span></h4><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4135.795994084296!2d32.5501253!3d29.972320399999997!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14562582e01c888f%3A0xe8e26e44033fbde3!2z2KjZhtmDINin2YTYqti52YXZitixINmI2KfZhNin2LPZg9in2YYg2YHYsdi5INin2YTYs9mI2YrYsw!5e1!3m2!1sar!2seg!4v1784148840058!5m2!1sar!2seg" allowfullscreen=""></iframe></div>
+            <div class="map-item"><h4><span class="ar">عيادة الإسماعيلية</span><span class="en">Ismailia Clinic</span></h4><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1452.6794767584438!2d32.272685070568876!3d30.61463542594053!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14f8590043b4d931%3A0xc7368e164b63f1e9!2z2KjYsdisINin2YTYrNmI2YfYsdip!5e1!3m2!1sar!2seg!4v1785244200616!5m2!1sar!2seg" width="600" height="400" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
         </div>
     </section>
 
@@ -494,13 +426,13 @@
                 <a href="#"><img src="Logo-Dr-Ayman-w.webp" alt="دكتور أيمن جمعة" class="footer-logo-img"></a>
             </div>
             <div class="footer-col">
-                <h3>أرقام التواصل</h3>
-                <p>الحجز: 01093553286</p>
-                <p>الواتساب: 01039166291</p>
-                <p>البريد الإلكتروني: marketing.draymangomaa@gmail.com</p>
+                <h3><span class="ar">أرقام التواصل</span><span class="en">Contact Us</span></h3>
+                <p><span class="ar">الحجز:</span><span class="en">Booking:</span> 01093553286</p>
+                <p><span class="ar">الواتساب:</span><span class="en">WhatsApp:</span> 01039166291</p>
+                <p><span class="ar">البريد:</span><span class="en">Email:</span> marketing.draymangomaa@gmail.com</p>
             </div>
             <div class="footer-col">
-                <h3>تابعنا</h3>
+                <h3><span class="ar">تابعنا</span><span class="en">Follow Us</span></h3>
                 <div class="social-links">
                     <a href="https://www.facebook.com/profile.php?id=61565387397714" target="_blank">
                         <svg viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
@@ -514,20 +446,36 @@
                 </div>
             </div>
         </div>
-        <div class="copyright">حقوق النشر محفوظة © دكتور أيمن جمعة</div>
+        <div class="copyright"><span class="ar">حقوق النشر محفوظة © دكتور أيمن جمعة</span><span class="en">Copyright © Dr. Ayman Gomaa</span></div>
     </footer>
 
     <a href="https://wa.me/201039166291" target="_blank" class="fab"><i class="fab fa-whatsapp"></i></a>
 
-    <!-- سكريبت الإرسال لجوجل شيت والسلايدر -->
+    <!-- سكريبت تبديل اللغة، الإرسال لجوجل شيت والسلايدر -->
     <script>
-        // سكريبت نموذج الحجز
+        // --- 1. سكريبت تبديل اللغة بالضغط على اللوجو ---
+        function toggleLanguage() {
+            const html = document.documentElement;
+            if(html.lang === 'ar') {
+                html.lang = 'en';
+                html.dir = 'ltr';
+            } else {
+                html.lang = 'ar';
+                html.dir = 'rtl';
+            }
+            // إعادة ضبط السلايدر عشان المارجن والاتجاهات تتحدث
+            updateSliderPosition();
+        }
+
+        // --- 2. سكريبت نموذج الحجز ---
         document.getElementById('bookingForm').addEventListener('submit', function(e) {
             e.preventDefault(); 
             
             var btn = document.getElementById('submitBtn');
-            var originalText = btn.innerText;
-            btn.innerText = 'جاري الإرسال...'; 
+            var isAr = document.documentElement.lang === 'ar';
+            var originalBtnContent = btn.innerHTML;
+            
+            btn.innerHTML = isAr ? '<span class="ar">جاري الإرسال...</span>' : '<span class="en">Sending...</span>'; 
             btn.disabled = true; 
 
             var formData = new FormData(this);
@@ -537,23 +485,23 @@
             .then(response => response.text())
             .then(data => {
                 if(data === 'Success') {
-                    alert('تم تسجيل حجزك بنجاح! سيتم التواصل معك في أقرب وقت.');
+                    alert(isAr ? 'تم تسجيل حجزك بنجاح! سيتم التواصل معك في أقرب وقت.' : 'Booking submitted successfully! We will contact you soon.');
                     document.getElementById('bookingForm').reset(); 
                 } else {
-                    alert('حدث خطأ غير متوقع، يرجى المحاولة مرة أخرى.');
+                    alert(isAr ? 'حدث خطأ غير متوقع، يرجى المحاولة مرة أخرى.' : 'An unexpected error occurred. Please try again.');
                 }
-                btn.innerText = originalText;
+                btn.innerHTML = originalBtnContent;
                 btn.disabled = false;
             })
             .catch(error => {
                 console.error('Error!', error.message);
-                alert('حدث خطأ في الاتصال، يرجى التأكد من اتصالك بالإنترنت.');
-                btn.innerText = originalText;
+                alert(isAr ? 'حدث خطأ في الاتصال، يرجى التأكد من اتصالك بالإنترنت.' : 'Connection error. Please check your internet connection.');
+                btn.innerHTML = originalBtnContent;
                 btn.disabled = false;
             });
         });
 
-        // سكريبت سلايدر أراء العملاء المعدل
+        // --- 3. سكريبت سلايدر أراء العملاء المعدل ---
         const sliderTrack = document.getElementById('sliderTrack');
         const slides = document.querySelectorAll('.testimonial-slide');
         const btnNext = document.getElementById('btnNext');
@@ -563,10 +511,13 @@
         let currentIndex = 0;
         const totalSlides = slides.length;
         let slideInterval;
-        let slideDirection = 1; // 1 للأمام، -1 للخلف
+        let slideDirection = 1; 
 
         function updateSliderPosition() {
-            sliderTrack.style.transform = `translateX(${currentIndex * 100}%)`;
+            // التحقق من اللغة عشان نحسب اتجاه الحركة صح
+            const isRtl = document.documentElement.dir === 'rtl';
+            const movePercentage = currentIndex * 100;
+            sliderTrack.style.transform = `translateX(${isRtl ? movePercentage : -movePercentage}%)`;
             updateButtonsVisibility();
         }
 
@@ -653,17 +604,18 @@
         carouselWrapper.addEventListener('touchend', () => {
             if (startX > 0 && endX > 0) {
                 let diffX = startX - endX;
+                const isRtl = document.documentElement.dir === 'rtl';
+                
                 if (diffX > 50) {
-                    showPrevSlide(); 
+                    isRtl ? showPrevSlide() : showNextSlide();
                 } else if (diffX < -50) {
-                    showNextSlide(); 
+                    isRtl ? showNextSlide() : showPrevSlide();
                 }
             }
             startX = 0;
             endX = 0;
             startAutoSlide(); 
         });
-
     </script>
 
 </body>
