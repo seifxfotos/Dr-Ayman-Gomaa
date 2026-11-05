@@ -307,28 +307,65 @@
         </div>
     </section>
 
-    <!-- نموذج الحجز بـ 3 خانات فقط -->
+    <!-- نموذج الحجز معدل ليحتوي على الخانات الأساسية والإضافية (بدون إجبار) -->
     <section class="appointment-sec" id="appointment">
         <div class="container">
             <h2 class="section-title"><span class="ar">احجز موعداً</span><span class="en">Book an Appointment</span></h2>
             <form id="bookingForm">
                 <div class="form-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
                     
+                    <!-- الصف الأول: أساسي -->
                     <div>
                         <label><span class="ar">الاسم</span><span class="en">Full Name</span> <span>*</span></label>
                         <input type="text" name="name" required>
                     </div>
-                    
                     <div>
                         <label><span class="ar">رقم الهاتف</span><span class="en">Phone Number</span> <span>*</span></label>
                         <input type="tel" name="phone" required>
                     </div>
                     
-                    <div style="grid-column: span 2;">
+                    <!-- الصف الثاني: واتساب (أساسي) والعمر (اختياري) -->
+                    <div>
                         <label><span class="ar">رقم الواتساب</span><span class="en">WhatsApp Number</span> <span>*</span></label>
                         <input type="tel" name="whatsapp" required>
                     </div>
+                    <div>
+                        <label><span class="ar">العمر</span><span class="en">Age</span></label>
+                        <input type="number" name="age">
+                    </div>
+
+                    <!-- الصف الثالث: العيادة ومصدر المعرفة (اختياري) -->
+                    <div>
+                        <label><span class="ar">العيادة</span><span class="en">Clinic</span></label>
+                        <select name="clinic">
+                            <option value="" selected class="ar">اختر العيادة (اختياري)</option>
+                            <option value="" selected class="en">Select Clinic (Optional)</option>
+                            <option value="التجمع الخامس">التجمع الخامس / New Cairo</option>
+                            <option value="السويس">السويس / Suez</option>
+                            <option value="الإسماعيلية">الإسماعيلية / Ismailia</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label><span class="ar">كيف تعرفت علينا؟</span><span class="en">How did you hear about us?</span></label>
+                        <select name="source">
+                            <option value="" selected class="ar">اختر... (اختياري)</option>
+                            <option value="" selected class="en">Select... (Optional)</option>
+                            <option value="عميل سابق">عميل سابق / Previous Patient</option>
+                            <option value="فيسبوك">فيسبوك / Facebook</option>
+                            <option value="انستاجرام">انستاجرام / Instagram</option>
+                            <option value="تيك توك">تيك توك / TikTok</option>
+                            <option value="صديق/قريب">صديق/قريب / Friend or Relative</option>
+                            <option value="أخرى">أخرى / Other</option>
+                        </select>
+                    </div>
+
+                    <!-- الصف الرابع: المشكلة الطبية (اختياري) -->
+                    <div style="grid-column: span 2;">
+                        <label><span class="ar">المشكلة الطبية / الجراحية</span><span class="en">Medical / Surgical issue</span></label>
+                        <textarea name="details" rows="3"></textarea>
+                    </div>
                     
+                    <!-- زر الإرسال -->
                     <button type="submit" id="submitBtn" class="btn btn-blue" style="grid-column: span 2;">
                         <span class="ar">إرسال</span><span class="en">Submit</span>
                     </button>
