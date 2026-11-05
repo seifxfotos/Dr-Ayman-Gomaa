@@ -307,66 +307,32 @@
         </div>
     </section>
 
+    <!-- تم تعديل نموذج الحجز هنا ليكون 3 خانات فقط -->
     <section class="appointment-sec" id="appointment">
         <div class="container">
             <h2 class="section-title"><span class="ar">احجز موعداً</span><span class="en">Book an Appointment</span></h2>
             <form id="bookingForm">
                 <div class="form-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
-                    <div><label><span class="ar">الاسم</span><span class="en">Full Name</span> <span>*</span></label><input type="text" name="name" required></div>
-                    <div><label><span class="ar">رقم الهاتف</span><span class="en">Phone Number</span> <span>*</span></label><input type="tel" name="phone" required></div>
-                    <div><label><span class="ar">رقم الواتساب</span><span class="en">WhatsApp Number</span> <span>*</span></label><input type="tel" name="whatsapp" required></div>
-                    <div><label><span class="ar">الدولة</span><span class="en">Country</span> <span>*</span></label>
-                        <select name="country" required>
-                            <option value="" disabled selected class="ar">اختر الدولة</option>
-                            <option value="" disabled selected class="en">Select Country</option>
-                            <option value="EG">مصر / Egypt</option>
-                            <option value="SA">السعودية / Saudi Arabia</option>
-                            <option value="AE">الإمارات / UAE</option>
-                            <option value="KW">الكويت / Kuwait</option>
-                            <option value="QA">قطر / Qatar</option>
-                            <option value="BH">البحرين / Bahrain</option>
-                            <option value="OM">عمان / Oman</option>
-                            <option value="JO">الأردن / Jordan</option>
-                            <option value="LB">لبنان / Lebanon</option>
-                            <option value="SY">سوريا / Syria</option>
-                            <option value="IQ">العراق / Iraq</option>
-                            <option value="YE">اليمن / Yemen</option>
-                            <option value="LY">ليبيا / Libya</option>
-                            <option value="TN">تونس / Tunisia</option>
-                            <option value="DZ">الجزائر / Algeria</option>
-                            <option value="MA">المغرب / Morocco</option>
-                            <option value="SD">السودان / Sudan</option>
-                            <option value="OTHER">أخرى / Other</option>
-                        </select>
+                    
+                    <div>
+                        <label><span class="ar">الاسم</span><span class="en">Full Name</span> <span>*</span></label>
+                        <input type="text" name="name" required>
                     </div>
-                    <div style="grid-column: span 2;"><label><span class="ar">الجنسية</span><span class="en">Nationality</span> <span>*</span></label><input type="text" name="nationality" required></div>
-                    <div style="grid-column: span 2;"><label><span class="ar">كيف تعرفت علينا؟</span><span class="en">How did you hear about us?</span></label>
-                        <select name="source">
-                            <option value="" disabled selected class="ar">اختر طريقة معرفتك بنا</option>
-                            <option value="" disabled selected class="en">Select an option</option>
-                            <option value="عميل سابق">عميل سابق / Previous Patient</option>
-                            <option value="فيسبوك">فيسبوك / Facebook</option>
-                            <option value="انستاجرام">انستاجرام / Instagram</option>
-                            <option value="تيك توك">تيك توك / TikTok</option>
-                            <option value="صديق/قريب">صديق/قريب / Friend or Relative</option>
-                            <option value="أخرى">أخرى / Other</option>
-                        </select>
+                    
+                    <div>
+                        <label><span class="ar">رقم الهاتف</span><span class="en">Phone Number</span> <span>*</span></label>
+                        <input type="tel" name="phone" required>
                     </div>
-                    <div style="grid-column: span 2;"><label><span class="ar">الوظيفة</span><span class="en">Occupation</span> <span>*</span></label><input type="text" name="job" required></div>
-                    <div><label><span class="ar">العمر</span><span class="en">Age</span> <span>*</span></label><input type="number" name="age" required></div>
-                    <div><label><span class="ar">الجنس</span><span class="en">Gender</span> <span>*</span></label>
-                        <select name="gender" required>
-                            <option value="" disabled selected class="ar">اختر الجنس</option>
-                            <option value="" disabled selected class="en">Select Gender</option>
-                            <option value="ذكر">ذكر / Male</option>
-                            <option value="أنثى">أنثى / Female</option>
-                        </select>
+                    
+                    <div style="grid-column: span 2;">
+                        <label><span class="ar">رقم الواتساب</span><span class="en">WhatsApp Number</span> <span>*</span></label>
+                        <input type="tel" name="whatsapp" required>
                     </div>
-                    <div style="grid-column: span 2;"><label><span class="ar">المشكلة الطبية / الجراحية التى تعانى منها ؟</span><span class="en">Medical / Surgical issue you are suffering from?</span> <span>*</span></label><textarea name="details" required></textarea></div>
                     
                     <button type="submit" id="submitBtn" class="btn btn-blue" style="grid-column: span 2;">
                         <span class="ar">إرسال</span><span class="en">Submit</span>
                     </button>
+                    
                 </div>
             </form>
         </div>
