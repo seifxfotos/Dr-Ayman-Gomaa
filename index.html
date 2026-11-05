@@ -103,7 +103,9 @@
         .appointment-sec { padding: 80px 5%; background-color: #f8f9fa; }
         input, select, textarea { padding: 12px; border: 1px solid #ccc; border-radius: 4px; font-family: var(--font-main); font-size: 14px; width: 100%; }
         label { font-weight: 700; margin-bottom: 5px; display: block; }
-        label span:last-child { color: red; }
+        
+        /* تعديل كلاس النجمة الحمراء عشان ميأثرش على الكلام الإنجليزي */
+        .req-star { color: red; }
 
         .testimonials-sec { padding: 60px 5%; background-color: #fff; overflow: hidden; }
         .carousel-wrapper { position: relative; max-width: 900px; margin: 0 auto; direction: ltr; padding: 20px 0; }
@@ -307,7 +309,7 @@
         </div>
     </section>
 
-    <!-- نموذج الحجز معدل ليحتوي على الخانات الأساسية والإضافية (بدون إجبار) -->
+    <!-- نموذج الحجز معدل ليحتوي على الخانات الأساسية والإضافية مع فصل لغات الخيارات -->
     <section class="appointment-sec" id="appointment">
         <div class="container">
             <h2 class="section-title"><span class="ar">احجز موعداً</span><span class="en">Book an Appointment</span></h2>
@@ -316,17 +318,17 @@
                     
                     <!-- الصف الأول: أساسي -->
                     <div>
-                        <label><span class="ar">الاسم</span><span class="en">Full Name</span> <span>*</span></label>
+                        <label><span class="ar">الاسم</span><span class="en">Full Name</span> <span class="req-star">*</span></label>
                         <input type="text" name="name" required>
                     </div>
                     <div>
-                        <label><span class="ar">رقم الهاتف</span><span class="en">Phone Number</span> <span>*</span></label>
+                        <label><span class="ar">رقم الهاتف</span><span class="en">Phone Number</span> <span class="req-star">*</span></label>
                         <input type="tel" name="phone" required>
                     </div>
                     
                     <!-- الصف الثاني: واتساب (أساسي) والعمر (اختياري) -->
                     <div>
-                        <label><span class="ar">رقم الواتساب</span><span class="en">WhatsApp Number</span> <span>*</span></label>
+                        <label><span class="ar">رقم الواتساب</span><span class="en">WhatsApp Number</span> <span class="req-star">*</span></label>
                         <input type="tel" name="whatsapp" required>
                     </div>
                     <div>
@@ -334,15 +336,21 @@
                         <input type="number" name="age">
                     </div>
 
-                    <!-- الصف الثالث: العيادة ومصدر المعرفة (اختياري) -->
+                    <!-- الصف الثالث: العيادة ومصدر المعرفة (اختياري) مع فصل اللغات -->
                     <div>
                         <label><span class="ar">العيادة</span><span class="en">Clinic</span></label>
                         <select name="clinic">
                             <option value="" selected class="ar">اختر العيادة (اختياري)</option>
                             <option value="" selected class="en">Select Clinic (Optional)</option>
-                            <option value="التجمع الخامس">التجمع الخامس / New Cairo</option>
-                            <option value="السويس">السويس / Suez</option>
-                            <option value="الإسماعيلية">الإسماعيلية / Ismailia</option>
+                            
+                            <option value="التجمع الخامس" class="ar">التجمع الخامس</option>
+                            <option value="التجمع الخامس" class="en">New Cairo</option>
+                            
+                            <option value="السويس" class="ar">السويس</option>
+                            <option value="السويس" class="en">Suez</option>
+                            
+                            <option value="الإسماعيلية" class="ar">الإسماعيلية</option>
+                            <option value="الإسماعيلية" class="en">Ismailia</option>
                         </select>
                     </div>
                     <div>
@@ -350,12 +358,24 @@
                         <select name="source">
                             <option value="" selected class="ar">اختر... (اختياري)</option>
                             <option value="" selected class="en">Select... (Optional)</option>
-                            <option value="عميل سابق">عميل سابق / Previous Patient</option>
-                            <option value="فيسبوك">فيسبوك / Facebook</option>
-                            <option value="انستاجرام">انستاجرام / Instagram</option>
-                            <option value="تيك توك">تيك توك / TikTok</option>
-                            <option value="صديق/قريب">صديق/قريب / Friend or Relative</option>
-                            <option value="أخرى">أخرى / Other</option>
+                            
+                            <option value="عميل سابق" class="ar">عميل سابق</option>
+                            <option value="عميل سابق" class="en">Previous Patient</option>
+                            
+                            <option value="فيسبوك" class="ar">فيسبوك</option>
+                            <option value="فيسبوك" class="en">Facebook</option>
+                            
+                            <option value="انستاجرام" class="ar">انستاجرام</option>
+                            <option value="انستاجرام" class="en">Instagram</option>
+                            
+                            <option value="تيك توك" class="ar">تيك توك</option>
+                            <option value="تيك توك" class="en">TikTok</option>
+                            
+                            <option value="صديق/قريب" class="ar">صديق/قريب</option>
+                            <option value="صديق/قريب" class="en">Friend or Relative</option>
+                            
+                            <option value="أخرى" class="ar">أخرى</option>
+                            <option value="أخرى" class="en">Other</option>
                         </select>
                     </div>
 
