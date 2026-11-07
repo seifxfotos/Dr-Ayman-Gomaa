@@ -5,6 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="دكتور أيمن جمعة | خيارك الأول في حالات الجراحة العامة وجراحات الأورام المتقدمة والمناظير.">
     <title>دكتور أيمن جمعة | Dr. Ayman Gomaa</title>
+    
+    <!-- فحص اللغة المحفوظة مبكراً لمنع رمشة الصفحة عند التحميل -->
+    <script>
+        (function() {
+            var savedLang = localStorage.getItem('siteLang');
+            if (savedLang === 'en') {
+                document.documentElement.lang = 'en';
+                document.documentElement.dir = 'ltr';
+            } else {
+                document.documentElement.lang = 'ar';
+                document.documentElement.dir = 'rtl';
+            }
+        })();
+    </script>
+
     <!-- رابط مكتبة الأيقونات -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
@@ -73,7 +88,8 @@
         @keyframes float2 { 0% { transform: translate(0, 0) scale(1); } 50% { transform: translate(-300px, -200px) scale(1.3); } 100% { transform: translate(-450px, -100px) scale(0.9); } }
 
         .hero-content { max-width: 550px; z-index: 2; position: relative;}
-        .hero-box { background-color: var(--teal-box); padding: 30px; border-radius: 10px; font-size: 22px; font-weight: 700; line-height: 1.6; margin-bottom: 20px; }
+        /* تم تعديل border-radius إلى 0 ليكون حاد الزوايا */
+        .hero-box { background-color: var(--teal-box); padding: 30px; border-radius: 0px; font-size: 22px; font-weight: 700; line-height: 1.6; margin-bottom: 20px; }
         .btn { display: inline-block; padding: 10px 25px; background-color: var(--teal-box); color: white; border-radius: 25px; font-weight: 700; border: none; cursor: pointer; font-family: var(--font-main); font-size: 16px; position: relative; z-index: 2; transition: 0.3s;}
         .btn:hover { background-color: #1ea3df; }
         .btn-blue { background-color: var(--btn-blue); border-radius: 0; padding: 12px 30px; width: 100%; font-size: 18px; color: white;}
@@ -521,6 +537,14 @@
             });
         }
 
+        // ضبط نص زر اللغة والخيارات فور تحميل الصفحة بناءً على اللغة المحفوظة
+        const initialLang = document.documentElement.lang;
+        const langToggleBtn = document.getElementById('langToggle');
+        if (langToggleBtn) {
+            langToggleBtn.innerText = initialLang === 'en' ? 'العربية' : 'English';
+        }
+        updateSelectOptionsLanguage(initialLang);
+
         // --- 1. سكريبت الأنيميشن وتغيير اللغة (الزرار) ---
         function toggleLanguage() {
             const toggleBtn = document.getElementById('langToggle');
@@ -563,10 +587,12 @@
                     html.lang = 'en';
                     html.dir = 'ltr';
                     toggleBtn.innerText = 'العربية';
+                    localStorage.setItem('siteLang', 'en'); // حفظ اللغة الإنجليزية في الذاكرة
                 } else {
                     html.lang = 'ar';
                     html.dir = 'rtl';
                     toggleBtn.innerText = 'English';
+                    localStorage.setItem('siteLang', 'ar'); // حفظ اللغة العربية في الذاكرة
                 }
                 
                 // تحديث نصوص القوائم المنسدلة واتجاه السلايدر
@@ -629,7 +655,7 @@
             });
         });
 
-        // --- 3. سكريبت سلايدر أراء العملاء (تم إصلاح مشكلة الاتجاهات بالكامل) ---
+        // --- 3. سكريبت سلايدر أراء العملاء ---
         const sliderTrack = document.getElementById('sliderTrack');
         const slides = document.querySelectorAll('.testimonial-slide');
         const btnNext = document.getElementById('btnNext');
@@ -645,10 +671,8 @@
 
         function updateSliderPosition() {
             const isRtl = document.documentElement.dir === 'rtl';
-            // ضبط اتجاه الحاوية ليتطابق مع لغة الصفحة فيتحرك السلايدر بشكل سليم في اللغتين
             carouselWrapper.style.direction = isRtl ? 'rtl' : 'ltr';
             
-            // تبديل اتجاه أيقونات الأسهم لتناسب اتجاه اللغة
             if (iconPrev && iconNext) {
                 iconPrev.className = isRtl ? 'fas fa-chevron-right' : 'fas fa-chevron-left';
                 iconNext.className = isRtl ? 'fas fa-chevron-left' : 'fas fa-chevron-right';
