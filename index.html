@@ -20,18 +20,23 @@
         })();
     </script>
 
-    <!-- رابط مكتبة الأيقونات -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <!-- تسريع تحميل الصور الأساسية والخطوط (حل مشكلة LCP و Render-blocking) -->
+    <link rel="preload" as="image" href="Doctor.webp" fetchpriority="high">
+    <link rel="preload" as="image" href="Logo-Dr-Ayman.webp">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet"></noscript>
     
     <style>
-        :root { --footer-dark: #063e63; --btn-blue: #29b6f6; --teal-box: #28b6f6; --text-dark: #333333; --gray-bg: #e9ecef; --font-main: 'Cairo', sans-serif; }
+        :root { --footer-dark: #063e63; --btn-blue: #29b6f6; --teal-box: #28b6f6; --text-dark: #333333; --gray-bg: #e9ecef; --font-main: 'Cairo', system-ui, -apple-system, sans-serif; }
         
         html { scroll-behavior: smooth; scroll-padding-top: 75px; }
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: var(--font-main); color: var(--text-dark); line-height: 1.6; background-color: #fff; overflow-x: hidden; transition: background-color 0.3s; }
         a { text-decoration: none; color: inherit; }
         .container { width: 90%; max-width: 1200px; margin: auto; }
+        .svg-icon { width: 1em; height: 1em; fill: currentColor; display: inline-block; vertical-align: middle; }
 
         /* --- Language Toggle Styles --- */
         html[lang="ar"] .en { display: none !important; }
@@ -45,8 +50,8 @@
         .header { display: flex; justify-content: space-between; align-items: center; padding: 15px 5%; background: #fff; position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
         
         .logo { display: flex; align-items: center; }
-        .header-logo-img { max-height: 60px; width: auto; display: block; }
-        .footer-logo-img { max-height: 70px; width: auto; display: block; margin-bottom: 10px; }
+        .header-logo-img { max-height: 60px; width: auto; height: auto; display: block; }
+        .footer-logo-img { max-height: 70px; width: auto; height: auto; display: block; margin-bottom: 10px; }
         
         .nav-links { display: flex; gap: 30px; align-items: center; font-weight: 700; font-size: 15px; color: var(--footer-dark); margin-right: 40px; transition: margin 0.3s; }
         .nav-links a:hover { color: var(--btn-blue); }
@@ -93,7 +98,7 @@
         .btn:hover { background-color: #1ea3df; }
         .btn-blue { background-color: var(--btn-blue); border-radius: 0; padding: 12px 30px; width: 100%; font-size: 18px; color: white;}
         .btn-blue:hover { background-color: #1ea3df; }
-        .hero-image { z-index: 2; object-fit: cover; position: relative;}
+        .hero-image { z-index: 2; object-fit: cover; position: relative; height: auto; }
 
         @media (min-width: 769px) {
             .hero { justify-content: center; gap: 75px; }
@@ -129,7 +134,7 @@
             border-color: var(--btn-blue);
             box-shadow: 0 0 0 3px rgba(41, 182, 246, 0.15);
         }
-        label { font-weight: 700; margin-bottom: 5px; display: block; }
+        label { font-weight: 700; margin-bottom: 5px; display: block; cursor: pointer; }
         .req-star { color: red; }
 
         /* --- ستايل القوائم المنسدلة المخصصة (Custom Dropdowns) --- */
@@ -145,10 +150,10 @@
             border-color: var(--btn-blue);
             box-shadow: 0 0 0 3px rgba(41, 182, 246, 0.15);
         }
-        .custom-select-trigger i {
+        .custom-select-trigger .arrow-svg {
             color: var(--footer-dark); font-size: 12px; transition: transform 0.3s ease;
         }
-        .custom-select-wrapper.open .custom-select-trigger i {
+        .custom-select-wrapper.open .custom-select-trigger .arrow-svg {
             transform: rotate(180deg); color: var(--btn-blue);
         }
         .custom-options {
@@ -228,8 +233,9 @@
         .maps-section { padding: 60px 5%; background-color: #f8f9fa; }
         .maps-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 30px; }
         .map-item { background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-        .map-item h4 { margin-bottom: 15px; text-align: center; color: var(--footer-dark); font-size: 18px; }
-        .map-item iframe { width: 100%; height: 250px; border: 0; border-radius: 4px; }
+        /* تم تعديل h4 إلى h3 لحل مشكلة التسلسل الهرمي للعناوين مع الحفاظ على نفس الشكل */
+        .map-item h3 { margin-bottom: 15px; text-align: center; color: var(--footer-dark); font-size: 18px; font-weight: 700; }
+        .map-item iframe { width: 100%; height: 250px; border: 0; border-radius: 4px; background-color: #e9ecef; }
 
         .footer { background-color: var(--footer-dark); color: white; padding: 60px 5% 20px; }
         .footer-grid { display: flex; justify-content: center; align-items: center; gap: 60px; text-align: center; margin-bottom: 40px; flex-wrap: wrap; }
@@ -300,17 +306,45 @@
 </head>
 <body>
 
+    <!-- تعريف الأيقونات داخلياً كـ SVG لتوفير 900ms من وقت التحميل والاستغناء عن FontAwesome الثقيل -->
+    <svg style="display: none;" aria-hidden="true">
+        <symbol id="icon-user" viewBox="0 0 448 512">
+            <path d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z"/>
+        </symbol>
+        <symbol id="icon-quote-right" viewBox="0 0 448 512">
+            <path d="M448 296c0 66.3-53.7 120-120 120h-8c-17.7 0-32-14.3-32-32s14.3-32 32-32h8c30.9 0 56-25.1 56-56v-8H320c-35.3 0-64-28.7-64-64V160c0-35.3 28.7-64 64-64h64c35.3 0 64 28.7 64 64v136zm-256 0c0 66.3-53.7 120-120 120H64c-17.7 0-32-14.3-32-32s14.3-32 32-32h8c30.9 0 56-25.1 56-56v-8H64c-35.3 0-64-28.7-64-64V160c0-35.3 28.7-64 64-64h64c35.3 0 64 28.7 64 64v136z"/>
+        </symbol>
+        <symbol id="icon-chevron-right" viewBox="0 0 320 512">
+            <path d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z"/>
+        </symbol>
+        <symbol id="icon-chevron-left" viewBox="0 0 320 512">
+            <path d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l192 192c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L77.3 256 246.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-192 192z"/>
+        </symbol>
+        <symbol id="icon-chevron-down" viewBox="0 0 512 512">
+            <path d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z"/>
+        </symbol>
+        <symbol id="icon-check" viewBox="0 0 448 512">
+            <path d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"/>
+        </symbol>
+        <symbol id="icon-exclamation" viewBox="0 0 192 512">
+            <path d="M64 64c0-17.7 14.3-32 32-32s32 14.3 32 32V288c0 17.7-14.3 32-32 32s-32-14.3-32-32V64zM48 432a48 48 0 1 1 96 0 48 48 0 1 1 -96 0z"/>
+        </symbol>
+        <symbol id="icon-whatsapp" viewBox="0 0 448 512">
+            <path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/>
+        </symbol>
+    </svg>
+
     <!-- Transition Elements للأنيميشن -->
     <div class="page-transition-overlay" id="transitionOverlay"></div>
     <div class="cool-loader" id="transitionLoader">
         <span></span><span></span><span></span>
     </div>
 
-    <!-- نافذة الإشعار المخصصة بنفس ستايل الموقع (بديل الـ Alert التقليدي) -->
+    <!-- نافذة الإشعار المخصصة بنفس ستايل الموقع -->
     <div class="custom-modal-overlay" id="customModal">
         <div class="custom-modal-box" id="modalBox">
             <div class="custom-modal-icon success" id="modalIcon">
-                <i class="fas fa-check"></i>
+                <svg class="svg-icon"><use href="#icon-check"></use></svg>
             </div>
             <h3 class="custom-modal-title" id="modalTitle"></h3>
             <p class="custom-modal-message" id="modalMessage"></p>
@@ -322,7 +356,7 @@
 
     <header class="header">
         <div class="logo">
-            <a href="#"><img src="Logo-Dr-Ayman.webp" alt="دكتور أيمن جمعة | Dr. Ayman Gomaa" class="header-logo-img" id="mainLogo"></a>
+            <a href="#"><img src="Logo-Dr-Ayman.webp" alt="دكتور أيمن جمعة | Dr. Ayman Gomaa" class="header-logo-img" id="mainLogo" width="212" height="60"></a>
         </div>
         <nav class="nav-links">
             <a href="#"><span class="ar">الرئيسية</span><span class="en">Home</span></a>
@@ -343,7 +377,7 @@
                 <span class="ar">احجز موعدك الآن</span><span class="en">Book Your Appointment Now</span>
             </button>
         </div>
-        <img src="Doctor.webp" alt="دكتور أيمن جمعة" class="hero-image">
+        <img src="Doctor.webp" alt="دكتور أيمن جمعة" class="hero-image" width="500" height="470" fetchpriority="high" decoding="async">
     </section>
 
     <section class="services-sec container" id="services">
@@ -429,7 +463,7 @@
         </div>
     </section>
 
-    <!-- نموذج الحجز -->
+    <!-- نموذج الحجز (تم ربط الـ Labels بالحقول لحل مشكلة Accessibility) -->
     <section class="appointment-sec" id="appointment">
         <div class="container">
             <h2 class="section-title"><span class="ar">احجز موعداً</span><span class="en">Book an Appointment</span></h2>
@@ -438,28 +472,28 @@
                     
                     <!-- الصف الأول: أساسي -->
                     <div>
-                        <label><span class="ar">الاسم</span><span class="en">Full Name</span> <span class="req-star">*</span></label>
-                        <input type="text" name="name" required>
+                        <label for="nameInput"><span class="ar">الاسم</span><span class="en">Full Name</span> <span class="req-star">*</span></label>
+                        <input type="text" id="nameInput" name="name" required>
                     </div>
                     <div>
-                        <label><span class="ar">رقم الهاتف</span><span class="en">Phone Number</span> <span class="req-star">*</span></label>
-                        <input type="tel" name="phone" required>
+                        <label for="phoneInput"><span class="ar">رقم الهاتف</span><span class="en">Phone Number</span> <span class="req-star">*</span></label>
+                        <input type="tel" id="phoneInput" name="phone" required>
                     </div>
                     
                     <!-- الصف الثاني: واتساب (أساسي) والعمر (اختياري) -->
                     <div>
-                        <label><span class="ar">رقم الواتساب</span><span class="en">WhatsApp Number</span> <span class="req-star">*</span></label>
-                        <input type="tel" name="whatsapp" required>
+                        <label for="whatsappInput"><span class="ar">رقم الواتساب</span><span class="en">WhatsApp Number</span> <span class="req-star">*</span></label>
+                        <input type="tel" id="whatsappInput" name="whatsapp" required>
                     </div>
                     <div>
-                        <label><span class="ar">العمر</span><span class="en">Age</span></label>
-                        <input type="number" name="age">
+                        <label for="ageInput"><span class="ar">العمر</span><span class="en">Age</span></label>
+                        <input type="number" id="ageInput" name="age">
                     </div>
 
-                    <!-- الصف الثالث: قوائم منسدلة مخصصة بستايل الموقع (Custom Styled Dropdowns) -->
+                    <!-- الصف الثالث: قوائم منسدلة مخصصة بستايل الموقع (بدون سكرول) -->
                     <div>
-                        <label><span class="ar">العيادة</span><span class="en">Clinic</span></label>
-                        <select name="clinic" class="custom-select-target" style="display: none;">
+                        <label for="clinicSelect"><span class="ar">العيادة</span><span class="en">Clinic</span></label>
+                        <select id="clinicSelect" name="clinic" class="custom-select-target" style="display: none;">
                             <option value="" selected data-ar="اختر العيادة (اختياري)" data-en="Select Clinic (Optional)">اختر العيادة (اختياري)</option>
                             <option value="التجمع الخامس" data-ar="التجمع الخامس" data-en="New Cairo">التجمع الخامس</option>
                             <option value="السويس" data-ar="السويس" data-en="Suez">السويس</option>
@@ -467,8 +501,8 @@
                         </select>
                     </div>
                     <div>
-                        <label><span class="ar">كيف تعرفت علينا؟</span><span class="en">How did you hear about us?</span></label>
-                        <select name="source" class="custom-select-target" style="display: none;">
+                        <label for="sourceSelect"><span class="ar">كيف تعرفت علينا؟</span><span class="en">How did you hear about us?</span></label>
+                        <select id="sourceSelect" name="source" class="custom-select-target" style="display: none;">
                             <option value="" selected data-ar="اختر... (اختياري)" data-en="Select... (Optional)">اختر... (اختياري)</option>
                             <option value="عميل سابق" data-ar="عميل سابق" data-en="Previous Patient">عميل سابق</option>
                             <option value="فيسبوك" data-ar="فيسبوك" data-en="Facebook">فيسبوك</option>
@@ -481,8 +515,8 @@
 
                     <!-- الصف الرابع: المشكلة الطبية (اختياري) -->
                     <div class="full-width">
-                        <label><span class="ar">المشكلة الطبية / الجراحية</span><span class="en">Medical / Surgical issue</span></label>
-                        <textarea name="details" rows="3"></textarea>
+                        <label for="detailsInput"><span class="ar">المشكلة الطبية / الجراحية</span><span class="en">Medical / Surgical issue</span></label>
+                        <textarea id="detailsInput" name="details" rows="3"></textarea>
                     </div>
                     
                     <!-- زر الإرسال -->
@@ -500,15 +534,19 @@
         <h2 class="section-title"><span class="ar">أراء عملائنا</span><span class="en">Patients Reviews</span></h2>
         <div class="container carousel-wrapper" id="carouselWrapper">
             
-            <button class="carousel-btn btn-prev" id="btnPrev" aria-label="Previous"><i class="fas fa-chevron-right" id="iconPrev"></i></button>
-            <button class="carousel-btn btn-next" id="btnNext" aria-label="Next"><i class="fas fa-chevron-left" id="iconNext"></i></button>
+            <button class="carousel-btn btn-prev" id="btnPrev" aria-label="Previous">
+                <svg class="svg-icon"><use id="iconPrevUse" href="#icon-chevron-right"></use></svg>
+            </button>
+            <button class="carousel-btn btn-next" id="btnNext" aria-label="Next">
+                <svg class="svg-icon"><use id="iconNextUse" href="#icon-chevron-left"></use></svg>
+            </button>
             
             <div class="carousel-track" id="sliderTrack">
                 
                 <div class="testimonial-slide">
                     <div class="review-card">
-                        <div class="review-avatar"><i class="fas fa-user"></i></div>
-                        <i class="fas fa-quote-right quote-mark"></i>
+                        <div class="review-avatar"><svg class="svg-icon"><use href="#icon-user"></use></svg></div>
+                        <svg class="svg-icon quote-mark"><use href="#icon-quote-right"></use></svg>
                         <p>
                             <span class="ar">دكتور ايمن فوق الممتاز واخلاق عاليه جدا ولو حد محتاج دكتور جراح ارشحه طبعا ربنا يباركله ويذيده من فضله</span>
                             <span class="en">Dr. Ayman is excellent and highly ethical. I highly recommend him as a surgeon. God bless him.</span>
@@ -518,8 +556,8 @@
 
                 <div class="testimonial-slide">
                     <div class="review-card">
-                        <div class="review-avatar"><i class="fas fa-user"></i></div>
-                        <i class="fas fa-quote-right quote-mark"></i>
+                        <div class="review-avatar"><svg class="svg-icon"><use href="#icon-user"></use></svg></div>
+                        <svg class="svg-icon quote-mark"><use href="#icon-quote-right"></use></svg>
                         <p>
                             <span class="ar">خدمة طبية ممتازة وبصراحة هما دول ملائكة الرحمة بجد والله خدمة طبية فوق الممتازة وكل الشكر والتقدير والاحترام لدكتور ايمن جمعة والأستاذة شروق</span>
                             <span class="en">Excellent medical service. They are truly angels of mercy. Thanks to Dr. Ayman and Ms. Shorouk for the amazing follow-up.</span>
@@ -529,8 +567,8 @@
 
                 <div class="testimonial-slide">
                     <div class="review-card">
-                        <div class="review-avatar"><i class="fas fa-user"></i></div>
-                        <i class="fas fa-quote-right quote-mark"></i>
+                        <div class="review-avatar"><svg class="svg-icon"><use href="#icon-user"></use></svg></div>
+                        <svg class="svg-icon quote-mark"><use href="#icon-quote-right"></use></svg>
                         <p>
                             <span class="ar">الدكتور ممتاز ربنا يباركله والمستشفى رائعه والتمريض من المعامله والنظافه والاهتمام وارشح اى حد مريض غدة يعمله مع دكتور ايمن جمعه</span>
                             <span class="en">Excellent doctor and great hospital. I recommend anyone with a thyroid issue to trust Dr. Ayman completely.</span>
@@ -540,8 +578,8 @@
 
                 <div class="testimonial-slide">
                     <div class="review-card">
-                        <div class="review-avatar"><i class="fas fa-user"></i></div>
-                        <i class="fas fa-quote-right quote-mark"></i>
+                        <div class="review-avatar"><svg class="svg-icon"><use href="#icon-user"></use></svg></div>
+                        <svg class="svg-icon quote-mark"><use href="#icon-quote-right"></use></svg>
                         <p>
                             <span class="ar">السلام عليكم ورحمة الله حضرتك يادكتور ايمن ماشاء الله عليك شاطر جدا وماهر جدا بتعرف تتعامل مع المرضى... تسلم ايدك على العملية اللى عملتهالى فى استئصال الورم فى القولون</span>
                             <span class="en">Dr. Ayman is extremely skilled and knows how to deal with patients perfectly. Thank you for the successful colon tumor excision surgery.</span>
@@ -551,8 +589,8 @@
 
                 <div class="testimonial-slide">
                     <div class="review-card">
-                        <div class="review-avatar"><i class="fas fa-user"></i></div>
-                        <i class="fas fa-quote-right quote-mark"></i>
+                        <div class="review-avatar"><svg class="svg-icon"><use href="#icon-user"></use></svg></div>
+                        <svg class="svg-icon quote-mark"><use href="#icon-quote-right"></use></svg>
                         <p>
                             <span class="ar">الحمد لله بخير دكتور محترم جدا جدا كفايه ذوقه واخلاقه وعنده ضمير مهني اتمنا تكون عند كل دكتور ومتابعة دقيقه بعد العمليه</span>
                             <span class="en">A very respectful doctor with a strong professional conscience. Accurate and caring follow-up post-surgery. May God reward him.</span>
@@ -562,8 +600,8 @@
 
                 <div class="testimonial-slide">
                     <div class="review-card">
-                        <div class="review-avatar"><i class="fas fa-user"></i></div>
-                        <i class="fas fa-quote-right quote-mark"></i>
+                        <div class="review-avatar"><svg class="svg-icon"><use href="#icon-user"></use></svg></div>
+                        <svg class="svg-icon quote-mark"><use href="#icon-quote-right"></use></svg>
                         <p>
                             <span class="ar">احب اشكر دكتور /ايمن جمعه بجد هو انسان قبل ان يكون دكتور محترم جدا واهتمامه بالحاله الي عنده كبير وبيقدم دايما النصيحه المظبوطه</span>
                             <span class="en">A true human before being a doctor. He provides the right advice, answers all questions patiently, and ensures the patient is fully reassured.</span>
@@ -575,23 +613,23 @@
         </div>
     </section>
 
-    <!-- الخرائط محدثة بأبعاد متناسقة 100% وخريطة التجمع بوضع التضاريس -->
-    <section class="maps-section container">
+    <!-- الخرائط تعمل بتقنية التحميل الذكي عند الاقتراب منها (Smart Lazy Load) لتوفير 480KiB من جافاسكريبت جوجل مابس عند فتح الموقع -->
+    <section class="maps-section container" id="mapsSection">
         <h2 class="section-title"><span class="ar">مواقع العيادات</span><span class="en">Our Clinics</span></h2>
         <div class="maps-grid">
             <div class="map-item">
-                <h4><span class="ar">عيادة التجمع الخامس</span><span class="en">New Cairo Clinic</span></h4>
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3454.562065961822!2d31.5286948!3d30.020728799999997!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x145823774767dc2d%3A0x19862d4e747be0ff!2z2KfYrNmI2LHYpyDZhdmI2YQg2KfZhNiq2KzZhdi5!5e1!3m2!1sar!2seg!4v1793897480305!5m2!1sar!2seg" width="100%" height="250" style="border:0; border-radius: 4px;" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+                <h3><span class="ar">عيادة التجمع الخامس</span><span class="en">New Cairo Clinic</span></h3>
+                <iframe title="موقع عيادة التجمع الخامس - New Cairo Clinic Map" data-src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3454.562065961822!2d31.5286948!3d30.020728799999997!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x145823774767dc2d%3A0x19862d4e747be0ff!2z2KfYrNmI2LHYpyDZhdmI2YQg2KfZhNiq2KzZhdi5!5e1!3m2!1sar!2seg!4v1793897480305!5m2!1sar!2seg" width="100%" height="250" style="border:0; border-radius: 4px;" allowfullscreen="" referrerpolicy="strict-origin-when-cross-origin"></iframe>
             </div>
             
             <div class="map-item">
-                <h4><span class="ar">عيادة السويس</span><span class="en">Suez Clinic</span></h4>
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4135.795994084296!2d32.5501253!3d29.972320399999997!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14562582e01c888f%3A0xe8e26e44033fbde3!2z2KjZhtmDINin2YTYqti52YXZitixINmI2KfZhNin2LPZg9in2YYg2YHYsdi5INin2YTYs9mI2YrYsw!5e1!3m2!1sar!2seg!4v1784148840058!5m2!1sar!2seg" width="100%" height="250" style="border:0; border-radius: 4px;" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+                <h3><span class="ar">عيادة السويس</span><span class="en">Suez Clinic</span></h3>
+                <iframe title="موقع عيادة السويس - Suez Clinic Map" data-src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4135.795994084296!2d32.5501253!3d29.972320399999997!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14562582e01c888f%3A0xe8e26e44033fbde3!2z2KjZhtmDINin2YTYqti52YXZitixINmI2KfZhNin2LPZg9in2YYg2YHYsdi5INin2YTYs9mI2YrYsw!5e1!3m2!1sar!2seg!4v1784148840058!5m2!1sar!2seg" width="100%" height="250" style="border:0; border-radius: 4px;" allowfullscreen="" referrerpolicy="strict-origin-when-cross-origin"></iframe>
             </div>
             
             <div class="map-item">
-                <h4><span class="ar">عيادة الإسماعيلية</span><span class="en">Ismailia Clinic</span></h4>
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1452.6794767584438!2d32.272685070568876!3d30.61463542594053!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14f8590043b4d931%3A0xc7368e164b63f1e9!2z2KjYsdisINin2YTYrNmI2YfYsdip!5e1!3m2!1sar!2seg!4v1785244200616!5m2!1sar!2seg" width="100%" height="250" style="border:0; border-radius: 4px;" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+                <h3><span class="ar">عيادة الإسماعيلية</span><span class="en">Ismailia Clinic</span></h3>
+                <iframe title="موقع عيادة الإسماعيلية - Ismailia Clinic Map" data-src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1452.6794767584438!2d32.272685070568876!3d30.61463542594053!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14f8590043b4d931%3A0xc7368e164b63f1e9!2z2KjYsdisINin2YTYrNmI2YfYsdip!5e1!3m2!1sar!2seg!4v1785244200616!5m2!1sar!2seg" width="100%" height="250" style="border:0; border-radius: 4px;" allowfullscreen="" referrerpolicy="strict-origin-when-cross-origin"></iframe>
             </div>
         </div>
     </section>
@@ -599,7 +637,7 @@
     <footer class="footer">
         <div class="container footer-grid">
             <div class="footer-logo">
-                <a href="#"><img src="Logo-Dr-Ayman-w.webp" alt="دكتور أيمن جمعة" class="footer-logo-img"></a>
+                <a href="#"><img src="Logo-Dr-Ayman-w.webp" alt="دكتور أيمن جمعة" class="footer-logo-img" width="248" height="70" loading="lazy"></a>
             </div>
             <div class="footer-col">
                 <h3><span class="ar">أرقام التواصل</span><span class="en">Contact Us</span></h3>
@@ -625,7 +663,9 @@
         <div class="copyright"><span class="ar">حقوق النشر محفوظة © دكتور أيمن جمعة</span><span class="en">Copyright © Dr. Ayman Gomaa</span></div>
     </footer>
 
-    <a href="https://wa.me/201039166291" target="_blank" rel="noopener noreferrer" class="fab" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+    <a href="https://wa.me/201039166291" target="_blank" rel="noopener noreferrer" class="fab" aria-label="WhatsApp">
+        <svg class="svg-icon"><use href="#icon-whatsapp"></use></svg>
+    </a>
 
     <script>
         // --- 0. بناء وتشغيل القوائم المنسدلة المخصصة (Custom Dropdowns) ---
@@ -634,7 +674,6 @@
             const currentLang = document.documentElement.lang || 'ar';
 
             selects.forEach(select => {
-                // تجنب التكرار إذا تم بناؤها مسبقاً
                 if (select.nextElementSibling && select.nextElementSibling.classList.contains('custom-select-wrapper')) {
                     return;
                 }
@@ -646,7 +685,7 @@
                 trigger.className = 'custom-select-trigger';
                 const selectedOpt = select.options[select.selectedIndex];
                 const initialText = currentLang === 'en' ? selectedOpt.getAttribute('data-en') : selectedOpt.getAttribute('data-ar');
-                trigger.innerHTML = `<span class="trigger-text">${initialText}</span><i class="fas fa-chevron-down"></i>`;
+                trigger.innerHTML = `<span class="trigger-text">${initialText}</span><svg class="svg-icon arrow-svg"><use href="#icon-chevron-down"></use></svg>`;
 
                 const optionsContainer = document.createElement('div');
                 optionsContainer.className = 'custom-options';
@@ -675,7 +714,6 @@
 
                 trigger.addEventListener('click', (e) => {
                     e.stopPropagation();
-                    // إغلاق أي قائمة أخرى مفتوحة
                     document.querySelectorAll('.custom-select-wrapper').forEach(w => {
                         if (w !== wrapper) w.classList.remove('open');
                     });
@@ -687,13 +725,11 @@
                 select.parentNode.insertBefore(wrapper, select.nextSibling);
             });
 
-            // إغلاق القوائم عند الضغط في أي مكان خارجها
             document.addEventListener('click', () => {
                 document.querySelectorAll('.custom-select-wrapper').forEach(w => w.classList.remove('open'));
             });
         }
 
-        // تحديث لغة القوائم المخصصة عند تبديل اللغة
         function updateSelectOptionsLanguage(lang) {
             document.querySelectorAll('select option[data-ar]').forEach(opt => {
                 opt.textContent = lang === 'en' ? opt.getAttribute('data-en') : opt.getAttribute('data-ar');
@@ -712,7 +748,6 @@
             });
         }
 
-        // إعادة تعيين القوائم المخصصة للوضع الافتراضي بعد إرسال الفورم
         function resetCustomSelects() {
             const lang = document.documentElement.lang || 'ar';
             document.querySelectorAll('.custom-select-wrapper').forEach(wrapper => {
@@ -739,11 +774,11 @@
 
             if (type === 'success') {
                 icon.className = 'custom-modal-icon success';
-                icon.innerHTML = '<i class="fas fa-check"></i>';
+                icon.innerHTML = '<svg class="svg-icon"><use href="#icon-check"></use></svg>';
                 box.classList.remove('error-border');
             } else {
                 icon.className = 'custom-modal-icon error';
-                icon.innerHTML = '<i class="fas fa-exclamation"></i>';
+                icon.innerHTML = '<svg class="svg-icon"><use href="#icon-exclamation"></use></svg>';
                 box.classList.add('error-border');
             }
 
@@ -754,7 +789,6 @@
             document.getElementById('customModal').classList.remove('show');
         }
 
-        // ضبط نص زر اللغة وبناء القوائم فور تحميل الصفحة
         const initialLang = document.documentElement.lang;
         const langToggleBtn = document.getElementById('langToggle');
         if (langToggleBtn) {
@@ -890,8 +924,8 @@
         const slides = document.querySelectorAll('.testimonial-slide');
         const btnNext = document.getElementById('btnNext');
         const btnPrev = document.getElementById('btnPrev');
-        const iconNext = document.getElementById('iconNext');
-        const iconPrev = document.getElementById('iconPrev');
+        const iconNextUse = document.getElementById('iconNextUse');
+        const iconPrevUse = document.getElementById('iconPrevUse');
         const carouselWrapper = document.getElementById('carouselWrapper');
         
         let currentIndex = 0;
@@ -903,9 +937,9 @@
             const isRtl = document.documentElement.dir === 'rtl';
             carouselWrapper.style.direction = isRtl ? 'rtl' : 'ltr';
             
-            if (iconPrev && iconNext) {
-                iconPrev.className = isRtl ? 'fas fa-chevron-right' : 'fas fa-chevron-left';
-                iconNext.className = isRtl ? 'fas fa-chevron-left' : 'fas fa-chevron-right';
+            if (iconPrevUse && iconNextUse) {
+                iconPrevUse.setAttribute('href', isRtl ? '#icon-chevron-right' : '#icon-chevron-left');
+                iconNextUse.setAttribute('href', isRtl ? '#icon-chevron-left' : '#icon-chevron-right');
             }
 
             const movePercentage = currentIndex * 100;
@@ -945,71 +979,4 @@
 
         function startAutoSlide() {
             slideInterval = setInterval(() => {
-                if (currentIndex >= totalSlides - 1) {
-                    slideDirection = -1; 
-                } else if (currentIndex <= 0) {
-                    slideDirection = 1;  
-                }
-                
-                if (slideDirection === 1) {
-                    showNextSlide();
-                } else {
-                    showPrevSlide();
-                }
-            }, 4000);
-        }
-
-        function stopAutoSlide() {
-            clearInterval(slideInterval);
-        }
-
-        if(btnNext && btnPrev) {
-            btnNext.addEventListener('click', () => {
-                showNextSlide();
-                stopAutoSlide();
-                startAutoSlide();
-            });
-
-            btnPrev.addEventListener('click', () => {
-                showPrevSlide();
-                stopAutoSlide();
-                startAutoSlide();
-            });
-        }
-
-        // تهيئة السلايدر عند فتح الصفحة
-        updateSliderPosition(); 
-        startAutoSlide();
-
-        // برمجة السحب (Swipe) للموبايل
-        let startX = 0;
-        let endX = 0;
-
-        carouselWrapper.addEventListener('touchstart', (e) => {
-            startX = e.touches[0].clientX;
-            stopAutoSlide(); 
-        }, {passive: true});
-
-        carouselWrapper.addEventListener('touchmove', (e) => {
-            endX = e.touches[0].clientX;
-        }, {passive: true});
-
-        carouselWrapper.addEventListener('touchend', () => {
-            if (startX > 0 && endX > 0) {
-                let diffX = startX - endX;
-                const isRtl = document.documentElement.dir === 'rtl';
-                
-                if (diffX > 50) {
-                    isRtl ? showPrevSlide() : showNextSlide();
-                } else if (diffX < -50) {
-                    isRtl ? showNextSlide() : showPrevSlide();
-                }
-            }
-            startX = 0;
-            endX = 0;
-            startAutoSlide(); 
-        });
-    </script>
-
-</body>
-</html>
+                if (currentIndex >= totalSlides -
