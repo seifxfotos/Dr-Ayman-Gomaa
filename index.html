@@ -88,7 +88,6 @@
         @keyframes float2 { 0% { transform: translate(0, 0) scale(1); } 50% { transform: translate(-300px, -200px) scale(1.3); } 100% { transform: translate(-450px, -100px) scale(0.9); } }
 
         .hero-content { max-width: 550px; z-index: 2; position: relative;}
-        /* تم تعديل border-radius إلى 0 ليكون حاد الزوايا */
         .hero-box { background-color: var(--teal-box); padding: 30px; border-radius: 0px; font-size: 22px; font-weight: 700; line-height: 1.6; margin-bottom: 20px; }
         .btn { display: inline-block; padding: 10px 25px; background-color: var(--teal-box); color: white; border-radius: 25px; font-weight: 700; border: none; cursor: pointer; font-family: var(--font-main); font-size: 16px; position: relative; z-index: 2; transition: 0.3s;}
         .btn:hover { background-color: #1ea3df; }
@@ -120,10 +119,97 @@
         .appointment-sec { padding: 80px 5%; background-color: #f8f9fa; }
         .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
         .full-width { grid-column: span 2; }
-        input, select, textarea { padding: 12px; border: 1px solid #ccc; border-radius: 4px; font-family: var(--font-main); font-size: 14px; width: 100%; background-color: #fff; }
-        label { font-weight: 700; margin-bottom: 5px; display: block; }
         
+        input, select, textarea { 
+            padding: 12px; border: 1px solid #ccc; border-radius: 4px; 
+            font-family: var(--font-main); font-size: 14px; width: 100%; 
+            background-color: #fff; transition: border-color 0.3s, box-shadow 0.3s; outline: none;
+        }
+        input:focus, textarea:focus {
+            border-color: var(--btn-blue);
+            box-shadow: 0 0 0 3px rgba(41, 182, 246, 0.15);
+        }
+        label { font-weight: 700; margin-bottom: 5px; display: block; }
         .req-star { color: red; }
+
+        /* --- ستايل القوائم المنسدلة المخصصة (Custom Dropdowns) --- */
+        .custom-select-wrapper { position: relative; user-select: none; width: 100%; }
+        .custom-select-trigger {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 12px 15px; border: 1px solid #ccc; border-radius: 4px;
+            background-color: #fff; font-family: var(--font-main); font-size: 14px;
+            color: var(--text-dark); cursor: pointer; transition: all 0.3s ease;
+        }
+        .custom-select-trigger:hover { border-color: var(--btn-blue); }
+        .custom-select-wrapper.open .custom-select-trigger {
+            border-color: var(--btn-blue);
+            box-shadow: 0 0 0 3px rgba(41, 182, 246, 0.15);
+        }
+        .custom-select-trigger i {
+            color: var(--footer-dark); font-size: 12px; transition: transform 0.3s ease;
+        }
+        .custom-select-wrapper.open .custom-select-trigger i {
+            transform: rotate(180deg); color: var(--btn-blue);
+        }
+        .custom-options {
+            position: absolute; top: calc(100% + 6px); left: 0; right: 0;
+            background: #fff; border: 1px solid #e4e6eb; border-radius: 8px;
+            box-shadow: 0 10px 25px rgba(6, 62, 99, 0.12); z-index: 999;
+            opacity: 0; visibility: hidden; transform: translateY(-10px);
+            transition: all 0.25s cubic-bezier(0.25, 1, 0.5, 1); overflow: hidden;
+            max-height: 260px; overflow-y: auto;
+        }
+        .custom-select-wrapper.open .custom-options {
+            opacity: 1; visibility: visible; transform: translateY(0);
+        }
+        .custom-option {
+            padding: 11px 15px; font-size: 14px; font-weight: 600; color: var(--text-dark);
+            cursor: pointer; transition: all 0.2s ease; border-bottom: 1px solid #f1f3f5;
+        }
+        .custom-option:last-child { border-bottom: none; }
+        .custom-option:hover {
+            background-color: rgba(41, 182, 246, 0.1); color: var(--footer-dark);
+            padding-right: 20px;
+        }
+        html[lang="en"] .custom-option:hover {
+            padding-right: 15px; padding-left: 20px;
+        }
+        .custom-option.selected {
+            background-color: var(--btn-blue); color: #fff;
+        }
+
+        /* --- ستايل نافذة إشعار الحجز المخصصة (Custom Modal Alert) --- */
+        .custom-modal-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(6, 62, 99, 0.6); backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px);
+            display: flex; justify-content: center; align-items: center;
+            z-index: 100005; opacity: 0; visibility: hidden; transition: all 0.3s ease; padding: 20px;
+        }
+        .custom-modal-overlay.show { opacity: 1; visibility: visible; }
+        .custom-modal-box {
+            background: #fff; border-radius: 15px; padding: 35px 30px; max-width: 420px; width: 100%;
+            text-align: center; box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+            transform: scale(0.85) translateY(20px); transition: all 0.35s cubic-bezier(0.25, 1, 0.5, 1);
+            border-top: 6px solid var(--btn-blue);
+        }
+        .custom-modal-overlay.show .custom-modal-box {
+            transform: scale(1) translateY(0);
+        }
+        .custom-modal-icon {
+            width: 70px; height: 70px; border-radius: 50%; margin: 0 auto 20px;
+            display: flex; justify-content: center; align-items: center; font-size: 32px;
+        }
+        .custom-modal-icon.success { background: rgba(41, 182, 246, 0.15); color: var(--btn-blue); }
+        .custom-modal-icon.error { background: rgba(220, 53, 69, 0.15); color: #dc3545; }
+        .custom-modal-box.error-border { border-top-color: #dc3545; }
+        .custom-modal-title { font-size: 22px; font-weight: 800; color: var(--footer-dark); margin-bottom: 10px; }
+        .custom-modal-message { font-size: 16px; font-weight: 600; color: #555; margin-bottom: 25px; line-height: 1.6; }
+        .custom-modal-btn {
+            background: var(--btn-blue); color: #fff; border: none; padding: 10px 40px;
+            border-radius: 25px; font-family: var(--font-main); font-size: 16px; font-weight: 700;
+            cursor: pointer; transition: 0.3s; box-shadow: 0 4px 12px rgba(41, 182, 246, 0.3);
+        }
+        .custom-modal-btn:hover { background: var(--footer-dark); }
 
         .testimonials-sec { padding: 60px 5%; background-color: #fff; overflow: hidden; }
         .carousel-wrapper { position: relative; max-width: 900px; margin: 0 auto; direction: ltr; padding: 20px 0; }
@@ -219,6 +305,20 @@
     <div class="page-transition-overlay" id="transitionOverlay"></div>
     <div class="cool-loader" id="transitionLoader">
         <span></span><span></span><span></span>
+    </div>
+
+    <!-- نافذة الإشعار المخصصة بنفس ستايل الموقع (بديل الـ Alert التقليدي) -->
+    <div class="custom-modal-overlay" id="customModal">
+        <div class="custom-modal-box" id="modalBox">
+            <div class="custom-modal-icon success" id="modalIcon">
+                <i class="fas fa-check"></i>
+            </div>
+            <h3 class="custom-modal-title" id="modalTitle"></h3>
+            <p class="custom-modal-message" id="modalMessage"></p>
+            <button type="button" class="custom-modal-btn" onclick="closeCustomModal()">
+                <span class="ar">حسناً</span><span class="en">OK</span>
+            </button>
+        </div>
     </div>
 
     <header class="header">
@@ -357,10 +457,10 @@
                         <input type="number" name="age">
                     </div>
 
-                    <!-- الصف الثالث: العيادة ومصدر المعرفة (اختياري) متوافق مع جميع المتصفحات والآيفون -->
+                    <!-- الصف الثالث: قوائم منسدلة مخصصة بستايل الموقع (Custom Styled Dropdowns) -->
                     <div>
                         <label><span class="ar">العيادة</span><span class="en">Clinic</span></label>
-                        <select name="clinic">
+                        <select name="clinic" class="custom-select-target" style="display: none;">
                             <option value="" selected data-ar="اختر العيادة (اختياري)" data-en="Select Clinic (Optional)">اختر العيادة (اختياري)</option>
                             <option value="التجمع الخامس" data-ar="التجمع الخامس" data-en="New Cairo">التجمع الخامس</option>
                             <option value="السويس" data-ar="السويس" data-en="Suez">السويس</option>
@@ -369,7 +469,7 @@
                     </div>
                     <div>
                         <label><span class="ar">كيف تعرفت علينا؟</span><span class="en">How did you hear about us?</span></label>
-                        <select name="source">
+                        <select name="source" class="custom-select-target" style="display: none;">
                             <option value="" selected data-ar="اختر... (اختياري)" data-en="Select... (Optional)">اختر... (اختياري)</option>
                             <option value="عميل سابق" data-ar="عميل سابق" data-en="Previous Patient">عميل سابق</option>
                             <option value="فيسبوك" data-ar="فيسبوك" data-en="Facebook">فيسبوك</option>
@@ -528,21 +628,140 @@
 
     <a href="https://wa.me/201039166291" target="_blank" rel="noopener noreferrer" class="fab" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
 
-    <!-- سكريبت تبديل اللغة السحري، الإرسال لجوجل شيت والسلايدر -->
     <script>
-        // دالة لتحديث نصوص القوائم المنسدلة (Select) لتعمل على الآيفون وجميع المتصفحات بدون مشاكل
+        // --- 0. بناء وتشغيل القوائم المنسدلة المخصصة (Custom Dropdowns) ---
+        function initCustomSelects() {
+            const selects = document.querySelectorAll('select.custom-select-target');
+            const currentLang = document.documentElement.lang || 'ar';
+
+            selects.forEach(select => {
+                // تجنب التكرار إذا تم بناؤها مسبقاً
+                if (select.nextElementSibling && select.nextElementSibling.classList.contains('custom-select-wrapper')) {
+                    return;
+                }
+
+                const wrapper = document.createElement('div');
+                wrapper.className = 'custom-select-wrapper';
+
+                const trigger = document.createElement('div');
+                trigger.className = 'custom-select-trigger';
+                const selectedOpt = select.options[select.selectedIndex];
+                const initialText = currentLang === 'en' ? selectedOpt.getAttribute('data-en') : selectedOpt.getAttribute('data-ar');
+                trigger.innerHTML = `<span class="trigger-text">${initialText}</span><i class="fas fa-chevron-down"></i>`;
+
+                const optionsContainer = document.createElement('div');
+                optionsContainer.className = 'custom-options';
+
+                Array.from(select.options).forEach((opt, index) => {
+                    const customOpt = document.createElement('div');
+                    customOpt.className = 'custom-option' + (index === select.selectedIndex ? ' selected' : '');
+                    customOpt.dataset.value = opt.value;
+                    customOpt.dataset.ar = opt.getAttribute('data-ar');
+                    customOpt.dataset.en = opt.getAttribute('data-en');
+                    customOpt.textContent = currentLang === 'en' ? opt.getAttribute('data-en') : opt.getAttribute('data-ar');
+
+                    customOpt.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        select.selectedIndex = index;
+                        const lang = document.documentElement.lang || 'ar';
+                        trigger.querySelector('.trigger-text').textContent = lang === 'en' ? customOpt.dataset.en : customOpt.dataset.ar;
+                        
+                        optionsContainer.querySelectorAll('.custom-option').forEach(o => o.classList.remove('selected'));
+                        customOpt.classList.add('selected');
+                        wrapper.classList.remove('open');
+                    });
+
+                    optionsContainer.appendChild(customOpt);
+                });
+
+                trigger.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    // إغلاق أي قائمة أخرى مفتوحة
+                    document.querySelectorAll('.custom-select-wrapper').forEach(w => {
+                        if (w !== wrapper) w.classList.remove('open');
+                    });
+                    wrapper.classList.toggle('open');
+                });
+
+                wrapper.appendChild(trigger);
+                wrapper.appendChild(optionsContainer);
+                select.parentNode.insertBefore(wrapper, select.nextSibling);
+            });
+
+            // إغلاق القوائم عند الضغط في أي مكان خارجها
+            document.addEventListener('click', () => {
+                document.querySelectorAll('.custom-select-wrapper').forEach(w => w.classList.remove('open'));
+            });
+        }
+
+        // تحديث لغة القوائم المخصصة عند تبديل اللغة
         function updateSelectOptionsLanguage(lang) {
             document.querySelectorAll('select option[data-ar]').forEach(opt => {
                 opt.textContent = lang === 'en' ? opt.getAttribute('data-en') : opt.getAttribute('data-ar');
             });
+
+            document.querySelectorAll('.custom-select-wrapper').forEach(wrapper => {
+                const select = wrapper.previousElementSibling;
+                const triggerText = wrapper.querySelector('.trigger-text');
+                const selectedOpt = select.options[select.selectedIndex];
+                if (selectedOpt && triggerText) {
+                    triggerText.textContent = lang === 'en' ? selectedOpt.getAttribute('data-en') : selectedOpt.getAttribute('data-ar');
+                }
+                wrapper.querySelectorAll('.custom-option').forEach(customOpt => {
+                    customOpt.textContent = lang === 'en' ? customOpt.dataset.en : customOpt.dataset.ar;
+                });
+            });
         }
 
-        // ضبط نص زر اللغة والخيارات فور تحميل الصفحة بناءً على اللغة المحفوظة
+        // إعادة تعيين القوائم المخصصة للوضع الافتراضي بعد إرسال الفورم
+        function resetCustomSelects() {
+            const lang = document.documentElement.lang || 'ar';
+            document.querySelectorAll('.custom-select-wrapper').forEach(wrapper => {
+                const select = wrapper.previousElementSibling;
+                select.selectedIndex = 0;
+                const firstOpt = select.options[0];
+                wrapper.querySelector('.trigger-text').textContent = lang === 'en' ? firstOpt.getAttribute('data-en') : firstOpt.getAttribute('data-ar');
+                wrapper.querySelectorAll('.custom-option').forEach((opt, idx) => {
+                    opt.classList.toggle('selected', idx === 0);
+                });
+            });
+        }
+
+        // --- نافذة الإشعار المخصصة (Custom Modal Functions) ---
+        function showCustomModal(type, title, message) {
+            const modal = document.getElementById('customModal');
+            const box = document.getElementById('modalBox');
+            const icon = document.getElementById('modalIcon');
+            const titleEl = document.getElementById('modalTitle');
+            const msgEl = document.getElementById('modalMessage');
+
+            titleEl.textContent = title;
+            msgEl.textContent = message;
+
+            if (type === 'success') {
+                icon.className = 'custom-modal-icon success';
+                icon.innerHTML = '<i class="fas fa-check"></i>';
+                box.classList.remove('error-border');
+            } else {
+                icon.className = 'custom-modal-icon error';
+                icon.innerHTML = '<i class="fas fa-exclamation"></i>';
+                box.classList.add('error-border');
+            }
+
+            modal.classList.add('show');
+        }
+
+        function closeCustomModal() {
+            document.getElementById('customModal').classList.remove('show');
+        }
+
+        // ضبط نص زر اللغة وبناء القوائم فور تحميل الصفحة
         const initialLang = document.documentElement.lang;
         const langToggleBtn = document.getElementById('langToggle');
         if (langToggleBtn) {
             langToggleBtn.innerText = initialLang === 'en' ? 'العربية' : 'English';
         }
+        initCustomSelects();
         updateSelectOptionsLanguage(initialLang);
 
         // --- 1. سكريبت الأنيميشن وتغيير اللغة (الزرار) ---
@@ -587,15 +806,14 @@
                     html.lang = 'en';
                     html.dir = 'ltr';
                     toggleBtn.innerText = 'العربية';
-                    localStorage.setItem('siteLang', 'en'); // حفظ اللغة الإنجليزية في الذاكرة
+                    localStorage.setItem('siteLang', 'en');
                 } else {
                     html.lang = 'ar';
                     html.dir = 'rtl';
                     toggleBtn.innerText = 'English';
-                    localStorage.setItem('siteLang', 'ar'); // حفظ اللغة العربية في الذاكرة
+                    localStorage.setItem('siteLang', 'ar');
                 }
                 
-                // تحديث نصوص القوائم المنسدلة واتجاه السلايدر
                 updateSelectOptionsLanguage(html.lang);
                 updateSliderPosition(); 
 
@@ -639,17 +857,30 @@
             .then(response => response.text())
             .then(data => {
                 if(data === 'Success') {
-                    alert(isAr ? 'تم تسجيل حجزك بنجاح! سيتم التواصل معك في أقرب وقت.' : 'Booking submitted successfully! We will contact you soon.');
-                    document.getElementById('bookingForm').reset(); 
+                    showCustomModal(
+                        'success',
+                        isAr ? 'تم استلام حجزك بنجاح!' : 'Booking Confirmed!',
+                        isAr ? 'تم تسجيل بياناتك بنجاح، وسيتم التواصل معك في أقرب وقت لتأكيد الموعد.' : 'Your booking has been submitted successfully. We will contact you soon.'
+                    );
+                    document.getElementById('bookingForm').reset();
+                    resetCustomSelects();
                 } else {
-                    alert(isAr ? 'حدث خطأ غير متوقع، يرجى المحاولة مرة أخرى.' : 'An unexpected error occurred. Please try again.');
+                    showCustomModal(
+                        'error',
+                        isAr ? 'عفواً، حدث خطأ' : 'Unexpected Error',
+                        isAr ? 'حدث خطأ غير متوقع أثناء الإرسال، يرجى المحاولة مرة أخرى.' : 'An unexpected error occurred. Please try again.'
+                    );
                 }
                 btn.innerHTML = originalBtnContent;
                 btn.disabled = false;
             })
             .catch(error => {
                 console.error('Error!', error.message);
-                alert(isAr ? 'حدث خطأ في الاتصال، يرجى التأكد من اتصالك بالإنترنت.' : 'Connection error. Please check your internet connection.');
+                showCustomModal(
+                    'error',
+                    isAr ? 'خطأ في الاتصال' : 'Connection Error',
+                    isAr ? 'يرجى التأكد من اتصالك بالإنترنت والمحاولة مرة أخرى.' : 'Please check your internet connection and try again.'
+                );
                 btn.innerHTML = originalBtnContent;
                 btn.disabled = false;
             });
