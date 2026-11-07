@@ -1,6 +1,15 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18544681111"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'AW-18544681111');
+    </script>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="دكتور أيمن جمعة | خيارك الأول في حالات الجراحة العامة وجراحات الأورام المتقدمة والمناظير.">
@@ -900,6 +909,7 @@
                     );
                     document.getElementById('bookingForm').reset();
                     resetCustomSelects();
+                    gtag('event', 'conversion', {'send_to': 'AW-18544681111/ZAFeCJ6dkbQdEJfB5YpF'});
                 } else {
                     showCustomModal(
                         'error',
@@ -1046,5 +1056,26 @@
         });
     </script>
 
+    <script>
+    (function () {
+      var KEYS = ['gclid', 'utm_campaign'];
+      var p = new URLSearchParams(location.search);
+      KEYS.forEach(function (k) {
+        var v = p.get(k);
+        if (v) { try { localStorage.setItem('dr_' + k, v); } catch (e) {} }
+      });
+      var form = document.getElementById('bookingForm');
+      if (!form) return;
+      KEYS.forEach(function (k) {
+        var v = '';
+        try { v = localStorage.getItem('dr_' + k) || ''; } catch (e) {}
+        var input = document.createElement('input');
+        input.type = 'hidden';
+        input.name = k;
+        input.value = v;
+        form.appendChild(input);
+      });
+    })();
+    </script>
 </body>
 </html>
