@@ -18,6 +18,44 @@
                 document.documentElement.dir = 'rtl';
             }
         })();
+
+        // دوال مباشرة لفتح واختيار القوائم المنسدلة (تعمل فوراً ومضمونة 100%)
+        function toggleCustomSelect(wrapperId, event) {
+            if (event) event.stopPropagation();
+            var current = document.getElementById(wrapperId);
+            if (!current) return;
+            var isOpen = current.classList.contains('open');
+            document.querySelectorAll('.custom-select-wrapper').forEach(function(w) {
+                w.classList.remove('open');
+            });
+            if (!isOpen) {
+                current.classList.add('open');
+            }
+        }
+
+        function pickCustomOption(optionEl, wrapperId, inputId, event) {
+            if (event) event.stopPropagation();
+            var wrapper = document.getElementById(wrapperId);
+            var hiddenInput = document.getElementById(inputId);
+            if (!wrapper || !hiddenInput) return;
+
+            hiddenInput.value = optionEl.getAttribute('data-value') || '';
+            var triggerText = wrapper.querySelector('.trigger-text');
+            if (triggerText) {
+                triggerText.innerHTML = optionEl.innerHTML;
+            }
+            wrapper.querySelectorAll('.custom-option').forEach(function(o) {
+                o.classList.remove('selected');
+            });
+            optionEl.classList.add('selected');
+            wrapper.classList.remove('open');
+        }
+
+        document.addEventListener('click', function() {
+            document.querySelectorAll('.custom-select-wrapper').forEach(function(w) {
+                w.classList.remove('open');
+            });
+        });
     </script>
 
     <!-- تسريع تحميل الصور الأساسية والخطوط -->
@@ -35,7 +73,7 @@
         body { font-family: var(--font-main); color: var(--text-dark); line-height: 1.6; background-color: #fff; overflow-x: hidden; transition: background-color 0.3s; }
         a { text-decoration: none; color: inherit; }
         .container { width: 90%; max-width: 1200px; margin: auto; }
-        .svg-icon { width: 1em; height: 1em; fill: currentColor; display: inline-block; vertical-align: middle; }
+        .svg-icon { width: 1em; height: 1em; fill: currentColor; display: inline-block; vertical-align: middle; pointer-events: none; }
 
         /* --- Language Toggle Styles --- */
         html[lang="ar"] .en { display: none !important; }
@@ -137,7 +175,8 @@
         .req-star { color: red; }
 
         /* --- ستايل القوائم المنسدلة المخصصة (Custom Dropdowns) --- */
-        .custom-select-wrapper { position: relative; user-select: none; width: 100%; }
+        .custom-select-wrapper { position: relative; user-select: none; width: 100%; z-index: 20; }
+        .custom-select-wrapper.open { z-index: 9999; }
         .custom-select-trigger {
             display: flex; justify-content: space-between; align-items: center;
             padding: 12px 15px; border: 1px solid #ccc; border-radius: 4px;
@@ -158,12 +197,16 @@
         .custom-options {
             position: absolute; top: calc(100% + 6px); left: 0; right: 0;
             background: #fff; border: 1px solid #e4e6eb; border-radius: 8px;
-            box-shadow: 0 10px 25px rgba(6, 62, 99, 0.12); z-index: 999;
-            opacity: 0; visibility: hidden; transform: translateY(-10px);
-            transition: all 0.25s cubic-bezier(0.25, 1, 0.5, 1); overflow: hidden;
+            box-shadow: 0 10px 25px rgba(6, 62, 99, 0.15); z-index: 10000;
+            display: none; overflow: hidden;
         }
         .custom-select-wrapper.open .custom-options {
-            opacity: 1; visibility: visible; transform: translateY(0);
+            display: block !important;
+            animation: dropdownFadeIn 0.2s ease forwards;
+        }
+        @keyframes dropdownFadeIn {
+            from { opacity: 0; transform: translateY(-6px); }
+            to { opacity: 1; transform: translateY(0); }
         }
         .custom-option {
             padding: 11px 15px; font-size: 14px; font-weight: 600; color: var(--text-dark);
@@ -488,12 +531,12 @@
                         <input type="number" id="ageInput" name="age">
                     </div>
 
-                    <!-- الصف الثالث: قوائم منسدلة مخصصة مبنية مباشرة في الـ HTML لضمان ظهورها دائماً -->
+                    <!-- الصف الثالث: قوائم منسدلة مخصصة مربوطة بـ onclick مباشر لفتح فوري ومضمون -->
                     <div>
-                        <label><span class="ar">العيادة</span><span class="en">Clinic</span></label>
+                        <label onclick="toggleCustomSelect('clinicDropdown', event)"><span class="ar">العيادة</span><span class="en">Clinic</span></label>
                         <input type="hidden" name="clinic" id="clinicInput" value="">
                         <div class="custom-select-wrapper" id="clinicDropdown">
-                            <div class="custom-select-trigger">
+                            <div class="custom-select-trigger" onclick="toggleCustomSelect('clinicDropdown', event)">
                                 <span class="trigger-text">
                                     <span class="ar">اختر العيادة (اختياري)</span>
                                     <span class="en">Select Clinic (Optional)</span>
@@ -501,16 +544,16 @@
                                 <svg class="svg-icon arrow-svg"><use href="#icon-chevron-down"></use></svg>
                             </div>
                             <div class="custom-options">
-                                <div class="custom-option selected" data-value="">
+                                <div class="custom-option selected" data-value="" onclick="pickCustomOption(this, 'clinicDropdown', 'clinicInput', event)">
                                     <span class="ar">اختر العيادة (اختياري)</span><span class="en">Select Clinic (Optional)</span>
                                 </div>
-                                <div class="custom-option" data-value="التجمع الخامس">
+                                <div class="custom-option" data-value="التجمع الخامس" onclick="pickCustomOption(this, 'clinicDropdown', 'clinicInput', event)">
                                     <span class="ar">التجمع الخامس</span><span class="en">New Cairo</span>
                                 </div>
-                                <div class="custom-option" data-value="السويس">
+                                <div class="custom-option" data-value="السويس" onclick="pickCustomOption(this, 'clinicDropdown', 'clinicInput', event)">
                                     <span class="ar">السويس</span><span class="en">Suez</span>
                                 </div>
-                                <div class="custom-option" data-value="الإسماعيلية">
+                                <div class="custom-option" data-value="الإسماعيلية" onclick="pickCustomOption(this, 'clinicDropdown', 'clinicInput', event)">
                                     <span class="ar">الإسماعيلية</span><span class="en">Ismailia</span>
                                 </div>
                             </div>
@@ -518,10 +561,10 @@
                     </div>
 
                     <div>
-                        <label><span class="ar">كيف تعرفت علينا؟</span><span class="en">How did you hear about us?</span></label>
+                        <label onclick="toggleCustomSelect('sourceDropdown', event)"><span class="ar">كيف تعرفت علينا؟</span><span class="en">How did you hear about us?</span></label>
                         <input type="hidden" name="source" id="sourceInput" value="">
                         <div class="custom-select-wrapper" id="sourceDropdown">
-                            <div class="custom-select-trigger">
+                            <div class="custom-select-trigger" onclick="toggleCustomSelect('sourceDropdown', event)">
                                 <span class="trigger-text">
                                     <span class="ar">اختر... (اختياري)</span>
                                     <span class="en">Select... (Optional)</span>
@@ -529,25 +572,25 @@
                                 <svg class="svg-icon arrow-svg"><use href="#icon-chevron-down"></use></svg>
                             </div>
                             <div class="custom-options">
-                                <div class="custom-option selected" data-value="">
+                                <div class="custom-option selected" data-value="" onclick="pickCustomOption(this, 'sourceDropdown', 'sourceInput', event)">
                                     <span class="ar">اختر... (اختياري)</span><span class="en">Select... (Optional)</span>
                                 </div>
-                                <div class="custom-option" data-value="عميل سابق">
+                                <div class="custom-option" data-value="عميل سابق" onclick="pickCustomOption(this, 'sourceDropdown', 'sourceInput', event)">
                                     <span class="ar">عميل سابق</span><span class="en">Previous Patient</span>
                                 </div>
-                                <div class="custom-option" data-value="فيسبوك">
+                                <div class="custom-option" data-value="فيسبوك" onclick="pickCustomOption(this, 'sourceDropdown', 'sourceInput', event)">
                                     <span class="ar">فيسبوك</span><span class="en">Facebook</span>
                                 </div>
-                                <div class="custom-option" data-value="انستاجرام">
+                                <div class="custom-option" data-value="انستاجرام" onclick="pickCustomOption(this, 'sourceDropdown', 'sourceInput', event)">
                                     <span class="ar">انستاجرام</span><span class="en">Instagram</span>
                                 </div>
-                                <div class="custom-option" data-value="تيك توك">
+                                <div class="custom-option" data-value="تيك توك" onclick="pickCustomOption(this, 'sourceDropdown', 'sourceInput', event)">
                                     <span class="ar">تيك توك</span><span class="en">TikTok</span>
                                 </div>
-                                <div class="custom-option" data-value="صديق/قريب">
+                                <div class="custom-option" data-value="صديق/قريب" onclick="pickCustomOption(this, 'sourceDropdown', 'sourceInput', event)">
                                     <span class="ar">صديق/قريب</span><span class="en">Friend or Relative</span>
                                 </div>
-                                <div class="custom-option" data-value="أخرى">
+                                <div class="custom-option" data-value="أخرى" onclick="pickCustomOption(this, 'sourceDropdown', 'sourceInput', event)">
                                     <span class="ar">أخرى</span><span class="en">Other</span>
                                 </div>
                             </div>
@@ -709,50 +752,15 @@
     </a>
 
     <script>
-        // --- 0. تشغيل القوائم المنسدلة المخصصة المبنية في الـ HTML ---
-        function setupDropdown(wrapperId, hiddenInputId) {
-            const wrapper = document.getElementById(wrapperId);
-            const hiddenInput = document.getElementById(hiddenInputId);
-            if (!wrapper || !hiddenInput) return;
-
-            const trigger = wrapper.querySelector('.custom-select-trigger');
-            const triggerText = wrapper.querySelector('.trigger-text');
-            const options = wrapper.querySelectorAll('.custom-option');
-
-            trigger.addEventListener('click', (e) => {
-                e.stopPropagation();
-                document.querySelectorAll('.custom-select-wrapper').forEach(w => {
-                    if (w !== wrapper) w.classList.remove('open');
-                });
-                wrapper.classList.toggle('open');
-            });
-
-            options.forEach(opt => {
-                opt.addEventListener('click', (e) => {
-                    e.stopPropagation();
-                    hiddenInput.value = opt.getAttribute('data-value');
-                    triggerText.innerHTML = opt.innerHTML;
-                    options.forEach(o => o.classList.remove('selected'));
-                    opt.classList.add('selected');
-                    wrapper.classList.remove('open');
-                });
-            });
-        }
-
-        setupDropdown('clinicDropdown', 'clinicInput');
-        setupDropdown('sourceDropdown', 'sourceInput');
-
-        document.addEventListener('click', () => {
-            document.querySelectorAll('.custom-select-wrapper').forEach(w => w.classList.remove('open'));
-        });
-
         function resetCustomSelects() {
-            ['clinicDropdown', 'sourceDropdown'].forEach(id => {
-                const wrapper = document.getElementById(id);
+            ['clinicDropdown', 'sourceDropdown'].forEach(function(id) {
+                var wrapper = document.getElementById(id);
                 if (!wrapper) return;
-                const firstOpt = wrapper.querySelector('.custom-option');
-                const triggerText = wrapper.querySelector('.trigger-text');
-                wrapper.querySelectorAll('.custom-option').forEach((o, i) => o.classList.toggle('selected', i === 0));
+                var firstOpt = wrapper.querySelector('.custom-option');
+                var triggerText = wrapper.querySelector('.trigger-text');
+                wrapper.querySelectorAll('.custom-option').forEach(function(o, i) {
+                    o.classList.toggle('selected', i === 0);
+                });
                 if (firstOpt && triggerText) triggerText.innerHTML = firstOpt.innerHTML;
             });
             document.getElementById('clinicInput').value = '';
@@ -1003,3 +1011,40 @@
                 showPrevSlide();
                 stopAutoSlide();
                 startAutoSlide();
+            });
+        }
+
+        updateSliderPosition(); 
+        startAutoSlide();
+
+        let startX = 0;
+        let endX = 0;
+
+        carouselWrapper.addEventListener('touchstart', (e) => {
+            startX = e.touches[0].clientX;
+            stopAutoSlide(); 
+        }, {passive: true});
+
+        carouselWrapper.addEventListener('touchmove', (e) => {
+            endX = e.touches[0].clientX;
+        }, {passive: true});
+
+        carouselWrapper.addEventListener('touchend', () => {
+            if (startX > 0 && endX > 0) {
+                let diffX = startX - endX;
+                const isRtl = document.documentElement.dir === 'rtl';
+                
+                if (diffX > 50) {
+                    isRtl ? showPrevSlide() : showNextSlide();
+                } else if (diffX < -50) {
+                    isRtl ? showNextSlide() : showPrevSlide();
+                }
+            }
+            startX = 0;
+            endX = 0;
+            startAutoSlide(); 
+        });
+    </script>
+
+</body>
+</html>
